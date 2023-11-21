@@ -1,0 +1,13 @@
+Capstone Project note
+
+
+*2 server : Manage site
+*** server for frontEnd 
+
+*** 1 server for the Scraping (on TimeouT)
+-On my Own machine
+- 
+
+
+
+
