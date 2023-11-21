@@ -2,11 +2,11 @@
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import Header from "../components/Header"
-import { HomePage } from "../components/HomePage";
-import { CenterPage } from "../components/CenterPage";
-import { AllCenterInRegion } from "../components/AllCenterInRegion";
-import { LoginPage } from "../components/LogInPage";
+import Header from "./Header"
+import { HomePage } from "./HomePage";
+import { CenterPage } from "./CenterPage";
+import { AllCenterInRegion } from "./AllCenterInRegion";
+import { LoginPage } from "./LogInPage";
 
 export const Index = () => {
 
