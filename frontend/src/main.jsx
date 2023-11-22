@@ -12,7 +12,6 @@ import { LoginPage } from "../src/components/LogInPage";
 import {UserPage} from "../src/components/UserPage.jsx"
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
     <BrowserRouter>
             <Header />
             <Routes>
@@ -24,9 +23,6 @@ ReactDOM.createRoot(document.getElementById('root')).render(
                 {/* <Route path="admin/orders/:orderId" element={<Admin/>}></Route> */}
             </Routes>
         </BrowserRouter>
-    <App />
-    
-  </React.StrictMode>,
 )
 
 
