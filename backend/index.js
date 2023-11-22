@@ -1,18 +1,8 @@
-"use strict";
 
 const {getCenterById} = require("./handlers") 
 
-// build your server here
-
-// consider making one or more handler files to ease the  division of work
-
 const express = require("express");
 const morgan = require("morgan");
-
-// const { MongoClient } = require("mongodb");
-// require("dotenv").config();
-// const { MONGO_URI } = process.env;
-// Need to add the updated MONGO_URI to the .env file in server folder
 
 const PORT = 8000;
 
@@ -25,7 +15,7 @@ express()
   res.json({ message: "You hit the end point!" });
 })
 
-.get("/center/:centerId", getCenterById)
+.get("/api/center/:centerId", getCenterById)
 
 //test MongoDB get w/ db & collection names used as examples, 
 .get("/api/testMongo", async (req, res) => {

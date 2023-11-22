@@ -1,6 +1,5 @@
 
 "use strict";
-
 const { MongoClient } = require("mongodb");
 
 require("dotenv").config();
@@ -29,18 +28,18 @@ const getCenterById = async (request, response) => {
       console.log("connected!");
 
       //retrieve Id in the database 
-      const item = await db.collection(collectionName).findOne({_id :centerId});
+      const center = await db.collection(collectionName).findOne({_id :centerId});
 
-      if (!item || item.matchedCount === 0) {
+      if (!center || center.matchedCount === 0) {
           return response
           .status(404)
-          .json({ status: 404, centerId, message : `Item not found, please verify the item Id : ${centerId} was not found` });
+          .json({ status: 404, centerId, message : `center not found, please verify the center Id : ${centerId} was not found` });
         }  
 
         //after all test is passed 
         return response
         .status(200)
-        .json({status:200, message : "Item sucessfully found: ", data : item });
+        .json({status:200, message : "center sucessfully found: ", data : center });
   }
   
   catch(error) {
