@@ -1,0 +1,30 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "`yarn init` in this server folder and add your BE dependencies",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CharlesEricStLD/FinalProject.git"
+  },
+  "author": "CharlesEric St-Louis Dupuis",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/CharlesEricStLD/FinalProject/issues"
+  },
+  "homepage": "https://github.com/CharlesEricStLD/FinalProject#readme",
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "install": "^0.13.0",
+    "mongodb": "6.3",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}
