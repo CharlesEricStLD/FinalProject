@@ -1,5 +1,7 @@
 "use strict";
 
+const {getCenterById} = require("./handlers") 
+
 // build your server here
 
 // consider making one or more handler files to ease the  division of work
@@ -22,6 +24,8 @@ express()
 .get("/test", (req, res) => {
   res.json({ message: "You hit the end point!" });
 })
+
+.get("/center/:centerId", getCenterById)
 
 //test MongoDB get w/ db & collection names used as examples, 
 .get("/api/testMongo", async (req, res) => {
