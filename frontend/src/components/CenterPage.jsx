@@ -24,7 +24,7 @@ export const CenterPage = () => {
     <>
     <h1>THIS IS THE PAGE TO RENDER THE CENTER PAGE WITH IT"S ID</h1>
     {
-      <body>
+      <div>
       <h1>{center.name}</h1>
       <p>region :{center.region} </p>
       <img src={center.image}></img>
@@ -33,7 +33,7 @@ export const CenterPage = () => {
       <p>{center.email}</p>
       <p>{center.facebook}</p>
       <p>{center.phone}</p>   
-      </body>
+      </div>
   }
     </>
 
