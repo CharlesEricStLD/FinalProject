@@ -13,12 +13,14 @@
   //
 
 "use strict";
-
 const { v4: uuidv4 } = require('uuid');
 
 const { MongoClient } = require("mongodb");
 
 require("dotenv").config();
+
+const {createHashPassword} = require("../helpers/bcrypt")
+
 const { MONGO_URI } = process.env;
 
 const client = new MongoClient(MONGO_URI);
@@ -32,16 +34,15 @@ const signin = async (request, response) => {
   const {user} = request.body;
   const {username, password} = user;
 
-  console.log(!user);
-  console.log(!username);
-
   if (!user || !username || !password) {
     return response
     .status(401)
     .json({ status: 401,  message : "You need to provide a username and a password to access this endoint"});
   } 
-  
-  const newUser = {...user, _id : uuidv4()};
+
+  const hashpassword = await createHashPassword(password)
+
+  const newUser = {...user, _id : uuidv4(), password : hashpassword};
   
   try {
 
