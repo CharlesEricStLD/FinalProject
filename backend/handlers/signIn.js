@@ -1,17 +1,6 @@
 //Sign In endpoint where we ceate the user an validate that his 
 //username is not taken 
 
- //FETCH POST
-
-  //BAckedn : 
-  //Add user to db with : 
-  // user = {
-    // "id"
-    // username : "BOB", (LOWERCASE in BACKEND)
-    // password : "pass1" 
-  //}
-  //
-
 "use strict";
 const { v4: uuidv4 } = require('uuid');
 
@@ -37,8 +26,28 @@ const signin = async (request, response) => {
   if (!user || !username || !password) {
     return response
     .status(401)
-    .json({ status: 401,  message : "You need to provide a username and a password to access this endoint"});
+    .json({ status: 401,  message : "Please provide a username and a password to sign in"});
   } 
+
+  //RegEx espression to validate that username only contain alaphanumeric character 
+  //and between 6 and 16 characters long
+  const usernameTester = RegExp (/^[0-9A-Za-z]{6,16}$/);
+
+  //Regex expression to validate that password contain at least one letter, one number and one special character 
+  //and is a minimum of 8 characters
+  const passwordTester = RegExp (/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/)
+
+  if (!(usernameTester.test(username))) {
+    return response
+    .status(401)
+    .json({status:401, message : "Invalid username, your username should only contain alaphanumeric character and be between 6 and 16 characters long" })
+  }
+
+  if(!(passwordTester.test(password))) {
+    return response
+    .status(401)
+    .json({status:401, message : "Invalid password, your password should contain at least one letter, one number and one special character and be a minimum of 6 characters and a maximum of 16 characters long" })
+  }
 
   const hashpassword = await createHashPassword(password)
 
@@ -59,7 +68,6 @@ const signin = async (request, response) => {
     }
 
     //if user don't exist, create add it to the database
-      
     const createdUser = await db.collection(collectionName).insertOne({_id : newUser._id, username : newUser.username, password : newUser.password});
 
     console.log(newUser);
