@@ -5,35 +5,72 @@ import styled from "styled-components"
 
 export const SignInPage = () => {
 
-  const [user, SetUser] = useState(null);
-  const [password, setPassword] = useState(null)
+  const emptyUser = {
+    username : "", 
+    password : ""
+  }
+  
+  const [user, setUser] = useState(emptyUser);
+  const [verificationInProgress, setVerificationInProgress] = useState(false);
+  const [validationMessage, setValidationMessage] = useState(null);
+  const [errorMessage, setErrorMessage] = useState(null);
 
-  const handleSubmit = () => {
-    console.log("form Submit");
+
+
+
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    setErrorMessage("");
+    setValidationMessage("");
+    setVerificationInProgress(true);
+    fetch("/api/signin",{
+      method: "POST",
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+    },
+    body: JSON.stringify({user})
+    })
+    .then(response => response.json())
+    .then((data) => {
+      setVerificationInProgress(false);
+      console.log(data.message);
+      if (data.message === "Request sucessfull: ") {
+        setValidationMessage(`Welcome ${data.data}!`)
+      } else {
+        setErrorMessage(data.message);
+      }
+      //navigate to userPage + add local session stoarge user ID
+    })
   }
 
-  //FETCH POST
-
-  //BAckedn : 
-  //Add user to db with : 
-  // user = {
-    // username : "BOB", (LOWERCASE in BACKEND)
-    // password : "pass1" 
-  //}
-  //
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    if (name === "username") {
+      const valueStore = value.toLowerCase();
+      setUser({...user,[name] : valueStore})
+    }   
+      setUser({...user, [name] : value})
+      setErrorMessage("");
+      setValidationMessage("");
+  }
 
   return (
     <form>
       <h1>Sign In</h1>
       <InputContainer>
       <label> UserName :
-      <input type="text"></input> 
+      <input type="text" name="username" onChange={(event) =>handleChange(event)}></input> 
       </label>
       <label> Password
-        <input type="password"></input>
+        <input type="password" name="password" onChange={(event) =>handleChange(event)}></input>
       </label>
-      <button onClick={handleSubmit}>Register</button>
+      
+      <button onClick={handleSubmit} disabled={verificationInProgress}>Register </button>
       </InputContainer>
+      {errorMessage? <p>{errorMessage}</p> : <p>{validationMessage}</p>}
     </form>
   )
 }
