@@ -1,5 +1,5 @@
 
-const {centerById, allCentersByRegion} = require("./handlers") 
+const {centerById, allCentersByRegion, signin} = require("./handlers") 
 
 const express = require("express");
 const morgan = require("morgan");
@@ -18,6 +18,8 @@ express()
 .get("/api/center/:centerId", centerById)
 
 .get("/api/region/:region", allCentersByRegion)
+
+.post("/api/signin", signin)
 
 //test MongoDB get w/ db & collection names used as examples, 
 .get("/api/testMongo", async (req, res) => {

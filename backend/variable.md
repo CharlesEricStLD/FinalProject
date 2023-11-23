@@ -16,6 +16,12 @@ center = {
     }
   }
 
+user = {
+    "id" : "id" //create with UIIDv4
+    "username" : "BOB",
+    "password" : "pass1"
+  }
+
 ### Photo credit 
 Home page photo : Photo by stein egil liland: https://www.pexels.com/photo/snow-covered-mountain-3807981/
 
