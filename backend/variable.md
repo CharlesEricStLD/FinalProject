@@ -15,3 +15,10 @@ center = {
     "phone":"450 886-3845"
     }
   }
+
+### Photo credit 
+Home page photo : Photo by stein egil liland: https://www.pexels.com/photo/snow-covered-mountain-3807981/
+
+
+  
+

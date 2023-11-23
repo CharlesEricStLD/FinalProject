@@ -1,3 +1,4 @@
+//Endpoint to retrieve in Database all the center of a specific region 
 
 "use strict";
 const { MongoClient } = require("mongodb");
@@ -10,16 +11,14 @@ const client = new MongoClient(MONGO_URI);
 const collectionName = "centers"
 const database = "CrossCountryData"
 
+const allCentersByRegion = async (request, response) => {
 
-// Get a specific center by his ID
-
-const getCenterById = async (request, response) => {
-  const { centerId } = request.params;
+  const { region } = request.params;
   
-  if (!centerId) {
+  if (!region) {
   return response
   .status(401)
-  .json({ status: 401,  message : "You need to provide an Id to access this endoint"});
+  .json({ status: 401,  message : "You need to provide a region to access this endoint"});
 }    
     try {
 
@@ -28,18 +27,18 @@ const getCenterById = async (request, response) => {
       console.log("connected!");
 
       //retrieve Id in the database 
-      const center = await db.collection(collectionName).findOne({_id :centerId});
+      const allCenters = await db.collection(collectionName).find({region : region}).toArray();
 
-      if (!center || center.matchedCount === 0) {
+      if (!allCenters || allCenters.matchedCount === 0) {
           return response
           .status(404)
-          .json({ status: 404, centerId, message : `center not found, please verify the center Id : ${centerId} was not found` });
+          .json({ status: 404, allCenters, message : `region not found, please verify the region name : ${region} was not found` });
         }  
 
         //after all test is passed 
         return response
         .status(200)
-        .json({status:200, message : "center sucessfully found: ", data : center });
+        .json({status:200, message : "region sucessfully found: ", data : allCenters });
   }
   
   catch(error) {
@@ -54,4 +53,4 @@ const getCenterById = async (request, response) => {
     }
 }
 
-module.exports = getCenterById;
+module.exports = allCentersByRegion;
