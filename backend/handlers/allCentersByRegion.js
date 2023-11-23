@@ -38,7 +38,7 @@ const allCentersByRegion = async (request, response) => {
         //after all test is passed 
         return response
         .status(200)
-        .json({status:200, message : "region sucessfully found: ", data : allCenters });
+        .json({status:200, message : "Request sucessfull: ", data : allCenters });
   }
   
   catch(error) {
