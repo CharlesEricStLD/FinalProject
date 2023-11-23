@@ -17,7 +17,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
             <Routes>
                 <Route path="/" element={<HomePage/>} />
                 <Route path="/center/:centerId" element={<CenterPage/>}></Route>
-                <Route path="/region/:regionId" element={<AllCenterInRegion/>} />
+                <Route path="/region/:region" element={<AllCenterInRegion/>} />
                 <Route path="/login" element={<LoginPage/>}> </Route>
                 <Route path="/User/:UserName" element={<UserPage/>}></Route>
                 {/* <Route path="admin/orders/:orderId" element={<Admin/>}></Route> */}
