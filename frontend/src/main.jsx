@@ -10,6 +10,7 @@ import { CenterPage } from "../src/components/CenterPage";
 import { AllCenterInRegion } from "../src/components/AllCenterInRegion";
 import { LoginPage } from "../src/components/LogInPage";
 import {UserPage} from "../src/components/UserPage.jsx"
+import { SignInPage } from './components/SignInPage.jsx';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
     <BrowserRouter>
@@ -19,6 +20,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
                 <Route path="/center/:centerId" element={<CenterPage/>}></Route>
                 <Route path="/region/:region" element={<AllCenterInRegion/>} />
                 <Route path="/login" element={<LoginPage/>}> </Route>
+                <Route path="/signin" element={<SignInPage/>}> </Route>
                 <Route path="/User/:UserName" element={<UserPage/>}></Route>
                 {/* <Route path="admin/orders/:orderId" element={<Admin/>}></Route> */}
             </Routes>

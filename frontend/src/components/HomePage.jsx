@@ -15,7 +15,7 @@ navigate(`region/${regionSelected}`)
 
 return (
   <>
-  <img src="../public/homePageBanner.jpg"></img>
+  <img src="./homePageBanner.jpg"></img>
   <h1> HOME PAGE : Welcome on the Quebec CrossCountry Finder!</h1>
   <input type="text"></input>
   <select onChange={(domElement) => {handleChange(domElement)}}>
