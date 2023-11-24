@@ -54,7 +54,7 @@ const logIn = async (request, response) => {
       //after all test is passed 
       return response
       .status(200)
-      .json({status:200,  data : user.username, message : "Request sucessfull: "});
+      .json({status:200,  data : username, message : "Request sucessfull: "});
 }
   
   catch(error) {
