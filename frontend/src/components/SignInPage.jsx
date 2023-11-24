@@ -1,6 +1,7 @@
 //PAge where user can Sign in
 
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components"
 
 export const SignInPage = () => {
@@ -9,6 +10,8 @@ export const SignInPage = () => {
     username : "", 
     password : ""
   }
+
+  const navigate = useNavigate();
   
   const [user, setUser] = useState(emptyUser);
   const [verificationInProgress, setVerificationInProgress] = useState(false);
@@ -38,11 +41,14 @@ export const SignInPage = () => {
       setVerificationInProgress(false);
       console.log(data.message);
       if (data.message === "Request sucessfull: ") {
-        setValidationMessage(`Welcome ${data.data}!`)
+        setValidationMessage(`Welcome ${data.data}!, your will be redirected to your User page in a few sec !`)
+        sessionStorage.setItem("user", user.username)
+        setTimeout(() => {
+          navigate(`/user/${user.username}`)
+        }, 3000)
       } else {
         setErrorMessage(data.message);
       }
-      //navigate to userPage + add local session stoarge user ID
     })
   }
 
