@@ -1,18 +1,53 @@
 //This is the navigation Bar component
 
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components"
+import { useState, useEffect } from "react";
 
 export const Header = () => {
 
-  return (
+
+    //put username into a global state;
+
+    const navigate = useNavigate();
+    
+    const [accessAllowed,setAccessAllowed] = useState(false)
+
+    let sessionData = "" ; 
+    sessionData = sessionStorage.getItem("user");
+
+    const handleLogout = () => {
+        console.log("SESSIONCLEAR");
+        sessionStorage.clear();
+        sessionData = "";
+        navigate("/")
+    }
+
+    //todo
+    //mettre le session storage en global state.
+
+    useEffect(() => {
+        if (sessionData) {
+            console.log("session DATA IS TRUE");
+            setAccessAllowed(true);
+        } else {
+            setAccessAllowed(false);
+        }
+        }, [sessionData]);
+
+
+
+return (
     <Wrapper>
             <NavBar>
                 <NavItem to="/">Home</NavItem>
-                <NavItem to="/login">Log in </NavItem>
+                {accessAllowed ? 
+                (<NavItem onClick={handleLogout}>Log out </NavItem> ) : (
+                <NavItem to="/login">Log in </NavItem>)}
+                
             </NavBar>
     </Wrapper>
-  )
+)
 
 }
 
