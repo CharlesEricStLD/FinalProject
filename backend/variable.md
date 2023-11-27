@@ -35,7 +35,7 @@ comment = {
   centerID: "",
   text : "",
   date : Date(),
-  accepted : falsed 
+  accepted : false
   }
 
 ### Photo credit 
