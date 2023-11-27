@@ -30,6 +30,14 @@ favorite = {
   "centerId" = ""
 }
 
+comment = {
+  username : "",
+  centerID: "",
+  text : "",
+  date : Date(),
+  accepted : falsed 
+  }
+
 ### Photo credit 
 Home page photo : Photo by stein egil liland: https://www.pexels.com/photo/snow-covered-mountain-3807981/
 
