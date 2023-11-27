@@ -2,12 +2,18 @@
 
 import { useEffect, useState } from "react"
 import { useParams } from 'react-router-dom'; 
+import { FaHeart } from "react-icons/fa";
+import styled from "styled-components";
 
 export const CenterPage = () => {
 
   const [center, SetCenter] = useState(null); 
   const [lattitude, setLattitude] = useState(null);
   const [longitude, setLongitude] = useState(null);
+  const [isFavorite, setIsFavorite] = useState(false);
+  const [favorite, setFavorite] = useState(null);
+  const [validationMessage, setValidationMessage] = useState(null);
+  const [errorMessage, setErrorMessage] = useState(null);
   
 
   const {centerId} = useParams();
@@ -48,6 +54,41 @@ export const CenterPage = () => {
   }
   }, [center])
 
+  useEffect(() => {
+    if (isFavorite) {
+        fetch("/api/addfavorite",  { 
+        method: 'PATCH',
+        headers: {
+          "Accept": "application/json",
+          "Content-Type": "application/json",
+      },
+      body: JSON.stringify({favorite : {username : (sessionStorage.getItem("user")), centerId : centerId }  })
+        }) 
+      .then(response => response.json())
+      .then((data) => {
+        console.log(data);
+      if (data === "Request sucessfull: ") {
+        setValidationMessage("Add to favorite !")
+      } else {
+        setErrorMessage(data.message);
+      }
+      })
+    }
+  }, [isFavorite])
+
+  const favoriteCLick = (event) => {
+    const FavoriteIcon = event.target.parentElement;
+
+    if(FavoriteIcon.style.fill === "red") {
+      setIsFavorite(false);
+      FavoriteIcon.style.fill = "black";
+    } else {
+      setIsFavorite(true);
+      FavoriteIcon.style.fill = "red";
+    }
+  }
+
+
 
   return (
     <>
@@ -56,6 +97,8 @@ export const CenterPage = () => {
     {!center? <p>loading ....</p> : (
       <>
       <h1>{center.name}</h1>
+      <Favorite><FaHeart onClick={(event) => favoriteCLick(event)}></FaHeart></Favorite>
+      {<p>{validationMessage || errorMessage}</p> }
       <p>region :{center.region} </p>
       <img src={center.image}></img>
       <p><a>{center.url}</a></p>
@@ -72,3 +115,18 @@ export const CenterPage = () => {
   ) 
 
 }
+
+
+// #root > div:nth-child(2) > button > svg
+document.querySelector("#root > div:nth-child(2) > button > svg")
+
+const Favorite = styled.button`
+  border:none;
+  
+  & > svg :active {
+    background-color: pink;
+    border: solid yellow;
+    fill:red;
+  }
+  
+`
