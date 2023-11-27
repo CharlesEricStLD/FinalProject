@@ -11,11 +11,13 @@ import { AllCenterInRegion } from "../src/components/AllCenterInRegion";
 import { LoginPage } from "../src/components/LogInPage";
 import {UserPage} from "../src/components/UserPage.jsx"
 import { SignInPage } from './components/SignInPage.jsx';
+import { AdminPage } from './components/AdminPage.jsx';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
     <BrowserRouter>
             <Header />
             <Routes>
+                <Route path="/admin" element={<AdminPage/>}/>
                 <Route path="/" element={<HomePage/>} />
                 <Route path="/center/:centerId" element={<CenterPage/>}></Route>
                 <Route path="/region/:region" element={<AllCenterInRegion/>} />
