@@ -64,10 +64,14 @@ export const CenterPage = () => {
       },
       body: JSON.stringify({favorite : {username : (sessionStorage.getItem("user")), centerId : centerId }  })
         }) 
+
+        //makebetter
+        //Remove .then 
+
       .then(response => response.json())
       .then((data) => {
         console.log(data);
-      if (data === "Request sucessfull: ") {
+      if (data.message === "Request sucessfull: ") {
         setValidationMessage("Add to favorite !")
       } else {
         setErrorMessage(data.message);
@@ -107,6 +111,7 @@ export const CenterPage = () => {
       <p>{center.contact.email}</p>
       <p>{center.contact.facebook}</p>
       <p>{center.contact.phone}</p> 
+      {/* //makebetter : add a message on trailfork, if you are trailfork member */ }
       <p> <a href={`https://www.trailforks.com/map/?ping=${lattitude},${longitude}`} target="blank"> InteractiveMAp on TrailFork </a> </p> 
       </> 
     ) }
