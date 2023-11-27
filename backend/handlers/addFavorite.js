@@ -28,15 +28,21 @@ const addFavorite = async (request, response) => {
 
     const favoriteAdded = await db.collection(collectionName).updateOne(
       { username: username },
-      { $push :{ favorite : centerId } }
+      { $addToSet :{ favorite : centerId } }
   );
 
   console.log(favoriteAdded);
 
-    if (!favoriteAdded, favoriteAdded.matchedCount === 0 || favoriteAdded.modifiedCount === 0) {
+    if (!favoriteAdded, favoriteAdded.matchedCount === 0 && favoriteAdded.modifiedCount === 0) {
       return response
       .status(401)
       .json({ status: 401, message : `You need to be login to add or remove favorite` });
+    }
+
+    if (favoriteAdded.modifiedCount === 0) {
+      return response
+      .status(401)
+      .json({ status: 401, message : `This favorite already exist in your favorite list :)` });
     }
 
     //after all test is passed 
