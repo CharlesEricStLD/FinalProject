@@ -5,22 +5,10 @@ import { useParams } from 'react-router-dom';
 
 export const CenterPage = () => {
 
-  // const centerObj =  {
-  //   _id : "e0d4b418-a2c2-4ed7-bc1b-b2fdbe55c530",
-  //   image : "https://m1.quebecormedia.com/emp/emp/62216354_2615382654865a-73cc-4c33-bc1d-8479a3cd3d50_ORIGINAL.jpg?impolicy=crop-resize&x=0&y=0&w=1000&h=667&width=960",
-  //   name : "Ski Montagne coupée",
-  //   region : "Laurentides",
-  //   url : "https://skidefondstjeanmatharaquettelanaudiere.com/",
-    
-  //   contact : {
-  //   email : "<info@skimontagnecoupee.com>",
-  //   facebook : " @skimontagnecoupee",
-  //   Phone : "450 886-3845",
-  //   website : "https://skidefondstjeanmatharaquettelanaudiere.com/",
-  //   }
-  // }
-
-  const [center, SetCenter] = useState(null);  
+  const [center, SetCenter] = useState(null); 
+  const [lattitude, setLattitude] = useState(null);
+  const [longitude, setLongitude] = useState(null);
+  
 
   const {centerId} = useParams();
 
@@ -42,6 +30,25 @@ export const CenterPage = () => {
 
   },[]);
 
+  //Fetch to Nominative GoogleStreet API
+  useEffect(() => {
+    if (center) {
+    fetch(`https://nominatim.openstreetmap.org/search?q=${center.name}&format=json`)
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.message = "center sucessfully found: ") {
+          console.log(data[0])
+          setLattitude(data[0].lat);
+          setLongitude(data[0].lon);
+        }
+      })
+      .catch((error) => {
+        console.error(`Error fetching center details for ID ${centerId}:`, error);
+    });
+  }
+  }, [center])
+
+
   return (
     <>
     <div>
@@ -52,10 +59,12 @@ export const CenterPage = () => {
       <p>region :{center.region} </p>
       <img src={center.image}></img>
       <p><a>{center.url}</a></p>
+      <p> adresss :<a href={`https://www.google.com/maps/place/${center.address}`} target="blank"> {center.address}</a></p>
       <h2>Contact</h2>
       <p>{center.contact.email}</p>
       <p>{center.contact.facebook}</p>
-      <p>{center.contact.phone}</p>  
+      <p>{center.contact.phone}</p> 
+      <p> <a href={`https://www.trailforks.com/map/?ping=${lattitude},${longitude}`} target="blank"> InteractiveMAp on TrailFork </a> </p> 
       </> 
     ) }
     </div>      
