@@ -8,6 +8,9 @@ center = {
   "name":"Ski Montagne coupée",
   "region":"Laurentides",
   "url":"https://skidefondstjeanmatharaquettelanaudiere.com/"
+  "address" : "220 Ch. Montagne Coupée,
+  Saint-Jean-de-Matha,
+  Québec, J0K 2S0"
   
   "contact": { 
     "facebook":" @skimontagnecoupee",
