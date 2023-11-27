@@ -1,1 +1,0 @@
-//This component is use to render the comment part on each specific center Page 

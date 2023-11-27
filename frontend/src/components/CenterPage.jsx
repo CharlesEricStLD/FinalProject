@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 import { useParams } from 'react-router-dom'; 
 import { FaHeart } from "react-icons/fa";
 import styled from "styled-components";
+import { AddComments } from "./AddComments";
 
 export const CenterPage = () => {
 
@@ -11,7 +12,6 @@ export const CenterPage = () => {
   const [lattitude, setLattitude] = useState(null);
   const [longitude, setLongitude] = useState(null);
   const [isFavorite, setIsFavorite] = useState(false);
-  const [favorite, setFavorite] = useState(null);
   const [validationMessage, setValidationMessage] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null);
   
@@ -115,7 +115,8 @@ export const CenterPage = () => {
       <p> <a href={`https://www.trailforks.com/map/?ping=${lattitude},${longitude}`} target="blank"> InteractiveMAp on TrailFork </a> </p> 
       </> 
     ) }
-    </div>      
+    </div>
+    <AddComments centerId = {centerId} centerName = {center && center.name}/>      
     </>
   ) 
 
