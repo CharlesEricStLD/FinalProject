@@ -5,7 +5,7 @@ const { MongoClient } = require("mongodb");
 require("dotenv").config();
 const { MONGO_URI } = process.env;
 
-const client = new MongoClient(MONGO_URI);
+// const client = new MongoClient(MONGO_URI);
 
 const collectionName = "centers"
 const database = "CrossCountryData"
@@ -13,6 +13,9 @@ const database = "CrossCountryData"
 // Get a specific center by his ID
 
 const centerById = async (request, response) => {
+  
+  const client = new MongoClient(MONGO_URI);
+
   const { centerId } = request.params;
   
   if (!centerId) {
@@ -21,6 +24,8 @@ const centerById = async (request, response) => {
   .json({ status: 401,  message : "You need to provide an Id to access this endoint"});
 }    
     try {
+
+      
 
       await client.connect();
       const db = client.db(database);
