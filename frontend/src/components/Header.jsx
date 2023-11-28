@@ -6,7 +6,6 @@ import { useState, useEffect } from "react";
 
 export const Header = () => {
 
-
     //put username into a global state;
 
     const navigate = useNavigate();
@@ -42,7 +41,7 @@ return (
             <NavBar>
                 <NavItem to="/">Home</NavItem>
                 {accessAllowed ? 
-                (<NavItem onClick={handleLogout}>Log out </NavItem> ) : (
+                (<NavItem as={"button"} onClick={handleLogout}>Log out </NavItem> ) : (
                 <NavItem to="/login">Log in </NavItem>)}
                 
             </NavBar>
