@@ -1,6 +1,7 @@
 
 "use strict";
 const { MongoClient } = require("mongodb");
+const { v4: uuidv4 } = require('uuid');
 
 require("dotenv").config();
 const { MONGO_URI } = process.env;
@@ -35,14 +36,14 @@ const addComment = async (request, response) => {
     console.log("connected!");
 
     const commentAdded = await db.collection(collectionName).updateOne({_id : centerId},
-    { $addToSet :{ comments : {...comment} } })
+    { $addToSet :{ comments : {...comment, _id : uuidv4()} } })
 
     if (!commentAdded, commentAdded.matchedCount === 0 && commentAdded.modifiedCount === 0) {
       return response
       .status(401)
       .json({ status: 401, message : `You need to provide a valid center id` });
     }
-    
+
     //after all test is passed 
     return response
     .status(200)
