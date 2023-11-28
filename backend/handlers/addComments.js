@@ -5,7 +5,7 @@ const { MongoClient } = require("mongodb");
 require("dotenv").config();
 const { MONGO_URI } = process.env;
 
-const collectionName = "comments"
+const collectionName = "centers"
 const database = "CrossCountryData"
 
 // {username : "", centerID: "", text : setComment, date : Date(), accepted : falsed  }
@@ -34,8 +34,15 @@ const addComment = async (request, response) => {
     const db = client.db(database);
     console.log("connected!");
 
-    const commentAdded = await db.collection(collectionName).insertOne({...comment});
+    const commentAdded = await db.collection(collectionName).updateOne({_id : centerId},
+    { $addToSet :{ comments : {...comment} } })
 
+    if (!commentAdded, commentAdded.matchedCount === 0 && commentAdded.modifiedCount === 0) {
+      return response
+      .status(401)
+      .json({ status: 401, message : `You need to provide a valid center id` });
+    }
+    
     //after all test is passed 
     return response
     .status(200)
