@@ -4,19 +4,25 @@ import { NewCommentContext } from "../routes/RoutesIndex"
 
 export const AdminComment = ({comment}) => {
 
-  //makebetter
-  //Make comment into an array of object of each on each center So like that we can 
-  //more easily render it
+  //makebetter ULTRA
+  //make the comment disapear when it's approved and possibility 
+  //of deleting it and sorting it by date.
 
   const handleApproveComment = () => {
-    comment.accepted = true;
-    setNewComments(comment)
-    console.log("NEW COMMENT ADD");
-  }
+      fetch("/api/approvedcomment",  { 
+      method: 'PATCH',
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ comment : {centerId : comment.centerId, _id : comment._id  }  })
+      }) 
+    }
 
   return (
     <>
-    <h1>Comment</h1>
+    <h1>Comment </h1>
+    {comment.accepted?<p style={{color:"green"}}>APPROVED</p>: <p>Waiting For approval...</p>}
     <p>Comment made by {comment.username}</p>
     <p>comment made for {comment.centerId}</p>
     <p>Text : {comment.text}</p>
