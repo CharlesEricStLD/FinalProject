@@ -1,10 +1,12 @@
 //Compopnents to render the Page for each center by ID of center 
 
-import { useEffect, useState } from "react"
+import { useEffect, useState, useContext} from "react"
 import { useParams } from 'react-router-dom'; 
 import { FaHeart } from "react-icons/fa";
 import styled from "styled-components";
 import { AddComments } from "./AddComments";
+import {NewCommentContext} from "../routes/RoutesIndex"
+import { Comment } from "./Comment";
 
 export const CenterPage = () => {
 
@@ -15,7 +17,8 @@ export const CenterPage = () => {
   const [validationMessage, setValidationMessage] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null);
   
-
+  const {newComments, setNewComments} = useContext(NewCommentContext)
+  
   const {centerId} = useParams();
 
   //Fetch data from server
@@ -116,7 +119,8 @@ export const CenterPage = () => {
       </> 
     ) }
     </div>
-    <AddComments centerId = {centerId} centerName = {center && center.name}/>      
+    <AddComments centerId = {centerId} centerName = {center && center.name}/> 
+    {newComments && newComments.centerId === centerId && <Comment comment={newComments}/>}
     </>
   ) 
 

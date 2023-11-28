@@ -1,10 +1,10 @@
 //Admin Page where we see all comments 
 
-import { useEffect, useState } from "react"
+import { useEffect, useState} from "react"
 import { Comment } from "./Comment";
+import { NewCommentContext } from "../routes/RoutesIndex";
 
 export const AdminPage = () => {
-
 
 const [allComments, setAllComments] = useState(null);
 
@@ -23,7 +23,7 @@ fetch("/api/admin/allcomments")
     <>
     <h1>Admin PaGE</h1>
     {allComments && allComments.map(comment => 
-    <Comment comment = {comment}/>
+    <Comment key={comment._id} comment = {comment}/>
     )
     }
     </>
