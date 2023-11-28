@@ -1,5 +1,5 @@
 
-const {centerById, allCentersByRegion, signin, logIn, addFavorite, showFavorites, addComment, allCommentsAdmin} = require("./handlers") 
+const {centerById, allCentersByRegion, signin, logIn, addFavorite, showFavorites, addComment, allCommentsAdmin, approvedComment} = require("./handlers") 
 
 const express = require("express");
 const morgan = require("morgan");
@@ -30,6 +30,8 @@ express()
 .post("/api/addcomment", addComment)
 
 .get("/api/admin/allcomments", allCommentsAdmin)
+
+.patch("/api/approvedcomment", approvedComment)
 
 //test MongoDB get w/ db & collection names used as examples, 
 .get("/api/testMongo", async (req, res) => {

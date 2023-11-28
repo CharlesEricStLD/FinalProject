@@ -6,6 +6,7 @@ const addFavorite = require("./handlers/addFavorite")
 const showFavorites = require("./handlers/showFavorites")
 const addComment = require("./handlers/addComments")
 const allCommentsAdmin = require("./handlers/allCommentsAdmin")
+const approvedComment = require("./handlers/approvedComment")
 
 module.exports = {
   centerById, 
@@ -15,5 +16,6 @@ module.exports = {
   addFavorite, 
   showFavorites,
   addComment,
-  allCommentsAdmin
+  allCommentsAdmin, 
+  approvedComment
 }
