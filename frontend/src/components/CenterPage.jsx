@@ -95,8 +95,11 @@ export const CenterPage = () => {
 
   let commentsToShow = [];
 
-  
-  center && (commentsToShow = center.comments.filter((comment) => comment.accepted === true))
+  if (center && center.comments) {
+    console.log("I TRY FUCK");
+    console.log(center);
+    (commentsToShow = (center.comments).filter((comment) => comment.accepted === true))
+  }
 
   return (
     <>
@@ -121,7 +124,7 @@ export const CenterPage = () => {
     ) }
     </div>
     <AddComments centerId = {centerId} centerName = {center && center.name}/> 
-    {commentsToShow.map(comment => <Comment comment={comment} key={comment._id}/>) }
+    {commentsToShow && commentsToShow.map(comment => <Comment comment={comment} key={comment._id}/>) }
     </>
   ) 
 

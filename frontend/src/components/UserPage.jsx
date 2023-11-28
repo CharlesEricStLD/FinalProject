@@ -3,6 +3,7 @@
 import { useContext, useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom";
 import { UserContext } from "../routes/RoutesIndex";
+import { FavoriteOfUser } from "./FavoriteOfUser";
 
 
 export const UserPage = () => {
@@ -10,6 +11,7 @@ export const UserPage = () => {
 const [userFavorites, SetUserFavorites] = useState(null);
 const [accessAllowed, setAccessAllowed] = useState(false);
 const [allFavorites, setAllFavorites] = useState([]);
+const [favoriteRemove, setFavoriteRemove] = useState(false) 
 
 const {user, setUser} = useContext(UserContext)
 
@@ -73,9 +75,10 @@ useEffect(() => {
       })      
     }
 
-}, [userFavorites])
+}, [userFavorites]);
 
 //user will also be able to see all their comments
+
 
   return (
     <>
@@ -85,15 +88,7 @@ useEffect(() => {
           {allFavorites ? (
             allFavorites.map((data => (
               <div key={data.data.name}>
-              <h1>{data.data.name}</h1>
-              <p>region :{data.data.region} </p>
-              <img src={data.data.image}></img>
-              <p><a>{data.data.url}</a></p>
-              <p> adresss :<a href={`https://www.google.com/maps/place/${data.data.address}`} target="blank"> {data.data.address}</a></p>
-              <h2>Contact</h2>
-              <p>{data.data.contact.email}</p>
-              <p>{data.data.contact.facebook}</p>
-              <p>{data.data.contact.phone}</p> 
+              <FavoriteOfUser favoriteRemove={favoriteRemove} setFavoriteRemove={setFavoriteRemove} data={data.data}/>
               </div>
             )))
           ) : (
