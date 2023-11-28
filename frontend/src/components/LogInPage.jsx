@@ -1,7 +1,8 @@
 //This is the login Page 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom"
 import styled from "styled-components";
+import { UserContext } from "../routes/RoutesIndex";
 
 
 export const LoginPage = () => {
@@ -14,7 +15,8 @@ export const LoginPage = () => {
     password : ""
   }
 
-  const [user, setUser] = useState(emptyUser);
+  const {user, setUser} = useContext(UserContext);
+
   const [verificationInProgress, setVerificationInProgress] = useState(false);
   const [validationMessage, setValidationMessage] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null);
@@ -59,7 +61,6 @@ export const LoginPage = () => {
       }
     })
   }
-
 
   const handleLogIn = (event) => {
     event.preventDefault();

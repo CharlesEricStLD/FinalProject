@@ -1,8 +1,9 @@
 //PAge where user can Sign in
 
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components"
+import { UserContext } from "../routes/RoutesIndex";
 
 export const SignInPage = () => {
 
@@ -13,7 +14,7 @@ export const SignInPage = () => {
 
   const navigate = useNavigate();
   
-  const [user, setUser] = useState(emptyUser);
+  const {user, setUser} = useContext(UserContext);
   const [verificationInProgress, setVerificationInProgress] = useState(false);
   const [validationMessage, setValidationMessage] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null);

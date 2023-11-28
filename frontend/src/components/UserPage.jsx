@@ -1,7 +1,8 @@
 //Component of the User Page 
 
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom";
+import { UserContext } from "../routes/RoutesIndex";
 
 
 export const UserPage = () => {
@@ -9,6 +10,8 @@ export const UserPage = () => {
 const [userFavorites, SetUserFavorites] = useState(null);
 const [accessAllowed, setAccessAllowed] = useState(false);
 const [allFavorites, setAllFavorites] = useState([]);
+
+const {user, setUser} = useContext(UserContext)
 
 const navigate = useNavigate();
 
@@ -66,15 +69,13 @@ useEffect(() => {
           }
         })
         .catch((error) => {
-          console.error(`Error fetching center details for ID ${centerId}:`, error);
+          console.error(`Error fetching center details:`, error);
       })      
     }
 
 }, [userFavorites])
 
 //user will also be able to see all their comments
-
-let center = null;
 
   return (
     <>
