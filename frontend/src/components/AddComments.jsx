@@ -25,7 +25,7 @@ export const AddComments = ({centerId, centerName}) => {
     //store the data a Context errorLog so I can watch it in admin mode
   })
   .then(response => response.json())
-  .then(data)
+  .then(data => (console.log(data)))
 }
 
   return (

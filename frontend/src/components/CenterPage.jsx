@@ -17,8 +17,6 @@ export const CenterPage = () => {
   const [validationMessage, setValidationMessage] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null);
   
-  const {newComments, setNewComments} = useContext(NewCommentContext)
-  
   const {centerId} = useParams();
 
   //Fetch data from server
@@ -95,7 +93,10 @@ export const CenterPage = () => {
     }
   }
 
+  let commentsToShow = [];
 
+  
+  center && (commentsToShow = center.comments.filter((comment) => comment.accepted === true))
 
   return (
     <>
@@ -116,11 +117,11 @@ export const CenterPage = () => {
       <p>{center.contact.phone}</p> 
       {/* //makebetter : add a message on trailfork, if you are trailfork member */ }
       <p> <a href={`https://www.trailforks.com/map/?ping=${lattitude},${longitude}`} target="blank"> InteractiveMAp on TrailFork </a> </p> 
-      </> 
+      </>
     ) }
     </div>
     <AddComments centerId = {centerId} centerName = {center && center.name}/> 
-    {newComments && newComments.centerId === centerId && <Comment comment={newComments}/>}
+    {commentsToShow.map(comment => <Comment comment={comment} key={comment._id}/>) }
     </>
   ) 
 
