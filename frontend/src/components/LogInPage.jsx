@@ -52,6 +52,7 @@ export const LoginPage = () => {
       if (data.message === "Request sucessfull: ") {
         setValidationMessage(`Welcome back ${data.data}!, your will be redirected to your User page in a few sec !`)
         sessionStorage.setItem("user", user.username)
+        setUser({...user, username : user.username} )
         
         setTimeout(() => {
           navigate(`/user/${user.username}`)
