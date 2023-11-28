@@ -9,9 +9,7 @@ const { MongoClient } = require("mongodb");
 require("dotenv").config();
 const { MONGO_URI } = process.env;
 
-
-
-const collectionName = "comments"
+const collectionName = "centers"
 const database = "CrossCountryData"
 
 const allCommentsAdmin = async (request, response) => {
@@ -25,7 +23,7 @@ const allCommentsAdmin = async (request, response) => {
       console.log("connected!");
 
       //retrieve Id in the database 
-      const allComments = await db.collection(collectionName).find().toArray();
+      const allComments = await db.collection(collectionName).distinct("comments");
 
       console.log(allComments);
 
