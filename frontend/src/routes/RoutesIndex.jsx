@@ -5,12 +5,12 @@
 import {Routes, Route } from "react-router-dom";
 import { useState, createContext } from "react";
 
-import {Header} from "../components/Header.jsx";
+
 import { HomePage } from "../components/HomePage";
 import { CenterPage } from "../components/CenterPage";
 import { AllCenterInRegion } from "../components/AllCenterInRegion";
 import { LoginPage } from "../components/LogInPage";
-import { UserPage} from "../components/UserPage.jsx"
+import { UserPage } from "../components/UserPage.jsx";
 import { SignInPage } from '../components/SignInPage.jsx';
 import { AdminPage } from '../components/AdminPage.jsx';
 
