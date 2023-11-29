@@ -1,5 +1,6 @@
 //Home Page component rendering the Home Page 
 import { useNavigate } from "react-router-dom";
+import { Typeahead } from "./Typeahead";
 
 
 export const HomePage = () => {
@@ -17,8 +18,9 @@ return (
   <>
   <img src="./homePageBanner.jpg"></img>
   <h1> HOME PAGE : Welcome on the Quebec CrossCountry Finder!</h1>
-  <input type="text"></input>
-  <select onChange={(domElement) => {handleChange(domElement)}}>
+  {/* <input type="text"></input> */}
+  <Typeahead/>
+  <select onChange={(domElement) => {handleChange(domElement)}} style={{margin:20, display:"block"}}>
   <option>Filter by region</option>
     {regions.map(region => 
     <option key={region}>{region}</option>)}
