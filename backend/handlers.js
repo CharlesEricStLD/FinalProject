@@ -8,6 +8,7 @@ const addComment = require("./handlers/addComments")
 const allCommentsAdmin = require("./handlers/allCommentsAdmin")
 const approvedComment = require("./handlers/approvedComment")
 const removeFavorite = require("./handlers/removeFavorite")
+const allCentersInformation = require("./handlers/allCenterInformations")
 
 module.exports = {
   centerById, 
@@ -19,5 +20,6 @@ module.exports = {
   addComment,
   allCommentsAdmin, 
   approvedComment,
-  removeFavorite
+  removeFavorite, 
+  allCentersInformation
 }

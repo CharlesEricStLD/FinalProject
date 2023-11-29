@@ -1,5 +1,5 @@
 
-const {centerById, allCentersByRegion, signin, logIn, addFavorite, showFavorites, addComment, allCommentsAdmin, approvedComment, removeFavorite} = require("./handlers") 
+const {centerById, allCentersByRegion, signin, logIn, addFavorite, showFavorites, addComment, allCommentsAdmin, approvedComment, removeFavorite, allCentersInformation} = require("./handlers") 
 
 const express = require("express");
 const morgan = require("morgan");
@@ -14,6 +14,8 @@ express()
 .get("/test", (req, res) => {
   res.json({ message: "You hit the end point!" });
 })
+
+.get("/api/allcentersinformation", allCentersInformation)
 
 .get("/api/center/:centerId", centerById)
 
