@@ -3,7 +3,7 @@
 import { useContext, useState } from "react";
 import { UserContext } from "../routes/RoutesIndex";
 
-export const FavoriteOfUser = ({data, userFavorites,SetUserFavorites, favoriteRemove, setFavoriteRemove}) => {
+export const FavoriteOfUser = ({data, userFavorites,SetUserFavorites}) => {
 
   // const {user, setUser} = useContext(UserContext)
 

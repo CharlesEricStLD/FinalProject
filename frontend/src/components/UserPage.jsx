@@ -77,9 +77,6 @@ useEffect(() => {
 
 }, [userFavorites]);
 
-//user will also be able to see all their comments
-
-
   return (
     <>
       {accessAllowed && (
@@ -88,7 +85,7 @@ useEffect(() => {
           {allFavorites ? (
             allFavorites.map((data => (
               <div key={data.data.name}>
-              <FavoriteOfUser userFavorites={userFavorites} SetUserFavorites={SetUserFavorites}  favoriteRemove={favoriteRemove} setFavoriteRemove={setFavoriteRemove} data={data.data}/>
+              <FavoriteOfUser userFavorites={userFavorites} SetUserFavorites={SetUserFavorites} data={data.data}/>
               </div>
             )))
           ) : (
