@@ -22,7 +22,7 @@ export const RoutesIndex = () => {
 
   const emptyUser = {
     username : "", 
-    password : ""
+    password : "",
   }
 
 
@@ -37,6 +37,9 @@ const emptyComment = {
 const [newComments, setNewComments] = useState(emptyComment)
 
 const [user, setUser] = useState(emptyUser)
+
+//Add remove favorite and put it into global userContext provider value 
+//So I can remove favorite and after set(user) to this new favorite array
 
   return (
     <NewCommentContext.Provider value={{newComments, setNewComments}}>

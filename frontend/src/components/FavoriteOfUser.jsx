@@ -18,8 +18,8 @@ export const FavoriteOfUser = ({data, favoriteRemove, setFavoriteRemove}) => {
         "Content-Type": "application/json",
     },
     body: JSON.stringify({favorite : {username : user.username, centerId : data._id } })
-  }) 
-  setFavoriteRemove(true);
+  })
+  //refilter trought user favorite and set of it 
   }
 
 return (
