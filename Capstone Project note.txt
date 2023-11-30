@@ -1,0 +1,34 @@
+Capstone Project note
+
+
+*2 server : Manage site
+*** server for frontEnd 
+
+**MakeBetterGobal
+**Make the userInformation (favorite and username) into a userContext variable so 
+**you can easily avoid to fetch for favorites or user comments in here.
+
+**comments and favorite should'nt appear if not log in.
+
+*** 1 server for the Scraping (on TimeouT)
+-On my Own machine
+- 
+
+
+MVP : 
+-Login/Log Out 
+- User can Patch/delete/get information on app
+  --That will be done within their user page.
+  -- Patch : COmment page 
+  -- delete : favorite removal 
+  -- Get : show favorite
+- Using an API (OPEN STREET MAP)
+
+
+PAcakge use : 
+https://headlessui.com/react/combobox
+
+
+
+
+
