@@ -3,13 +3,12 @@
 import { useContext, useState } from "react";
 import { UserContext } from "../routes/RoutesIndex";
 
-export const FavoriteOfUser = ({data, favoriteRemove, setFavoriteRemove}) => {
+export const FavoriteOfUser = ({data, userFavorites,SetUserFavorites, favoriteRemove, setFavoriteRemove}) => {
 
-  //makeBetter
-  //make it so the ush of the button force a rerender of the userPage
+  // const {user, setUser} = useContext(UserContext)
 
-  const {user, setUser} = useContext(UserContext)
-  
+  const user = sessionStorage.getItem("user")
+
   const handleRemoveFavorite = () => {
     fetch("/api/removefavorite",  { 
       method: 'PATCH',
@@ -17,10 +16,10 @@ export const FavoriteOfUser = ({data, favoriteRemove, setFavoriteRemove}) => {
         "Accept": "application/json",
         "Content-Type": "application/json",
     },
-    body: JSON.stringify({favorite : {username : user.username, centerId : data._id } })
+    body: JSON.stringify({favorite : {username : user, centerId : data._id } })
   })
-  //refilter trought user favorite and set of it 
-  }
+  SetUserFavorites(userFavorites.filter(favorite => favorite !== data._id))
+}
 
 return (
 <>

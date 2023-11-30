@@ -63,7 +63,7 @@ useEffect(() => {
         Promise.all(allFetch)
         .then((responses) => Promise.all(responses.map(response => response.json())))
         .then(datas => {
-          console.log(datas);
+          // console.log(datas);
           //todo 
           //this is an array treat it like that ! yeah! 
           if ( datas.every((data) => (data.message = "center sucessfully found: ")) ) { 
@@ -88,7 +88,7 @@ useEffect(() => {
           {allFavorites ? (
             allFavorites.map((data => (
               <div key={data.data.name}>
-              <FavoriteOfUser favoriteRemove={favoriteRemove} setFavoriteRemove={setFavoriteRemove} data={data.data}/>
+              <FavoriteOfUser userFavorites={userFavorites} SetUserFavorites={SetUserFavorites}  favoriteRemove={favoriteRemove} setFavoriteRemove={setFavoriteRemove} data={data.data}/>
               </div>
             )))
           ) : (
