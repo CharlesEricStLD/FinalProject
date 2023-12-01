@@ -7,6 +7,7 @@ import styled from "styled-components";
 import { AddComments } from "./AddComments";
 import {NewCommentContext, UserContext} from "../routes/RoutesIndex"
 import { Comment } from "./Comment";
+import { LeafletMap } from "./LeafletMap";
 
 export const CenterPage = () => {
 
@@ -100,6 +101,7 @@ export const CenterPage = () => {
   }
 
   return (
+    
     <>
     <div>
     <h1>THIS IS THE PAGE TO RENDER THE CENTER PAGE WITH IT"S ID</h1>
@@ -121,8 +123,10 @@ export const CenterPage = () => {
       </>
     ) }
     </div>
+    
     <AddComments centerId = {centerId} centerName = {center && center.name}/> 
     {commentsToShow && commentsToShow.map(comment => <Comment comment={comment} key={comment._id}/>) }
+    {lattitude && longitude && <LeafletMap lattitude={lattitude} longitude={longitude}></LeafletMap>}
     </>
   ) 
 
