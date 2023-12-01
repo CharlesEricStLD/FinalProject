@@ -38,24 +38,24 @@ const [newComments, setNewComments] = useState(emptyComment)
 
 const [user, setUser] = useState(emptyUser)
 
+console.log(user);
+
 //Add remove favorite and put it into global userContext provider value 
 //So I can remove favorite and after set(user) to this new favorite array
 
   return (
-    <NewCommentContext.Provider value={{newComments, setNewComments}}>
-    <UserContext.Provider value = {{user, setUser}}>
+    <UserContext.Provider value = {[user, setUser]}>
             <Routes>
                 <Route path="/" element={<HomePage/>} />
-                <Route path="/center/:centerId" element={<CenterPage/>}></Route>
+                <Route path="/center/:centerId" element={<CenterPage/>} />
                 <Route path="/admin" element={<AdminPage/>}/>
                 
                 <Route path="/region/:region" element={<AllCenterInRegion/>} />
-                <Route path="/login" element={<LoginPage/>}> </Route>
-                <Route path="/signin" element={<SignInPage/>}> </Route>
-                <Route path="/user/:username" element={<UserPage/>}></Route>
+                <Route path="/login" element={<LoginPage/>}/> 
+                <Route path="/signin" element={<SignInPage/>}/> 
+                <Route path="/user/:username" element={<UserPage/>}/>
             </Routes>
   </UserContext.Provider>
-  </NewCommentContext.Provider>
   )
 
 }
