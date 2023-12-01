@@ -8,12 +8,11 @@ import { FavoriteOfUser } from "./FavoriteOfUser";
 
 export const UserPage = () => {
 
-const [userFavorites, SetUserFavorites] = useState(null);
+const [user, setUser] = useContext(UserContext)
+
+const [userFavorites, SetUserFavorites] = useState(user.favorites);
 const [accessAllowed, setAccessAllowed] = useState(false);
 const [allFavorites, setAllFavorites] = useState([]);
-const [favoriteRemove, setFavoriteRemove] = useState(false) 
-
-const {user, setUser} = useContext(UserContext)
 
 const navigate = useNavigate();
 
@@ -22,37 +21,12 @@ const {username} = useParams();
 useEffect(() => {
   const sessionData = sessionStorage.getItem("user");
 
-  if (username === sessionData) {
+  if (username === user.username) {
     setAccessAllowed(true);
   } else {
     navigate("/login");
   }
 }, [navigate, username]);
-
-
-//makebetter
-//make the user object context state so it can be faster to fecth from it.
-
-//Here we will fetch the favorite and list it. 
-useEffect(() => {
-  fetch("/api/showfavorites", {
-    method: "POST",
-        headers: {
-          "Accept": "application/json",
-          "Content-Type": "application/json",
-      },
-      body: JSON.stringify({username : sessionStorage.getItem("user")})
-      })
-      .then(response => response.json())
-    .then((data) => {
-      if (data.message === "Request sucessfull: ") {
-        SetUserFavorites(data.data)
-      }
-      else {
-        console.error(data.message)
-      }
-    })
-},[])
 
 useEffect(() => {
   if(userFavorites) {
@@ -63,9 +37,7 @@ useEffect(() => {
         Promise.all(allFetch)
         .then((responses) => Promise.all(responses.map(response => response.json())))
         .then(datas => {
-          // console.log(datas);
-          //todo 
-          //this is an array treat it like that ! yeah! 
+
           if ( datas.every((data) => (data.message = "center sucessfully found: ")) ) { 
             setAllFavorites(datas)
           }

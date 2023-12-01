@@ -10,12 +10,7 @@ export const LoginPage = () => {
   //user name should be context state
   const navigate = useNavigate();
 
-  const emptyUser = {
-    username : "", 
-    password : ""
-  }
-
-  const {user, setUser} = useContext(UserContext);
+  const [user, setUser] = useContext(UserContext);
 
   const [verificationInProgress, setVerificationInProgress] = useState(false);
   const [validationMessage, setValidationMessage] = useState(null);
@@ -52,7 +47,8 @@ export const LoginPage = () => {
       if (data.message === "Request sucessfull: ") {
         setValidationMessage(`Welcome back ${data.data}!, your will be redirected to your User page in a few sec !`)
         sessionStorage.setItem("user", user.username)
-        setUser({...user, username : user.username} )
+        console.log(data.data.favorites);
+        setUser({username : data.data.username, favorites : data.data.favorites} )
         
         setTimeout(() => {
           navigate(`/user/${user.username}`)
