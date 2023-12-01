@@ -3,6 +3,7 @@
 import { NavLink, useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components"
 import { useState, useEffect } from "react";
+import { LuUserCircle2 } from "react-icons/lu";
 
 export const Header = () => {
 
@@ -44,7 +45,7 @@ return (
                 <NavItem to={`/user/${sessionData}`}>My profile</NavItem>
                 </>
                 : (
-                <NavItem to="/login">Log in </NavItem>)}
+                <NavItem to="/login"> <LuUserCircle2/> </NavItem>)}
                 
             </NavBar>
     </Wrapper>
@@ -55,15 +56,11 @@ return (
 
 const NavItem = styled(NavLink)`
     text-decoration: none;
-    border: solid 3px black;
+    border: none;
     padding: 5px;
     font-weight: bold;
     color: black;
     background-color: white;
-
-    &.active {
-        background: rgb(66,133,91);
-    }
 `;
 
 const NavBar = styled.div`
@@ -72,7 +69,8 @@ const NavBar = styled.div`
     top: 85%;
     width: 50%;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
+    justify-items: center;
     font-size: 2em;
 `
 
