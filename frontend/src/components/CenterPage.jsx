@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom';
 import { FaHeart } from "react-icons/fa";
 import styled from "styled-components";
 import { AddComments } from "./AddComments";
-import {NewCommentContext} from "../routes/RoutesIndex"
+import {NewCommentContext, UserContext} from "../routes/RoutesIndex"
 import { Comment } from "./Comment";
 
 export const CenterPage = () => {
@@ -19,10 +19,11 @@ export const CenterPage = () => {
   
   const {centerId} = useParams();
 
+  const [user, setUser] = useContext(UserContext);
+
   //Fetch data from server
   useEffect(() => {
     if (centerId) { 
-      console.log("FETCH DONE");
       fetch(`/api/center/${centerId}`)
       .then((response) => response.json())
       .then((data) => {
@@ -43,8 +44,8 @@ export const CenterPage = () => {
     fetch(`https://nominatim.openstreetmap.org/search?q=${center.name}&format=json`)
       .then((response) => response.json())
       .then((data) => {
-        if (data.message = "center sucessfully found: ") {
-          console.log(data[0])
+        console.log(data);
+        if (data.length > 0) {
           setLattitude(data[0].lat);
           setLongitude(data[0].lon);
         }
@@ -63,7 +64,7 @@ export const CenterPage = () => {
           "Accept": "application/json",
           "Content-Type": "application/json",
       },
-      body: JSON.stringify({favorite : {username : (sessionStorage.getItem("user")), centerId : centerId }  })
+      body: JSON.stringify({favorite : {username : user.username, centerId : centerId }  })
         }) 
 
         //makebetter
@@ -71,7 +72,6 @@ export const CenterPage = () => {
 
       .then(response => response.json())
       .then((data) => {
-        console.log(data);
       if (data.message === "Request sucessfull: ") {
         setValidationMessage("Add to favorite !")
       } else {
@@ -96,8 +96,6 @@ export const CenterPage = () => {
   let commentsToShow = [];
 
   if (center && center.comments) {
-    console.log("I TRY FUCK");
-    console.log(center);
     (commentsToShow = (center.comments).filter((comment) => comment.accepted === true))
   }
 
@@ -119,7 +117,7 @@ export const CenterPage = () => {
       <p>{center.contact.facebook}</p>
       <p>{center.contact.phone}</p> 
       {/* //makebetter : add a message on trailfork, if you are trailfork member */ }
-      <p> <a href={`https://www.trailforks.com/map/?ping=${lattitude},${longitude}`} target="blank"> InteractiveMAp on TrailFork </a> </p> 
+      {lattitude && longitude && (<p> <a href={`https://www.trailforks.com/map/?ping=${lattitude},${longitude}`} target="blank"> InteractiveMAp on TrailFork </a> </p>) }
       </>
     ) }
     </div>
