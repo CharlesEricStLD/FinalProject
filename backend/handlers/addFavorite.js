@@ -28,7 +28,7 @@ const addFavorite = async (request, response) => {
 
     const favoriteAdded = await db.collection(collectionName).updateOne(
       { username: username },
-      { $addToSet :{ favorite : centerId } }
+      { $addToSet :{ favorites : centerId } }
   );
 
   console.log(favoriteAdded);
