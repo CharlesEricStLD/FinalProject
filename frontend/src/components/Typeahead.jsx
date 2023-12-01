@@ -2,6 +2,7 @@
 import { Combobox } from '@headlessui/react'
 import {useState, useEffect} from "react"
 import {styled} from "styled-components"
+import { Link } from "react-router-dom";
 
 
 export const Typeahead = ( ) => {
@@ -42,7 +43,7 @@ return (
     <Combobox.Options>
       {query? filteredPeople.map((option) => (
         <Combobox.Option key={option.name} value={option.name}>
-          <a href={`/center/${option._id}`}>{option.name} {option.region}</a>
+          <Link to={`/center/${option._id}`}>{option.name} {option.region}</Link>
         </Combobox.Option>
       )) : "" }
     </Combobox.Options>
@@ -52,7 +53,7 @@ return (
 
 }
 
-const TypeaheadStyle = styled("Combobox")`
+const TypeaheadStyle = styled.div`
   padding: 0 2%;
 
 
