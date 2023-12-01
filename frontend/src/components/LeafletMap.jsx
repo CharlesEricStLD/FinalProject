@@ -4,7 +4,7 @@ import 'leaflet/dist/leaflet.css'
 
 export const LeafletMap = ({lattitude, longitude}) => {
   return (
-    <div style={{height:"200px"}}>
+    
     <MapContainer  style={{ height: '400px', width: '400px' }} center={[lattitude, longitude]} zoom={13} scrollWheelZoom={false}>
   <TileLayer
     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -16,7 +16,6 @@ export const LeafletMap = ({lattitude, longitude}) => {
     </Popup>
   </Marker>
 </MapContainer>
-</div>
 
   )
 }
