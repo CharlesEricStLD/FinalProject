@@ -102,46 +102,122 @@ export const CenterPage = () => {
 
   return (
     
-    <>
-    <div>
-    <h1>THIS IS THE PAGE TO RENDER THE CENTER PAGE WITH IT"S ID</h1>
+    <PageContainer>
     {!center? <p>loading ....</p> : (
       <>
+      
+      <CenterInformation>
       <h1>{center.name}</h1>
       <Favorite><FaHeart onClick={(event) => favoriteCLick(event)}></FaHeart></Favorite>
       {<p>{validationMessage || errorMessage}</p> }
-      <p>region :{center.region} </p>
+      <p>Region : {center.region} </p>
       <img src={center.image}></img>
-      <p><a>{center.url}</a></p>
+      </CenterInformation>
+      
+      <CenterDetails>
+      
+      <FirstBlock>
+      <p><a href={center.url} target="blank">{center.url}</a></p>
       <p> adresss :<a href={`https://www.google.com/maps/place/${center.address}`} target="blank"> {center.address}</a></p>
+
       <h2>Contact</h2>
       <p>{center.contact.email}</p>
       <p>{center.contact.facebook}</p>
       <p>{center.contact.phone}</p> 
       {/* //makebetter : add a message on trailfork, if you are trailfork member */ }
-      {lattitude && longitude && (<p> <a href={`https://www.trailforks.com/map/?ping=${lattitude},${longitude}`} target="blank"> InteractiveMAp on TrailFork </a> </p>) }
+      {lattitude && longitude && (<p> <a href={`https://www.trailforks.com/map/?ping=${lattitude},${longitude}`} target="blank"> Interactive Map on TrailFork </a> </p>) }
+      </FirstBlock>
+
+      <SecondBlock>
+      {lattitude && longitude && <LeafletMap lattitude={lattitude} longitude={longitude}></LeafletMap>}
+      </SecondBlock>
+
+      <ThirdBlock>
+      <h2>Comments</h2>
+      {commentsToShow && commentsToShow.map(comment => <Comment comment={comment} key={comment._id}/>) }
+      </ThirdBlock>
+
+      <div>
+      <p>POP UP</p>
+      <AddComments centerId = {centerId} centerName = {center && center.name}/> 
+      </div>
+
+      </CenterDetails>
       </>
     ) }
-    </div>
-    
-    <AddComments centerId = {centerId} centerName = {center && center.name}/> 
-    {commentsToShow && commentsToShow.map(comment => <Comment comment={comment} key={comment._id}/>) }
-    {lattitude && longitude && <LeafletMap lattitude={lattitude} longitude={longitude}></LeafletMap>}
-    </>
+    </PageContainer>
   ) 
 
 }
 
+const PageContainer = styled.div`
+  margin: 0 2%;
+  font-size: 1.5em;
+  border-radius: 15px;
+  border: 2px solid;
+  background-color: #767f878b;
+`
+const CenterInformation = styled.div`
+  padding:2%;
 
-// #root > div:nth-child(2) > button > svg
-document.querySelector("#root > div:nth-child(2) > button > svg")
+  h1{
+    display: inline-block;
+    margin-top: 1%;
+  }
+
+  p{
+    margin: 1% 0;
+  }
+  
+  img {
+    width:100%;
+    height:400px;
+    object-fit: cover;
+    object-position: 0 64%;
+    border-radius: 15px;
+  }
+`
+const CenterDetails = styled.div`
+  display:grid;
+  padding:2%;
+  font-size: 1.2em;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
+  grid-gap: 3%;
+
+`
+
+const FirstBlock = styled.div`
+padding:2%;
+h2{
+  margin-top: 5%;
+}
+border-radius: 15px;
+border: solid 2px;
+`
+
+const SecondBlock = styled.div`
+border-radius: 15px;
+border: solid 2px;
+`
+
+const ThirdBlock = styled.div`
+  h2{
+  padding:2%;
+  }
+  border-radius: 15px;
+  border: solid 2px;
+`
+
 
 const Favorite = styled.button`
   border:none;
+  display: inline-block;
+  margin-left:2%;
+  background-color: rgb(0,0,0,0);
+  font-size: 1.5em;
   
   & > svg :active {
-    background-color: pink;
-    border: solid yellow;
     fill:red;
   }
   

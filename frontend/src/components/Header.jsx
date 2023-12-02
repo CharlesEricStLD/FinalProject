@@ -60,7 +60,6 @@ const NavItem = styled(NavLink)`
 `;
 
 const NavBar = styled.div`
-    position: absolute;
     z-index: 1;
     width: 50%;
     margin-left:20% ;

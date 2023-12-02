@@ -4,8 +4,7 @@ import 'leaflet/dist/leaflet.css'
 
 export const LeafletMap = ({lattitude, longitude}) => {
   return (
-    
-    <MapContainer  style={{ height: '400px', width: '400px' }} center={[lattitude, longitude]} zoom={13} scrollWheelZoom={false}>
+    <MapContainer  style={{ height: '475px', width: '475px', borderRadius:"15px" }} center={[lattitude, longitude]} zoom={16} scrollWheelZoom={false}>
   <TileLayer
     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
