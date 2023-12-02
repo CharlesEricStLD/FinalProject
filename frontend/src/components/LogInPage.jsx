@@ -73,32 +73,62 @@ export const LoginPage = () => {
 
   return (
     <form>
-      <h1>LOGIN PAGE </h1>
-      <InputContainer>
-      <label> UserName :
+    <LoginPageStyle>
+      <h1>LOGIN</h1>
+      <label>Username :
       <input type="text" name="username" onChange={(event) =>handleChange(event)}></input> 
       </label>
-      <label> Password
+      <label>Password :
         <input type="password" name="password" onChange={(event) =>handleChange(event)}></input>
       </label>
       <button onClick = {handleLogIn} disabled={verificationInProgress}>Log in</button>
-      <button onClick = {handleLogInAsGuest} disabled={verificationInProgress}>log in as Guest</button>
-      <a href="/signin" disabled={verificationInProgress}>Sign In</a>
-      </InputContainer>
+      {/* <button onClick = {handleLogInAsGuest} disabled={verificationInProgress}>log in as Guest</button> */}
+      <p>Doesn't have an account ? You can  <a href="/signin" disabled={verificationInProgress}> sign in here </a>.</p>
       {errorMessage? <p>{errorMessage}</p> : <p>{validationMessage}</p>}
+    </LoginPageStyle>
     </form>
   )
-
-
 }
 
-const InputContainer = styled.div `
+const LoginPageStyle = styled.div`
+  margin:2% auto;
+  border: 2px solid;
+  width:30%;
+  height:75vh;
   display:flex;
-  flex-direction : column;
-  justify-content: left;
+  flex-direction: column;
+  justify-content:center;
+  text-align: center;
+  font-size: 2em;
+  padding:0 2%;
+  border-radius: 15px;
 
-  button {
-  width:50%;
-  margin-top:2%;
+  h1 {
+    margin:2% 0;
   }
-  `
+
+  label {
+    font-size: 1em;
+    margin-bottom: 3%;
+    margin-right:1%;
+  }
+
+  input {
+    margin-top: 2%;
+    font-size: 1em;
+    width:100%;
+    text-align: center;
+    font-size: 1em;
+  }
+
+  button{
+    font-size: 1em;
+    text-align: center;
+    width:100%;
+    margin:4% auto;
+  }
+
+  p{
+    margin-top:2%;
+  }
+`
