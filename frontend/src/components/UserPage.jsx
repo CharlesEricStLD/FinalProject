@@ -4,6 +4,7 @@ import { useContext, useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom";
 import { UserContext } from "../routes/RoutesIndex";
 import { FavoriteOfUser } from "./FavoriteOfUser";
+import styled from "styled-components";
 
 
 export const UserPage = () => {
@@ -52,19 +53,33 @@ useEffect(() => {
   return (
     <>
       {accessAllowed && (
-        <div>
+          <AllFavorites>
           <h1>HI {username} ! </h1>
           {allFavorites ? (
             allFavorites.map((data => (
               <div key={data.data.name}>
-              <FavoriteOfUser userFavorites={userFavorites} SetUserFavorites={SetUserFavorites} data={data.data}/>
+              <FavoriteOfUser userFavorites={userFavorites} SetUserFavorites={SetUserFavorites} data = {data.data} allFavorites={allFavorites}/>
               </div>
             )))
           ) : (
             <p>You have no favorites yet</p>
           )}
-        </div>
+          </AllFavorites>
       )}
     </>
   );
 }
+
+const AllFavorites = styled.div`
+  margin:2%;
+  font-size: 1.5em;
+  
+  p{
+    font-size: 1.2em;
+  }
+
+  h1{
+    font-size: 3em;
+    margin-bottom: 1%;
+  }
+`
