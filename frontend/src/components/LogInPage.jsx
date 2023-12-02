@@ -72,7 +72,8 @@ export const LoginPage = () => {
 
   return (
     <LoginPageStyle>
-    <img src="LoginBackground (3).jpg" alt="Lady doing some cross country" />
+    <img className="image2" src="LoginBackground (5).jpg" alt="Lady doing some cross country" />
+    <img className="image1" src="LoginBackground (3).jpg" alt="Lady doing some cross country" />
     <form>
     <LoginModal>
       <h1>Log in</h1>
@@ -98,9 +99,17 @@ height:90vh;
 position: relative;
 
 
-  img {
-  width: 100%;
+  .image1 {
   height:100%;
+  width:50%;
+  z-index: -1;
+  position: absolute;
+  left:50%;
+  }
+
+  .image2 {
+  height:100%;
+  width:50%;
   z-index: -1;
   position: absolute;
   object-fit: fill;
@@ -108,9 +117,8 @@ position: relative;
 `
 
 const LoginModal = styled.div`
-  background-color: #ffffff7a;
-  margin:5% auto;
-  border: 2px solid;
+  background-color: #ffffffd4;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;  margin:5% auto;
   width:30%;
   height:75vh;
   display:flex;
@@ -140,6 +148,7 @@ const LoginModal = styled.div`
   }
 
   button{
+    background-color: #2b381f;
     font-size: 1em;
     text-align: center;
     width:100%;
