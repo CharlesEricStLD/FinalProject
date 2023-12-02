@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom"
 import styled from "styled-components";
 import { UserContext } from "../routes/RoutesIndex";
 
-
 export const LoginPage = () => {
 
   //user name should be context state
@@ -72,9 +71,11 @@ export const LoginPage = () => {
   }
 
   return (
-    <form>
     <LoginPageStyle>
-      <h1>LOGIN</h1>
+    <img src="LoginBackground (3).jpg" alt="Lady doing some cross country" />
+    <form>
+    <LoginModal>
+      <h1>Log in</h1>
       <label>Username :
       <input type="text" name="username" onChange={(event) =>handleChange(event)}></input> 
       </label>
@@ -85,13 +86,30 @@ export const LoginPage = () => {
       {/* <button onClick = {handleLogInAsGuest} disabled={verificationInProgress}>log in as Guest</button> */}
       <p>Doesn't have an account ? You can  <a href="/signin" disabled={verificationInProgress}> sign in here </a>.</p>
       {errorMessage? <p>{errorMessage}</p> : <p>{validationMessage}</p>}
-    </LoginPageStyle>
+    </LoginModal>
     </form>
+    </LoginPageStyle>
   )
 }
 
 const LoginPageStyle = styled.div`
-  margin:2% auto;
+border: solid 2px;
+height:90vh;
+position: relative;
+
+
+  img {
+  width: 100%;
+  height:100%;
+  z-index: -1;
+  position: absolute;
+  object-fit: fill;
+  }
+`
+
+const LoginModal = styled.div`
+  background-color: #ffffff7a;
+  margin:5% auto;
   border: 2px solid;
   width:30%;
   height:75vh;
