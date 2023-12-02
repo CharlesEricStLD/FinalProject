@@ -54,7 +54,6 @@ return (
 }
 
 const TypeaheadStyle = styled.div`
-  padding: 0 2%;
 
 
 input {
@@ -63,12 +62,27 @@ input {
     outline: none;
     align-items: left;
     width:100%;
-    height: 3em;
+    height: 2em;
     object-fit: fill;
+    font-size: 1em;
+}
+
+Link{
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color:black;
 }
 
 ul > li:hover {
 font-weight: bold;
+text-decoration: none;
 }
 
 `

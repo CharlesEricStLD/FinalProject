@@ -36,7 +36,6 @@ export const Header = () => {
 
 
 return (
-    <Wrapper>
             <NavBar>
                 <NavItem to="/">Home</NavItem>
                 {accessAllowed ? 
@@ -48,7 +47,6 @@ return (
                 <NavItem to="/login"> <LuUserCircle2/> </NavItem>)}
                 
             </NavBar>
-    </Wrapper>
 )
 
 }
@@ -57,27 +55,17 @@ return (
 const NavItem = styled(NavLink)`
     text-decoration: none;
     border: none;
-    padding: 5px;
     font-weight: bold;
     color: black;
-    background-color: white;
 `;
 
 const NavBar = styled.div`
     position: absolute;
     z-index: 1;
-    top: 85%;
     width: 50%;
+    margin-left:20% ;
+    margin-top:1%;
     display: flex;
     justify-content: space-between;
-    justify-items: center;
-    font-size: 2em;
+    font-size: 2.5em;
 `
-
-const Wrapper = styled.div`
-    display: flex;
-    justify-content: center;
-    position: relative;
-    background: rgb(66,133,91);
-    margin-bottom: 100px;
-    `

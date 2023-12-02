@@ -33,8 +33,9 @@ return (
 }
 
 const HomePageStyled = styled.div`
-height:auto;
-width:auto;
+height:100vh;
+font-size: 1.2em;
+overflow: hidden;
 
 h1{
   text-align: center;
@@ -45,8 +46,11 @@ h1{
 }
 
 img{
-  position:fixed;
+  width: 99%;
+  height: 100%;
+  position:absolute;
   z-index: -1;
+  opacity: 80%;
 }
 `
 
@@ -57,16 +61,20 @@ margin-left: 2%;
 display:grid;
 grid-template-columns: 0.75fr 0.25fr;
 height: max-content;
-height:auto;
 border-radius:15px;
 border: solid black;
 font-size: 1.5em;
+position: relative;
 
 select {
   background-color: rgba(0, 0, 0, 0);
   border: none;
   outline: none;
   margin:0;
+  font-size: 1em;
+  position:absolute;
+  right:9%;
+  top:20%
 }
 
 option{
