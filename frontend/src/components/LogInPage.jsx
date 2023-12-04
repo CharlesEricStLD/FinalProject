@@ -11,6 +11,10 @@ export const LoginPage = () => {
 
   const [user, setUser] = useContext(UserContext);
 
+  console.log(UserContext);
+
+  console.log(user);
+
   const [verificationInProgress, setVerificationInProgress] = useState(false);
   const [validationMessage, setValidationMessage] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null);
@@ -37,7 +41,7 @@ export const LoginPage = () => {
         "Accept": "application/json",
         "Content-Type": "application/json",
     },
-    body: JSON.stringify({user})
+    body: JSON.stringify({user : {username : user.username, password : user.password}})
     })
     .then(response => response.json())
     .then((data) => {
