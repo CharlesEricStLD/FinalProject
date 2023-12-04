@@ -44,7 +44,7 @@ return (
     <Combobox.Options>
       {query? filteredPeople.map((option) => (
         <Combobox.Option key={option.name} value={option.name}>
-          <Link to={`/center/${option._id}`}>{option.name} {option.region}</Link>
+          <Link to={`/center/${option._id}`}>{option.name}, {option.region}</Link>
         </Combobox.Option>
       )) : "" }
     </Combobox.Options>
@@ -63,10 +63,11 @@ input {
     border: none;
     outline: none;
     align-items: left;
+    padding:0.5%;
     width:100%;
     height: 2em;
     object-fit: fill;
-    font-size: 2em;
+    font-size: 1.2em;
 }
 
 Link{
@@ -75,7 +76,8 @@ Link{
 
 ul, a, li {
   list-style: none;
-  font-size: 1.2em;
+  font-size: 1em;
+  padding:0.5%;
 }
 
 a {
@@ -85,6 +87,7 @@ a {
 
 ul > li:hover {
 font-weight: bold;
+background-color: #0062ff46;
 text-decoration: none;
 }
 

@@ -188,7 +188,7 @@ const PageContainer = styled.div`
   padding:1%;
   padding-top:0;
   padding-bottom: 2%;
-  font-size: 1.5em;
+  font-size: 1.2em;
   border-radius: 15px;
   border: 2px solid;
   box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;  background-color:#ffffff;
@@ -198,6 +198,7 @@ const CenterInformation = styled.div`
   h1, p{
     display: block;
     position: relative;
+    font-weight: bold;
     z-index: 2;
     padding-left: 5%;
     color:black;
@@ -247,9 +248,6 @@ p.note {
 `
 
 const SecondBlock = styled.div`
-/* border-radius: 15px;
-border: solid 2px;
-box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;  background-color:#ffffff; */
 padding-left:10%;
 `
 

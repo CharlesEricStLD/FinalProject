@@ -42,7 +42,7 @@ h1{
   width:85%;
   margin: auto;
   padding-top: 10%;
-  font-size: 4em;
+  font-size: 3.2em;
 }
 
 img{
@@ -72,7 +72,7 @@ select {
   border: none;
   outline: none;
   margin:0;
-  font-size: 2em;
+  font-size: 1.2em;
   position:absolute;
   right:9%;
   top:20%
