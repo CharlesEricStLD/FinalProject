@@ -73,8 +73,9 @@ Link{
   text-decoration: none;
 }
 
-ul {
+ul, a, li {
   list-style: none;
+  font-size: 1.2em;
 }
 
 a {
