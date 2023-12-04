@@ -66,7 +66,7 @@ input {
     width:100%;
     height: 2em;
     object-fit: fill;
-    font-size: 1em;
+    font-size: 2em;
 }
 
 Link{

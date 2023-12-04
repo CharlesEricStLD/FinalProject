@@ -47,14 +47,6 @@ return (
 
 }
 
-
-const NavItem = styled(NavLink)`
-    text-decoration: none;
-    border: none;
-    font-weight: bold;
-    color: black;
-`;
-
 const NavBar = styled.div`
     z-index: 1;
     width: 50%;
@@ -63,11 +55,23 @@ const NavBar = styled.div`
     display: flex;
     justify-content: space-between;
     font-size: 2.5em;
+    border-bottom: 4px solid;
+    padding: 1%;
 
     button {
         font: inherit;
         font-size: 1em;
         border: none;
         font-weight: bold;
+    }
+`
+const NavItem = styled(NavLink)`
+    text-decoration: none;
+    border: none;
+    font-weight: bold;
+    color: black;
+
+    svg {
+        font-size: 1.5em;
     }
 `

@@ -49,6 +49,7 @@ img{
   width: 99%;
   height: 100%;
   position:absolute;
+  top:-0.2%;
   z-index: -1;
   opacity: 80%;
 }
@@ -71,7 +72,7 @@ select {
   border: none;
   outline: none;
   margin:0;
-  font-size: 1em;
+  font-size: 2em;
   position:absolute;
   right:9%;
   top:20%

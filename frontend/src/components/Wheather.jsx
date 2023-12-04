@@ -2,6 +2,7 @@
 import { Loader } from "./Loader"
 import ReactWeather, { useOpenWeather } from 'react-open-weather';
 import { useVisualCrossing } from 'react-open-weather'
+import styled from "styled-components";
 
 export const Weather = ({lattitude, longitude, address}) => {
 
@@ -14,6 +15,7 @@ export const Weather = ({lattitude, longitude, address}) => {
   });
 
   return (
+    <WeatherStyling>
     <ReactWeather
       isLoading={isLoading}
       data={data}
@@ -22,6 +24,12 @@ export const Weather = ({lattitude, longitude, address}) => {
       unitsLabels={{ temperature: 'C', windSpeed: 'Km/h' }}
       showForecast
     />
+    </WeatherStyling>
   )
 
 }
+
+const WeatherStyling = styled.div`
+  width:100%;
+  height:175%;
+`

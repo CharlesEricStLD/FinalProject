@@ -185,23 +185,28 @@ export const CenterPage = () => {
 
 const PageContainer = styled.div`
   margin: 1% 8%;
+  padding:1%;
+  padding-top:0;
+  padding-bottom: 2%;
   font-size: 1.5em;
   border-radius: 15px;
   border: 2px solid;
   box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;  background-color:#ffffff;
-
-
 `
 const CenterInformation = styled.div`
-  padding:2%;
 
-  h1{
-    display: inline-block;
-    margin-top: 1%;
+  h1, p{
+    display: block;
+    position: relative;
+    z-index: 2;
+    padding-left: 5%;
+    color:black;
+    top: 150px;
   }
 
   p{
     margin: 1% 0;
+    font-size: 1.5em;
   }
   
   img {
@@ -210,6 +215,9 @@ const CenterInformation = styled.div`
     object-fit: cover;
     object-position: 0 64%;
     border-radius: 15px;
+    position: relative;
+    top:-150px;
+    z-index : 1;
   }
 `
 const CenterDetails = styled.div`
@@ -239,10 +247,10 @@ p.note {
 `
 
 const SecondBlock = styled.div`
-border-radius: 15px;
+/* border-radius: 15px;
 border: solid 2px;
-box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;  background-color:#ffffff;
-
+box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;  background-color:#ffffff; */
+padding-left:10%;
 `
 
 const ThirdBlock = styled.div`
@@ -250,18 +258,19 @@ const ThirdBlock = styled.div`
   border: solid 2px;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;  background-color:#ffffff;
 
-  
   h2{
   padding:2%;
   display: inline-block;
   }
 
   button {
-    background-color: #4d71e7;
+    background-color: #0181C2;
     font-size: 1em;
     text-align: center;
     width:25%;
+    padding:1%;
     margin:4% 4%;
+    color:white;
   }
 `
 const Favorite = styled.button`
