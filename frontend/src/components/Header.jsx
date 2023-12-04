@@ -14,14 +14,10 @@ export const Header = () => {
     
     const [accessAllowed,setAccessAllowed] = useState(false);
 
-    let sessionData = "" ; 
-    sessionData = sessionStorage.getItem("user");
-
     const handleLogout = () => {
         sessionStorage.clear();
         localStorage.clear();
-        sessionData = "";
-        setUser(null);
+        setUser("");
         navigate("/")
     }
 
@@ -29,13 +25,12 @@ export const Header = () => {
     //mettre le session storage en global state.
 
     useEffect(() => {
-        if (sessionData) {
-            console.log("session DATA IS TRUE");
+        if (user) {
             setAccessAllowed(true);
         } else {
             setAccessAllowed(false);
         }
-        }, [sessionData]);
+        }, [user]);
 
 
 
@@ -45,7 +40,7 @@ return (
                 {accessAllowed ? 
                 <>
                 <NavItem as={"button"} onClick={handleLogout}>Log out </NavItem>
-                <NavItem to={`/user/${sessionData}`}>My profile</NavItem>
+                <NavItem to={`/user/${user.username}`}>My profile</NavItem>
                 </>
                 : (
                 <NavItem to="/login"> <LuUserCircle2/> </NavItem>)}
@@ -71,4 +66,11 @@ const NavBar = styled.div`
     display: flex;
     justify-content: space-between;
     font-size: 2.5em;
+
+    button {
+        font: inherit;
+        font-size: 1em;
+        border: none;
+        font-weight: bold;
+    }
 `
