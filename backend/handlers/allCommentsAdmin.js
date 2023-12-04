@@ -25,8 +25,6 @@ const allCommentsAdmin = async (request, response) => {
       //retrieve Id in the database 
       const allComments = await db.collection(collectionName).distinct("comments");
 
-      console.log(allComments);
-
       if (!allComments || allComments.matchedCount === 0) {
           return response
           .status(404)

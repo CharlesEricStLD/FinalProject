@@ -35,7 +35,6 @@ const removeComment = async (request, response) => {
 
       const favoriteRemoved = await db.collection(collectionName).updateOne({username : username }, {$pull : {"favorite" : {$in : [centerId]}  }});
 
-      console.log(favoriteRemoved);
 
       if (!favoriteRemoved || favoriteRemoved.matchedCount === 0) {
           return response

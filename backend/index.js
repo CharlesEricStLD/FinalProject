@@ -47,8 +47,8 @@ express()
       .collection("people")
       .insertOne({ name: "Jimmy" });
     res.json(result);
-  } catch (err) {
-    console.log(err);
+  } catch (error) {
+    console.log(error.stack);
     res.status(400).json({ message: "something went wrong" });
   } finally {
     await client.close();

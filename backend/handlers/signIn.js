@@ -70,8 +70,6 @@ const signin = async (request, response) => {
     //if user don't exist, create add it to the database
     const createdUser = await db.collection(collectionName).insertOne({_id : newUser._id, username : newUser.username, password : newUser.password});
 
-    console.log(newUser);
-
     if (!createdUser || createdUser.insertedId !== newUser._id) {
         return response
         .status(500)

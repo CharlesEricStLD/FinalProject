@@ -41,6 +41,6 @@ comment = {
 ### Photo credit 
 Home page photo : Photo by stein egil liland: https://www.pexels.com/photo/snow-covered-mountain-3807981/
 
+LoginPhoto : Photo by Simon Berger: https://www.pexels.com/photo/woman-on-snow-ground-in-the-forest-with-rods-877864/, 
 
-  
-
+Image by <a href="https://pixabay.com/users/arttower-5337/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=215160"> Brigitte Werner</a>

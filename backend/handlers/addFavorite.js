@@ -31,8 +31,6 @@ const addFavorite = async (request, response) => {
       { $addToSet :{ favorites : centerId } }
   );
 
-  console.log(favoriteAdded);
-
     if (!favoriteAdded, favoriteAdded.matchedCount === 0 && favoriteAdded.modifiedCount === 0) {
       return response
       .status(401)

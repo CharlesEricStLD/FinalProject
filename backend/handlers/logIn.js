@@ -35,8 +35,6 @@ const logIn = async (request, response) => {
 
     const validUser = await db.collection(collectionName).findOne({username : user.username});
 
-    console.log(validUser);
-
     if (!validUser) {
       return response
       .status(401)
