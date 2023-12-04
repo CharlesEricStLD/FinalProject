@@ -8,6 +8,7 @@ import { AddComments } from "./AddComments";
 import {NewCommentContext, UserContext} from "../routes/RoutesIndex"
 import { Comment } from "./Comment";
 import { LeafletMap } from "./LeafletMap";
+import { LoginModal } from "./LoginModal"
 
 export const CenterPage = () => {
 
@@ -17,6 +18,7 @@ export const CenterPage = () => {
   const [isFavorite, setIsFavorite] = useState(false);
   const [validationMessage, setValidationMessage] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null);
+  const [open, setOpen] = useState(false);
   
   const {centerId} = useParams();
 
@@ -57,6 +59,7 @@ export const CenterPage = () => {
   }
   }, [center])
 
+  //Modify favorite if user is connected
   useEffect(() => {
     if (isFavorite) {
         fetch("/api/addfavorite",  { 
@@ -73,9 +76,18 @@ export const CenterPage = () => {
 
       .then(response => response.json())
       .then((data) => {
-      if (data.message === "Request sucessfull: ") {
+        console.log(data);
+      if (data.status === 200 || data.message === "This favorite already exist in your favorite list :)") {
         setValidationMessage("Add to favorite !")
       } else {
+        setOpen(true);
+        <LoginModal
+        open={open}
+        onCreate={onCreate}
+        onCancel={() => {
+          setOpen(false);
+        }}
+      />
         setErrorMessage(data.message);
       }
       })
@@ -94,6 +106,11 @@ export const CenterPage = () => {
     }
   }
 
+  const onCreate = (values) => {
+    console.log('Received values of form: ', values);
+    setOpen(false);
+  };
+
   let commentsToShow = [];
 
   if (center && center.comments) {
@@ -105,10 +122,16 @@ export const CenterPage = () => {
     <PageContainer>
     {!center? <p>loading ....</p> : (
       <>
-      
       <CenterInformation>
       <h1>{center.name}</h1>
       <Favorite><FaHeart onClick={(event) => favoriteCLick(event)}></FaHeart></Favorite>
+      <LoginModal
+        open={open}
+        onCreate={onCreate}
+        onCancel={() => {
+          setOpen(false);
+        }}></LoginModal>
+      
       {<p>{validationMessage || errorMessage}</p> }
       <p>Region : {center.region} </p>
       <img src={center.image}></img>
