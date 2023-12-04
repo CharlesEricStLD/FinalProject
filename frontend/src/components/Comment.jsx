@@ -4,8 +4,6 @@ import styled from "styled-components"
 
 export const Comment = ({comment}) => {
 
-  console.log(comment);
-
   return (
     <CommentContainer>
     <p>Comment made by :  {comment.username}, {comment.date} </p>

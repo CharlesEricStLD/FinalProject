@@ -19,6 +19,7 @@ export const CenterPage = () => {
   const [validationMessage, setValidationMessage] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null);
   const [open, setOpen] = useState(false);
+  const [OpenAddComment, setOpenAddComment] = useState(false);
   
   const {centerId} = useParams();
 
@@ -111,6 +112,11 @@ export const CenterPage = () => {
     setOpen(false);
   };
 
+  const onCreateAddComment = (values) => {
+    console.log('Received values of form: ', values);
+    setOpenAddComment(false);
+  };
+
   let commentsToShow = [];
 
   if (center && center.comments) {
@@ -118,7 +124,6 @@ export const CenterPage = () => {
   }
 
   return (
-    
     <PageContainer>
     {!center? <p>loading ....</p> : (
       <>
@@ -156,14 +161,12 @@ export const CenterPage = () => {
       </SecondBlock>
 
       <ThirdBlock>
-      <h2>Comments</h2>
+      <h2>Review</h2>
+      <button onClick={() => setOpenAddComment(true)}>Add Review</button>
       {commentsToShow && commentsToShow.map(comment => <Comment comment={comment} key={comment._id}/>) }
+            <AddComments onCreateAddComment={onCreateAddComment} onCancelAddComment={() => {
+          setOpenAddComment(false)}} centerId = {centerId} OpenAddComment={OpenAddComment} centerName = {center && center.name}/> 
       </ThirdBlock>
-
-      <div>
-      <p>POP UP</p>
-      <AddComments centerId = {centerId} centerName = {center && center.name}/> 
-      </div>
 
       </CenterDetails>
       </>
@@ -225,13 +228,22 @@ border: solid 2px;
 `
 
 const ThirdBlock = styled.div`
-  h2{
-  padding:2%;
-  }
   border-radius: 15px;
   border: solid 2px;
-`
+  
+  h2{
+  padding:2%;
+  display: inline-block;
+  }
 
+  button {
+    background-color: #4d71e7;
+    font-size: 1em;
+    text-align: center;
+    width:25%;
+    margin:4% 4%;
+  }
+`
 
 const Favorite = styled.button`
   border:none;
