@@ -11,9 +11,6 @@ export const LoginPage = () => {
 
   const [user, setUser] = useContext(UserContext);
 
-  console.log(UserContext);
-
-  console.log(user);
 
   const [verificationInProgress, setVerificationInProgress] = useState(false);
   const [validationMessage, setValidationMessage] = useState(null);
@@ -48,7 +45,7 @@ export const LoginPage = () => {
       console.log(data);
       setVerificationInProgress(false);
       if (data.message === "Request sucessfull: ") {
-        setValidationMessage(`Welcome back ${data.data}!, your will be redirected to your User page in a few sec !`)
+        setValidationMessage(`Welcome back !, you will be redirected to your User page in a few sec !`)
         sessionStorage.setItem("user", user.username)
         console.log(data.data.favorites);
         setUser({username : data.data.username, favorites : data.data.favorites} )
@@ -67,13 +64,6 @@ export const LoginPage = () => {
     logInVerification()
   }
 
-
-  const handleLogInAsGuest = (event) => {
-    setUser({username : "Guest1", password : "toyota1525**"})
-    event.preventDefault();
-    logInVerification();
-  }
-
   return (
     <LoginPageStyle>
     <img className="image2" src="LoginBackground (5).jpg" alt="Lady doing some cross country" />
@@ -89,7 +79,7 @@ export const LoginPage = () => {
       </label>
       <button onClick = {handleLogIn} disabled={verificationInProgress}>Log in</button>
       {/* <button onClick = {handleLogInAsGuest} disabled={verificationInProgress}>log in as Guest</button> */}
-      <p>Doesn't have an account ? You can  <a href="/signin" disabled={verificationInProgress}> sign in here </a>.</p>
+      {!validationMessage && <p>Doesn't have an account ? You can  <a href="/signin" disabled={verificationInProgress}> sign in here </a>.</p>}
       {errorMessage? <p>{errorMessage}</p> : <p>{validationMessage}</p>}
     </LoginModal>
     </form>
@@ -145,7 +135,6 @@ const LoginModal = styled.div`
 
   input {
     margin-top: 2%;
-    font-size: 1em;
     width:100%;
     text-align: center;
     font-size: 1em;
