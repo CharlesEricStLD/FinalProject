@@ -11,8 +11,7 @@ import { LeafletMap } from "./LeafletMap";
 import { LoginModal } from "./LoginModal"
 import { Loader } from "./Loader";
 import { Tooltip } from 'antd';
-
-export const CenterPage = () => {
+import { GoBookmarkFill } from "react-icons/go";export const CenterPage = () => {
 
   const [center, SetCenter] = useState(null); 
   const [lattitude, setLattitude] = useState(null);
@@ -75,9 +74,8 @@ export const CenterPage = () => {
 
       .then(response => response.json())
       .then((data) => {
-      if (data.status === 200 || data.message === "This favorite already exist in your favorite list :)") {
-        setValidationMessage("Add to favorite !")
-      } else {
+      if (data.status !== 200 || data.message !== "This favorite already exist in your favorite list :)") {
+
         setOpen(true);
         <LoginModal
         open={open}
@@ -95,12 +93,16 @@ export const CenterPage = () => {
   const favoriteCLick = (event) => {
     const FavoriteIcon = event.target.parentElement;
 
-    if(FavoriteIcon.style.fill === "red") {
+    if(FavoriteIcon.style.fill === "blue") {
       setIsFavorite(false);
-      FavoriteIcon.style.fill = "black";
+      setErrorMessage("");
+      setValidationMessage("");
+      FavoriteIcon.style.fill = "white";
     } else {
       setIsFavorite(true);
-      FavoriteIcon.style.fill = "red";
+      setErrorMessage("");
+      setValidationMessage("");
+      FavoriteIcon.style.fill = "blue";
     }
   }
 
@@ -124,7 +126,7 @@ export const CenterPage = () => {
       <>
       <CenterInformation>
       <h1>{center.name}</h1>
-      <Favorite><FaHeart onClick={(event) => favoriteCLick(event)}></FaHeart></Favorite>
+      <Favorite><GoBookmarkFill onClick={(event) => favoriteCLick(event)}></GoBookmarkFill></Favorite>
       <LoginModal
         open={open}
         onCreate={onCreate}
@@ -174,11 +176,13 @@ export const CenterPage = () => {
 }
 
 const PageContainer = styled.div`
-  margin: 0 2%;
+  margin: 1% 8%;
   font-size: 1.5em;
   border-radius: 15px;
   border: 2px solid;
-  background-color: #767f878b;
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;  background-color:#ffffff;
+
+
 `
 const CenterInformation = styled.div`
   padding:2%;
@@ -217,6 +221,8 @@ h2{
 }
 border-radius: 15px;
 border: solid 2px;
+box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;  background-color:ffffff
+
 
 p.note {
   font-size: 0.7em;
@@ -227,11 +233,15 @@ p.note {
 const SecondBlock = styled.div`
 border-radius: 15px;
 border: solid 2px;
+box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;  background-color:#ffffff;
+
 `
 
 const ThirdBlock = styled.div`
   border-radius: 15px;
   border: solid 2px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;  background-color:#ffffff;
+
   
   h2{
   padding:2%;
@@ -246,16 +256,16 @@ const ThirdBlock = styled.div`
     margin:4% 4%;
   }
 `
-
 const Favorite = styled.button`
-  border:none;
+  border:1px;
   display: inline-block;
   margin-left:2%;
   background-color: rgb(0,0,0,0);
   font-size: 1.5em;
+  fill:none;
   
   & > svg :active {
-    fill:red;
+    fill:white;
   }
   
 `
