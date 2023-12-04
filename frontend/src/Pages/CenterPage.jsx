@@ -63,6 +63,8 @@ export const CenterPage = () => {
   }
   }, [center])
 
+  
+
   //Modify favorite if user is connected
   useEffect(() => {
     if (isFavorite) {
@@ -232,6 +234,11 @@ const CenterDetails = styled.div`
 
 const FirstBlock = styled.div`
 padding:2%;
+
+a{
+  font-size: 0.7em;
+}
+
 h2{
   margin-top: 5%;
 }
@@ -275,8 +282,12 @@ const Favorite = styled.button`
   display: inline-block;
   margin-left:2%;
   background-color: rgb(0,0,0,0);
-  font-size: 1.5em;
+  font-size: 2em;
   fill:none;
+  position: relative;
+  top:50px;
+  z-index: 2;
+  
   
   & > svg :active {
     fill:white;

@@ -9,6 +9,7 @@ export const AddComments = ({centerId, centerName, OpenAddComment, onCancelAddCo
   const [comment, setComment] = useState("");
 
   const [user] = useContext(UserContext);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleChange = (event) => {
     setComment(event.target.value);
@@ -26,9 +27,17 @@ export const AddComments = ({centerId, centerName, OpenAddComment, onCancelAddCo
   body: JSON.stringify({comment :
     {username : user.username, "centerId" : centerId, text : comment, date: new Date().toLocaleDateString(), accepted : false }
   })
-  
-})
-  onCancelAddComment();
+  })
+  .then(response => response.json())
+  .then ((data) => {
+    console.log(data);
+    if (data.status === 401) {
+      setErrorMessage("You need to be log in to add comment");
+    } else 
+    {
+      onCancelAddComment();
+    }
+  })
 }
 
 const [form] = Form.useForm();
@@ -65,7 +74,8 @@ const [form] = Form.useForm();
             },
           ]} onChange={(event) => handleChange(event)} 
         >
-          <Input />
+        <Input />
+        {errorMessage && <p>{errorMessage}</p>}
         </Form.Item>
       </Form>
     </Modal>

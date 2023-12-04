@@ -35,6 +35,14 @@ const addComment = async (request, response) => {
     const db = client.db(database);
     console.log("connected!");
 
+    const validUser = await db.collection(collectionName).findOne({username : username});
+
+    if (!validUser) {
+      return response
+      .status(401)
+      .json({ status: 401, message : `You need to be login to add review` });
+    }
+
     const commentAdded = await db.collection(collectionName).updateOne({_id : centerId},
     { $addToSet :{ comments : {...comment, _id : uuidv4()} } })
 
