@@ -9,7 +9,7 @@ export const SignInPage = () => {
 
   const navigate = useNavigate();
   
-  const {user, setUser} = useContext(UserContext);
+  const [user, setUser] = useContext(UserContext);
   const [verificationInProgress, setVerificationInProgress] = useState(false);
   const [validationMessage, setValidationMessage] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null);
@@ -32,9 +32,10 @@ export const SignInPage = () => {
     .then(response => response.json())
     .then((data) => {
       setVerificationInProgress(false);
+      console.log(data);
       if (data.message === "Request sucessfull: ") {
         setValidationMessage(`Welcome ${data.data}!, your will be redirected to your User page in a few sec !`)
-        sessionStorage.setItem("user", user.username)
+        setUser({username : data.data, favorites : []} )
         setTimeout(() => {
           navigate(`/user/${user.username}`)
         }, 3000)
@@ -70,8 +71,8 @@ export const SignInPage = () => {
       </label>
       
       <button onClick={handleSubmit} disabled={verificationInProgress}>Register </button>
-      </SignInInput>
       {errorMessage? <p>{errorMessage}</p> : <p>{validationMessage}</p>}
+      </SignInInput>
     </form>
     </SignInPageStyle>
   )
@@ -120,7 +121,7 @@ const SignInInput = styled.div`
   }
 
   label {
-    font-size: 1.5em;
+    font-size: 1.2em;
     margin-bottom: 3%;
     margin-right:1%;
   }
@@ -142,6 +143,8 @@ const SignInInput = styled.div`
   }
 
   p{
+    font-size: 0.8em;
+    color:red;
     margin-top:2%;
   }
   `

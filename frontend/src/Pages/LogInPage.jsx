@@ -124,7 +124,7 @@ const LoginInputs = styled.div`
   h1 {
     margin:3% 0;
     position: relative;
-    top:-5%;
+    top:-2%;
   }
 
   label {
@@ -137,7 +137,7 @@ const LoginInputs = styled.div`
     margin-top: 2%;
     width:100%;
     text-align: center;
-    font-size: 1.5em;
+    font-size: 1.2em;
   }
 
   button{
@@ -151,5 +151,6 @@ const LoginInputs = styled.div`
 
   p{
     margin-top:2%;
+    font-size: 0.7em;
   }
 `
