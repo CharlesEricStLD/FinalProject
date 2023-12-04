@@ -6,13 +6,13 @@ import {Routes, Route } from "react-router-dom";
 import { useState, createContext } from "react";
 
 
-import { HomePage } from "../components/HomePage";
-import { CenterPage } from "../components/CenterPage";
+import { HomePage } from "../Pages/HomePage.jsx";
+import { CenterPage } from "../Pages/CenterPage.jsx";
 import { AllCenterInRegion } from "../components/AllCenterInRegion";
-import { LoginPage } from "../components/LogInPage";
-import { UserPage } from "../components/UserPage.jsx";
-import { SignInPage } from '../components/SignInPage.jsx';
-import { AdminPage } from '../components/AdminPage.jsx';
+import { LoginPage } from "../Pages/LogInPage.jsx";
+import { UserPage } from "../Pages/UserPage.jsx";
+import { SignInPage } from '../Pages/SignInPage.jsx';
+import { AdminPage } from '../Pages/AdminPage.jsx';
 import {App} from '../App.jsx'
 
 export const NewCommentContext = createContext();

@@ -1,6 +1,6 @@
 //Home Page component rendering the Home Page 
 import { useNavigate } from "react-router-dom";
-import { Typeahead } from "./Typeahead"
+import { Typeahead } from "../components/Typeahead"
 import {styled} from "styled-components"
 
 

@@ -1,8 +1,8 @@
 //Admin Page where we see all comments 
 
 import { useEffect, useState} from "react"
-import { AdminComment } from "./AdminComment";
-import { Loader } from "./Loader";
+import { AdminComment } from "../components/AdminComment";
+import { Loader } from "../components/Loader";
 
 export const AdminPage = () => {
 

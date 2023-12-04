@@ -3,7 +3,7 @@
 import { useContext, useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom";
 import { UserContext } from "../routes/RoutesIndex";
-import { FavoriteOfUser } from "./FavoriteOfUser";
+import { FavoriteOfUser } from "../components/FavoriteOfUser";
 import styled from "styled-components";
 
 

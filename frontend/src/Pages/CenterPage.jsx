@@ -4,15 +4,15 @@ import { useEffect, useState, useContext} from "react"
 import { useParams } from 'react-router-dom'; 
 import { FaHeart } from "react-icons/fa";
 import styled from "styled-components";
-import { AddComments } from "./AddComments";
+import { AddComments } from "../components/AddComments";
 import {NewCommentContext, UserContext} from "../routes/RoutesIndex"
-import { Comment } from "./Comment";
-import { LeafletMap } from "./LeafletMap";
-import { LoginModal } from "./LoginModal"
-import { Loader } from "./Loader";
+import { Comment } from "../components/Comment";
+import { LeafletMap } from "../components/LeafletMap";
+import { LoginModal } from "../components/LoginModal"
+import { Loader } from "../components/Loader";
 import { Tooltip } from 'antd';
 import { GoBookmarkFill } from "react-icons/go";
-import { Weather } from "./Wheather";
+import { Weather } from "../components/Wheather";
 
 
 export const CenterPage = () => {

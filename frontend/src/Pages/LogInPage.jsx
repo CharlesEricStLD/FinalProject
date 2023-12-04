@@ -67,7 +67,7 @@ export const LoginPage = () => {
     <img className="image2" src="LoginBackground (5).jpg" alt="Lady doing some cross country" />
     <img className="image1" src="LoginBackground (3).jpg" alt="Lady doing some cross country" />
     <form>
-    <LoginModal>
+    <LoginInputs>
       <h1>Log in</h1>
       <label>Username :
       <input type="text" name="username" onChange={(event) =>handleChange(event)}></input> 
@@ -79,7 +79,7 @@ export const LoginPage = () => {
       {/* <button onClick = {handleLogInAsGuest} disabled={verificationInProgress}>log in as Guest</button> */}
       {!validationMessage && <p>Doesn't have an account ? You can  <a href="/signin" disabled={verificationInProgress}> sign in here </a>.</p>}
       {errorMessage? <p>{errorMessage}</p> : <p>{validationMessage}</p>}
-    </LoginModal>
+    </LoginInputs>
     </form>
     </LoginPageStyle>
   )
@@ -108,11 +108,11 @@ position: relative;
   }
 `
 
-const LoginModal = styled.div`
+const LoginInputs = styled.div`
   background-color: #ffffffd4;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;  margin:5% auto;
   width:30%;
-  height:75vh;
+  height:70vh;
   display:flex;
   flex-direction: column;
   justify-content:center;
@@ -122,7 +122,9 @@ const LoginModal = styled.div`
   border-radius: 15px;
 
   h1 {
-    margin:2% 0;
+    margin:3% 0;
+    position: relative;
+    top:-5%;
   }
 
   label {
@@ -135,12 +137,13 @@ const LoginModal = styled.div`
     margin-top: 2%;
     width:100%;
     text-align: center;
-    font-size: 1em;
+    font-size: 1.5em;
   }
 
   button{
     background-color: #2b381f;
-    font-size: 1em;
+    font-size: 1.5em;
+    padding:1%;
     text-align: center;
     width:100%;
     margin:4% auto;
