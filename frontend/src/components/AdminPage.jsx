@@ -2,7 +2,7 @@
 
 import { useEffect, useState} from "react"
 import { AdminComment } from "./AdminComment";
-import { NewCommentContext } from "../routes/RoutesIndex";
+import { Loader } from "./Loader";
 
 export const AdminPage = () => {
 
@@ -27,9 +27,9 @@ fetch("/api/admin/allcomments")
   return (
     <>
     <h1>Admin PaGE</h1>
-    {allComments && allComments.map(comment => 
+    {allComments? allComments.map(comment => 
     <AdminComment key={comment._id} comment = {comment}/>
-    )
+    ) :  <Loader/>
     }
     </>
 

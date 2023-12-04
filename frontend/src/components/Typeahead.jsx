@@ -37,6 +37,7 @@ const filteredPeople =
       })
 
 return (
+  options ? (
   <TypeaheadStyle>
   <Combobox value={selectedoption} onChange={setSelectedoption} nullable>
     <Combobox.Input onChange={(event) => setQuery(event.target.value)} />
@@ -49,6 +50,7 @@ return (
     </Combobox.Options>
   </Combobox>
   </TypeaheadStyle>
+  ) : <Loader/>
 )
 
 }

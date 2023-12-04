@@ -9,6 +9,7 @@ import {NewCommentContext, UserContext} from "../routes/RoutesIndex"
 import { Comment } from "./Comment";
 import { LeafletMap } from "./LeafletMap";
 import { LoginModal } from "./LoginModal"
+import { Loader } from "./Loader";
 
 export const CenterPage = () => {
 
@@ -125,7 +126,7 @@ export const CenterPage = () => {
 
   return (
     <PageContainer>
-    {!center? <p>loading ....</p> : (
+    {!center? <Loader/> : (
       <>
       <CenterInformation>
       <h1>{center.name}</h1>
