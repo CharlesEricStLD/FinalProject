@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import {Form, Input, Modal } from 'antd';
 import { UserContext } from '../routes/RoutesIndex';
 
-export const LoginModal = ({ open, onCreate, onCancel }) => {
+export const LoginModal = ({ open, onCancel }) => {
   const [form] = Form.useForm();
   const [errorMessage, setErrorMessage] = useState(null);
   const [validationMessage, setValidationMessage] = useState(null);
