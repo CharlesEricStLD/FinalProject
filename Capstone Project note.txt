@@ -5,10 +5,14 @@ Capstone Project note
 *** server for frontEnd 
 
 **MakeBetterGobal
-**Make the userInformation (favorite and username) into a userContext variable so 
-**you can easily avoid to fetch for favorites or user comments in here.
-
 **comments and favorite should'nt appear if not log in.
+** when you try to comment or favorite without account open login PopUp.
+**Pass allComments to my subcomponent and modify this array in the adminComment component so I rerender
+
+//makebetter ULTRA
+**make the comment disapear when it's approved and possibility of deleting it and sorting it by date.
+
+
 
 *** 1 server for the Scraping (on TimeouT)
 -On my Own machine
@@ -27,6 +31,10 @@ MVP :
 
 PAcakge use : 
 https://headlessui.com/react/combobox
+React Open Weather (METEO PCKG)
+Ant Design (component)
+
+
 
 
 

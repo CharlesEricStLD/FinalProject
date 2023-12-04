@@ -1,8 +1,25 @@
-# React + Vite
+# Cross Country Finder Website
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+CrossCOuntryFinder is a wesbite where you ca search for al your favorite croscountry ski center and find map, condition and meteo in one and same place.
 
-Currently, two official plugins are available:
+The goal of this project was to provide a way for crossCountry skier to get the most update information on their favorite center easily ad efficiently.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Principal package
+
+This project was create using Javascript, Vite and react, for the frontend and node.js and mongoDb for the backend.
+
+## FrontEnd
+
+In the FrontENd, user can use the Search bar at the Home page to find their favorite center or filter by Region.
+
+When user is register or log In, user can add review or add favorite to their account.
+
+### CenterPage
+
+On CenterPage, user can see :
+
+* Basic Information
+* Map (using React Leaflet and Nominatim of OpenStreetMap)
+* Meteo (using React Open Weather with Visual Crossing API)
+
+![Alt text](readmeAssets\CenterPage.png?raw=true "Center Page")
