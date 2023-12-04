@@ -6,8 +6,6 @@ import { Link } from "react-router-dom"
 
 export const CenterCard = ({center}) => {
 
-  console.log(center);
-
   return (  
           <CenterCardStyling>
           <div>

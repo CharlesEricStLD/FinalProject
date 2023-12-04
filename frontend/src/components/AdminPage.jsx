@@ -8,11 +8,6 @@ export const AdminPage = () => {
 
 const [allComments, setAllComments] = useState(null);
 
-//makebetter
-//Pass allComments to my subcomponent and modify this array in the 
-//adminComment component so I rerender
-
-
 //fetchAllCommentsAndShowThem
 useEffect(() => {
 fetch("/api/admin/allcomments")

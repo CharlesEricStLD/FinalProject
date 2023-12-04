@@ -19,7 +19,6 @@ export const AllCenterInRegion = () => {
   .then(response => response.json())
   .then(data => {
     if (data.message === "Request sucessfull: ") {
-      console.log("FETCH DONE");
       setAllCentersOfRegion(data.data)
       setLoading(false)
     }

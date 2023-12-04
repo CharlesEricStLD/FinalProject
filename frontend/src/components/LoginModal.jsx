@@ -30,12 +30,10 @@ export const LoginModal = ({ open, onCancel }) => {
     })
     .then(response => response.json())
     .then((data) => {
-      console.log(data);
       setVerificationInProgress(false);
       if (data.message === "Request sucessfull: ") {
         setValidationMessage(`Welcome back !`)
         sessionStorage.setItem("user", user.username)
-        console.log(data.data.favorites);
         setUser({username : data.data.username, favorites : data.data.favorites} )
         onCancel();
       } else {
@@ -51,7 +49,6 @@ export const LoginModal = ({ open, onCancel }) => {
       setUser({...user,[name] : valueStore})
     }   
       setUser({...user, [name] : value})
-      console.log(user);
       setErrorMessage("");
       setValidationMessage("");
   }

@@ -5,10 +5,6 @@ import styled from "styled-components"
 
 export const AdminComment = ({comment}) => {
 
-  //makebetter ULTRA
-  //make the comment disapear when it's approved and possibility 
-  //of deleting it and sorting it by date.
-
   const handleApproveComment = () => {
       fetch("/api/approvedcomment",  { 
       method: 'PATCH',

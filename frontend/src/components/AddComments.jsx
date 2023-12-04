@@ -26,10 +26,8 @@ export const AddComments = ({centerId, centerName, OpenAddComment, onCancelAddCo
   body: JSON.stringify({comment :
     {username : user.username, "centerId" : centerId, text : comment, date: new Date().toLocaleDateString(), accepted : false }
   })
-    
-    //makeBetterVery
-    //store the data a Context errorLog so I can watch it in admin mode
-  })
+  
+})
   onCancelAddComment();
 }
 

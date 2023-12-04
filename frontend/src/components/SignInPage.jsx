@@ -40,7 +40,6 @@ export const SignInPage = () => {
     .then(response => response.json())
     .then((data) => {
       setVerificationInProgress(false);
-      console.log(data.message);
       if (data.message === "Request sucessfull: ") {
         setValidationMessage(`Welcome ${data.data}!, your will be redirected to your User page in a few sec !`)
         sessionStorage.setItem("user", user.username)
