@@ -1,10 +1,9 @@
 //component to render each the comment
-import { useContext } from "react"
-import { NewCommentContext } from "../routes/RoutesIndex"
 import styled from "styled-components"
 
 export const AdminComment = ({comment}) => {
 
+  //function launch when Admin approved a comment
   const handleApproveComment = () => {
       fetch("/api/approvedcomment",  { 
       method: 'PATCH',
@@ -28,7 +27,6 @@ export const AdminComment = ({comment}) => {
     <button>Declined</button>
     </CommentContainer>
   )
-
 
 }
 

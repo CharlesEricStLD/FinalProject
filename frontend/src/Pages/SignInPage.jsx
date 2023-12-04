@@ -7,20 +7,12 @@ import { UserContext } from "../routes/RoutesIndex";
 
 export const SignInPage = () => {
 
-  const emptyUser = {
-    username : "", 
-    password : ""
-  }
-
   const navigate = useNavigate();
   
   const {user, setUser} = useContext(UserContext);
   const [verificationInProgress, setVerificationInProgress] = useState(false);
   const [validationMessage, setValidationMessage] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null);
-
-
-
 
 
   const handleSubmit = (event) => {

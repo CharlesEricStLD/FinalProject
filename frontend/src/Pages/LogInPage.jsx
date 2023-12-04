@@ -1,5 +1,5 @@
 //This is the login Page 
-import { useEffect, useState, useContext } from "react";
+import {useState, useContext } from "react";
 import { useNavigate } from "react-router-dom"
 import styled from "styled-components";
 import { UserContext } from "../routes/RoutesIndex";

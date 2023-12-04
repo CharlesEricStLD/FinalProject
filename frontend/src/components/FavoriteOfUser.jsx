@@ -1,14 +1,13 @@
 //Userfavorite component 
 
-import { useContext, useState } from "react";
+import { useContext} from "react";
 import { UserContext } from "../routes/RoutesIndex";
-import { CenterCard } from "./CenterCard";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 export const FavoriteOfUser = ({data, userFavorites,SetUserFavorites}) => {
 
-  const [user, setUser] = useContext(UserContext)
+  const [user] = useContext(UserContext)
 
   const handleRemoveFavorite = () => {
     fetch("/api/removefavorite",  { 

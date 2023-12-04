@@ -1,6 +1,6 @@
 //This is the navigation Bar component
 
-import { NavLink, useNavigate, useParams } from "react-router-dom";
+import { NavLink, useNavigate} from "react-router-dom";
 import styled from "styled-components"
 import { useState, useEffect, useContext } from "react";
 import { LuUserCircle2 } from "react-icons/lu";

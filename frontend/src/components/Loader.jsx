@@ -1,3 +1,5 @@
+//Component of loaer to show when a page is loading
+
 import { quantum } from 'ldrs'
 
 quantum.register()

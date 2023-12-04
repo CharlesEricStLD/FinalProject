@@ -20,7 +20,6 @@ const navigate = useNavigate();
 const {username} = useParams();
 
 useEffect(() => {
-  const sessionData = sessionStorage.getItem("user");
 
   if (username === user.username) {
     setAccessAllowed(true);
@@ -29,6 +28,7 @@ useEffect(() => {
   }
 }, [navigate, username]);
 
+//Get information on Userfavorite to display center
 useEffect(() => {
   if(userFavorites) {
 

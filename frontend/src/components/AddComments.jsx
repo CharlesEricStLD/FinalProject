@@ -11,10 +11,10 @@ export const AddComments = ({centerId, centerName, OpenAddComment, onCancelAddCo
   const [user] = useContext(UserContext);
 
   const handleChange = (event) => {
-
     setComment(event.target.value);
   }
 
+  //Function to launch when user Submit a comment
   const handleSubmit = (event) => {
     event.preventDefault();
     fetch("/api/addcomment", {

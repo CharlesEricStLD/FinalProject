@@ -7,8 +7,6 @@ import { Link } from "react-router-dom";
 
 export const Typeahead = ( ) => {
 
-// const options = [{name:"TEST", region : "somewhere"}, {name : "test2", region: "canada"}];
-
 const [options, setOptions] = useState([]);
 const [selectedoption, setSelectedoption] = useState("")
 const [query, setQuery] = useState('')
@@ -30,8 +28,8 @@ useEffect(() => {
 },[])
 
 
-
-const filteredPeople =
+//
+const filteredOptions =
   options.filter((option) => {
         return option.name.toLowerCase().includes(query.toLowerCase())
       })
@@ -42,7 +40,7 @@ return (
   <Combobox value={selectedoption} onChange={setSelectedoption} nullable>
     <Combobox.Input onChange={(event) => setQuery(event.target.value)} />
     <Combobox.Options>
-      {query? filteredPeople.map((option) => (
+      {query? filteredOptions.map((option) => (
         <Combobox.Option key={option.name} value={option.name}>
           <Link to={`/center/${option._id}`}>{option.name}, {option.region}</Link>
         </Combobox.Option>

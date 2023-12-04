@@ -2,10 +2,9 @@
 
 import { useEffect, useState, useContext} from "react"
 import { useParams } from 'react-router-dom'; 
-import { FaHeart } from "react-icons/fa";
 import styled from "styled-components";
 import { AddComments } from "../components/AddComments";
-import {NewCommentContext, UserContext} from "../routes/RoutesIndex"
+import {UserContext} from "../routes/RoutesIndex"
 import { Comment } from "../components/Comment";
 import { LeafletMap } from "../components/LeafletMap";
 import { LoginModal } from "../components/LoginModal"
@@ -167,7 +166,7 @@ export const CenterPage = () => {
       <h2>Review</h2>
       <button onClick={() => setOpenAddComment(true)}>Add Review</button>
       {commentsToShow && commentsToShow.map(comment => <Comment comment={comment} key={comment._id}/>) }
-            <AddComments onCreateAddComment={onCreateAddComment} onCancelAddComment={() => {
+      <AddComments onCreateAddComment={onCreateAddComment} onCancelAddComment={() => {
           setOpenAddComment(false)}} centerId = {centerId} OpenAddComment={OpenAddComment} centerName = {center && center.name}/> 
       </ThirdBlock>
 

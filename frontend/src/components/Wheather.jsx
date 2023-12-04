@@ -1,7 +1,5 @@
 //component to render the Weather of each Center 
-import { Loader } from "./Loader"
-import ReactWeather, { useOpenWeather } from 'react-open-weather';
-import { useVisualCrossing } from 'react-open-weather'
+import ReactWeather,{ useVisualCrossing } from 'react-open-weather'
 import styled from "styled-components";
 
 export const Weather = ({lattitude, longitude, address}) => {

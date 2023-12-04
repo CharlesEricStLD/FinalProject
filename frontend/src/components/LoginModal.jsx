@@ -6,7 +6,6 @@ export const LoginModal = ({ open, onCancel }) => {
   const [form] = Form.useForm();
   const [errorMessage, setErrorMessage] = useState(null);
   const [validationMessage, setValidationMessage] = useState(null);
-  const [verificationInProgress, setVerificationInProgress] = useState(null);
   const [user, setUser] = useContext(UserContext);
 
 
@@ -18,7 +17,6 @@ export const LoginModal = ({ open, onCancel }) => {
   const logInVerification = () => {
     setErrorMessage("");
     setValidationMessage("");
-    setVerificationInProgress(true);
 
     fetch("/api/login",{
       method: "POST",
@@ -30,7 +28,6 @@ export const LoginModal = ({ open, onCancel }) => {
     })
     .then(response => response.json())
     .then((data) => {
-      setVerificationInProgress(false);
       if (data.message === "Request sucessfull: ") {
         setValidationMessage(`Welcome back !`)
         sessionStorage.setItem("user", user.username)

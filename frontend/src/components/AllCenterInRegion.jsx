@@ -2,13 +2,11 @@
 import { useParams } from "react-router-dom"
 import { useState, useEffect } from "react"
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 import { CenterCard } from "./CenterCard";
 
 export const AllCenterInRegion = () => {
 
   const [loading, setLoading] = useState(true);
-  const [errorMessage, setErrorMessage] = useState(null);
   const [allCentersOfRegion, setAllCentersOfRegion] = useState(null);
 
   const {region} = useParams()
@@ -21,9 +19,6 @@ export const AllCenterInRegion = () => {
     if (data.message === "Request sucessfull: ") {
       setAllCentersOfRegion(data.data)
       setLoading(false)
-    }
-    else {
-    setErrorMessage(data.message)
     }
 })
   },[region])
