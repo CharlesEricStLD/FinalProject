@@ -10,6 +10,7 @@ import { Comment } from "./Comment";
 import { LeafletMap } from "./LeafletMap";
 import { LoginModal } from "./LoginModal"
 import { Loader } from "./Loader";
+import { Tooltip } from 'antd';
 
 export const CenterPage = () => {
 
@@ -49,7 +50,6 @@ export const CenterPage = () => {
     fetch(`https://nominatim.openstreetmap.org/search?q=${center.name}&format=json`)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         if (data.length > 0) {
           setLattitude(data[0].lat);
           setLongitude(data[0].lon);
@@ -71,14 +71,10 @@ export const CenterPage = () => {
           "Content-Type": "application/json",
       },
       body: JSON.stringify({favorite : {username : user.username, centerId : centerId }  })
-        }) 
-
-        //makebetter
-        //Remove .then 
+        })
 
       .then(response => response.json())
       .then((data) => {
-        console.log(data);
       if (data.status === 200 || data.message === "This favorite already exist in your favorite list :)") {
         setValidationMessage("Add to favorite !")
       } else {
@@ -109,12 +105,10 @@ export const CenterPage = () => {
   }
 
   const onCreate = (values) => {
-    console.log('Received values of form: ', values);
     setOpen(false);
   };
 
   const onCreateAddComment = (values) => {
-    console.log('Received values of form: ', values);
     setOpenAddComment(false);
   };
 
@@ -153,8 +147,10 @@ export const CenterPage = () => {
       <p>{center.contact.email}</p>
       <p>{center.contact.facebook}</p>
       <p>{center.contact.phone}</p> 
-      {/* //makebetter : add a message on trailfork, if you are trailfork member */ }
-      {lattitude && longitude && (<p> <a href={`https://www.trailforks.com/map/?ping=${lattitude},${longitude}`} target="blank"> Interactive Map on TrailFork </a> </p>) }
+      <Tooltip title="To view on TrailFork website" placement="bottomLeft">
+      {lattitude && longitude && (<p> <a href={`https://www.trailforks.com/map/?ping=${lattitude},${longitude}`} target="blank"> Interactive Map on TrailFork App </a> </p>) }
+      </Tooltip>
+      <p className="note">You need to have a trailFork account to access this link</p>
       </FirstBlock>
 
       <SecondBlock>
@@ -221,6 +217,11 @@ h2{
 }
 border-radius: 15px;
 border: solid 2px;
+
+p.note {
+  font-size: 0.7em;
+}
+
 `
 
 const SecondBlock = styled.div`
