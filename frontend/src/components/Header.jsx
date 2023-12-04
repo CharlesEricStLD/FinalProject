@@ -25,7 +25,7 @@ export const Header = () => {
     //mettre le session storage en global state.
 
     useEffect(() => {
-        if (user) {
+        if (user.username) {
             setAccessAllowed(true);
         } else {
             setAccessAllowed(false);
