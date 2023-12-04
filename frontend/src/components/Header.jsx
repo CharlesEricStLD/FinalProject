@@ -2,22 +2,26 @@
 
 import { NavLink, useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components"
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { LuUserCircle2 } from "react-icons/lu";
+import { UserContext } from "../routes/RoutesIndex";
 
 export const Header = () => {
 
     const navigate = useNavigate();
+
+    const [user, setUser] = useContext(UserContext);
     
-    const [accessAllowed,setAccessAllowed] = useState(false)
+    const [accessAllowed,setAccessAllowed] = useState(false);
 
     let sessionData = "" ; 
     sessionData = sessionStorage.getItem("user");
 
     const handleLogout = () => {
-        console.log("SESSIONCLEAR");
         sessionStorage.clear();
+        localStorage.clear();
         sessionData = "";
+        setUser(null);
         navigate("/")
     }
 

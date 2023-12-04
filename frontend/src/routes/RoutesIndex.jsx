@@ -13,6 +13,7 @@ import { LoginPage } from "../components/LogInPage";
 import { UserPage } from "../components/UserPage.jsx";
 import { SignInPage } from '../components/SignInPage.jsx';
 import { AdminPage } from '../components/AdminPage.jsx';
+import {App} from '../App.jsx'
 
 export const NewCommentContext = createContext();
 
@@ -38,13 +39,9 @@ const [newComments, setNewComments] = useState(emptyComment)
 
 const [user, setUser] = useState(emptyUser)
 
-console.log(user);
-
-//Add remove favorite and put it into global userContext provider value 
-//So I can remove favorite and after set(user) to this new favorite array
-
   return (
     <UserContext.Provider value = {[user, setUser]}>
+            <App/>
             <Routes>
                 <Route path="/" element={<HomePage/>} />
                 <Route path="/center/:centerId" element={<CenterPage/>} />

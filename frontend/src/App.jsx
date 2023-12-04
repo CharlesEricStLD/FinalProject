@@ -2,7 +2,7 @@ import React, { createContext, useState } from "react"
 
 import {Header} from "../src/components/Header.jsx";
 
-function App() {
+export function App() {
 
   return (
     <>
@@ -10,5 +10,3 @@ function App() {
     </>
   )
 }
-
-export default App
