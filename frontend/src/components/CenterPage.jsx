@@ -11,7 +11,11 @@ import { LeafletMap } from "./LeafletMap";
 import { LoginModal } from "./LoginModal"
 import { Loader } from "./Loader";
 import { Tooltip } from 'antd';
-import { GoBookmarkFill } from "react-icons/go";export const CenterPage = () => {
+import { GoBookmarkFill } from "react-icons/go";
+import { Weather } from "./Wheather";
+
+
+export const CenterPage = () => {
 
   const [center, SetCenter] = useState(null); 
   const [lattitude, setLattitude] = useState(null);
@@ -167,6 +171,10 @@ import { GoBookmarkFill } from "react-icons/go";export const CenterPage = () => 
           setOpenAddComment(false)}} centerId = {centerId} OpenAddComment={OpenAddComment} centerName = {center && center.name}/> 
       </ThirdBlock>
 
+      <div>
+        {lattitude && longitude && <Weather address = {center.address} lattitude={lattitude} longitude={longitude} />}
+      </div>
+
       </CenterDetails>
       </>
     ) }
@@ -221,8 +229,8 @@ h2{
 }
 border-radius: 15px;
 border: solid 2px;
-box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;  background-color:ffffff
-
+box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;  
+background-color:#ffffff;
 
 p.note {
   font-size: 0.7em;
