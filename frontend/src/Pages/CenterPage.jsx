@@ -164,6 +164,11 @@ export const CenterPage = () => {
       {lattitude && longitude && <LeafletMap lattitude={lattitude} longitude={longitude}></LeafletMap>}
       </SecondBlock>
 
+      <SecondBlock>
+      <h3>Conditions</h3>
+      {center.condition ? <p>{center.condition}</p> : <p>`condition not available. You can view the website <a href={center.url}>here</a></p>}
+      </SecondBlock>
+
       <ThirdBlock>
       <h2>Review</h2>
       <button onClick={() => setOpenAddComment(true)}>Add Review</button>
