@@ -35,6 +35,9 @@ React Open Weather (METEO PCKG)
 Ant Design (component)
 
 
+url for google API to  get lattitude Longitude
+
+https://maps.googleapis.com/maps/api/place/findplacefromtext/json?fields=formatted_address%2Cgeometry&input=%22Sentier%20de%20l%27escapade%22,%20quebec&inputtype=textquery&key=AIzaSyAZLnZC5Bvs_EOx7CT1to6sxp9FrKo9okE
 
 
 
