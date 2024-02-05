@@ -3,6 +3,7 @@
 import { useEffect, useState, useContext} from "react"
 import { useParams } from 'react-router-dom'; 
 import styled from "styled-components";
+import parse from 'html-react-parser';
 import { AddComments } from "../components/AddComments";
 import {UserContext} from "../routes/RoutesIndex"
 import { Comment } from "../components/Comment";
@@ -126,6 +127,7 @@ export const CenterPage = () => {
   }
 
   return (
+    
     <PageContainer>
     {!center? <Loader/> : (
       <>
@@ -164,10 +166,12 @@ export const CenterPage = () => {
       {lattitude && longitude && <LeafletMap lattitude={lattitude} longitude={longitude}></LeafletMap>}
       </SecondBlock>
 
-      <SecondBlock>
+      <FirstBlock>
       <h3>Conditions</h3>
-      {center.condition ? <p>{center.condition}</p> : <p>`condition not available. You can view the website <a href={center.url}>here</a></p>}
-      </SecondBlock>
+      {center.condition && (center.url).includes("sepaq") ? parse(center.condition,"text/html") : null }
+      {center.condition && !(center.url).includes("sepaq") ? <p>{center.condition}</p> : null}
+      {!center.condition ? <p>`condition not available. You can view the website <a href={center.url}>here</a></p> : null }
+      </FirstBlock>
 
       <ThirdBlock>
       <h2>Review</h2>
