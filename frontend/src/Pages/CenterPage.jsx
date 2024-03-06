@@ -1,7 +1,7 @@
-//Compopnents to render the Page for each center by ID of center 
+//Compopnents to render the Page for each center by ID of center
 
 import { useEffect, useState, useContext} from "react"
-import { useParams } from 'react-router-dom'; 
+import { useParams } from 'react-router-dom';
 import styled from "styled-components";
 import parse from 'html-react-parser';
 import { AddComments } from "../components/AddComments";
@@ -17,7 +17,7 @@ import { Weather } from "../components/Wheather";
 
 export const CenterPage = () => {
 
-  const [center, SetCenter] = useState(null); 
+  const [center, SetCenter] = useState(null);
   const [lattitude, setLattitude] = useState(null);
   const [longitude, setLongitude] = useState(null);
   const [isFavorite, setIsFavorite] = useState(false);
@@ -25,14 +25,14 @@ export const CenterPage = () => {
   const [errorMessage, setErrorMessage] = useState(null);
   const [open, setOpen] = useState(false);
   const [OpenAddComment, setOpenAddComment] = useState(false);
-  
+
   const {centerId} = useParams();
 
   const [user, setUser] = useContext(UserContext);
 
-  //Fetch data from server
+  //Fetch the centers informations from database
   useEffect(() => {
-    if (centerId) { 
+    if (centerId) {
       fetch(`/api/center/${centerId}`)
       .then((response) => response.json())
       .then((data) => {
@@ -47,29 +47,50 @@ export const CenterPage = () => {
 
   },[]);
 
-  //Fetch to Nominative GoogleStreet API
+   //Fetch the centers condition url information from the database
   useEffect(() => {
-    if (center) {
-    fetch(`https://nominatim.openstreetmap.org/search?q=${center.name}&format=json`)
+    if (centerId) {
+      fetch(`/api/center/${centerId}`)
       .then((response) => response.json())
       .then((data) => {
-        if (data.length > 0) {
-          setLattitude(data[0].lat);
-          setLongitude(data[0].lon);
+        if (data.message = "center sucessfully found: ") {
+          SetCenter(data.data)
         }
       })
       .catch((error) => {
         console.error(`Error fetching center details for ID ${centerId}:`, error);
     });
   }
+
+  },[]);
+
+
+
+//set location for center
+  useEffect(() => {
+    if (center && center.location) {
+      setLattitude(center.location.lat)
+      setLongitude(center.location.lng)
+    // fetch(`https://nominatim.openstreetmap.org/search?q=${center.name}&format=json`)
+    //   .then((response) => response.json())
+    //   .then((data) => {
+    //     if (data.length > 0) {
+    //       setLattitude(data[0].lat);
+    //       setLongitude(data[0].lon);
+    //     }
+    //   })
+    //   .catch((error) => {
+    //     console.error(`Error fetching center details for ID ${centerId}:`, error);
+    // });
+  }
   }, [center])
 
-  
+
 
   //Modify favorite if user is connected
   useEffect(() => {
     if (isFavorite) {
-        fetch("/api/addfavorite",  { 
+        fetch("/api/addfavorite",  {
         method: 'PATCH',
         headers: {
           "Accept": "application/json",
@@ -127,7 +148,7 @@ export const CenterPage = () => {
   }
 
   return (
-    
+
     <PageContainer>
     {!center? <Loader/> : (
       <>
@@ -140,14 +161,14 @@ export const CenterPage = () => {
         onCancel={() => {
           setOpen(false);
         }}></LoginModal>
-      
+
       {<p>{validationMessage || errorMessage}</p> }
       <p>Region : {center.region} </p>
       <img src={center.image}></img>
       </CenterInformation>
-      
+
       <CenterDetails>
-      
+
       <FirstBlock>
       <p><a href={center.url} target="blank">{center.url}</a></p>
       <p> adresss :<a href={`https://www.google.com/maps/place/${center.address}`} target="blank"> {center.address}</a></p>
@@ -155,7 +176,7 @@ export const CenterPage = () => {
       <h2>Contact</h2>
       <p>{center.contact.email}</p>
       <p>{center.contact.facebook}</p>
-      <p>{center.contact.phone}</p> 
+      <p>{center.contact.phone}</p>
       <Tooltip title="To view on TrailFork website" placement="bottomLeft">
       {lattitude && longitude && (<p> <a href={`https://www.trailforks.com/map/?ping=${lattitude},${longitude}`} target="blank"> Interactive Map on TrailFork App </a> </p>) }
       </Tooltip>
@@ -168,9 +189,23 @@ export const CenterPage = () => {
 
       <FirstBlock>
       <h3>Conditions</h3>
-      {center.condition && (center.url).includes("sepaq") ? parse(center.condition,"text/html") : null }
-      {center.condition && !(center.url).includes("sepaq") ? <p>{center.condition}</p> : null}
-      {!center.condition ? <p>`condition not available. You can view the website <a href={center.url}>here</a></p> : null }
+      {center.condition? 
+      <table>
+        <tr>
+        <th>OUVERT/FERME</th>
+        <th>Pistes Fermées</th>
+        <th>Conditions de neige</th>
+        <th>Avertissements importants</th>
+        <th>Dernière mise à jour</th>
+        </tr>
+        <tr>
+        {
+        Object.values(center.condition).map((data) =>
+        <td>{data ?data: "Information non disponible" }</td>
+        )
+        };
+        </tr>
+      </table> : <h3>Condition indisponible pour le moment...</h3>}
       </FirstBlock>
 
       <ThirdBlock>
@@ -178,7 +213,7 @@ export const CenterPage = () => {
       <button onClick={() => setOpenAddComment(true)}>Add Review</button>
       {commentsToShow && commentsToShow.map(comment => <Comment comment={comment} key={comment._id}/>) }
       <AddComments onCreateAddComment={onCreateAddComment} onCancelAddComment={() => {
-          setOpenAddComment(false)}} centerId = {centerId} OpenAddComment={OpenAddComment} centerName = {center && center.name}/> 
+          setOpenAddComment(false)}} centerId = {centerId} OpenAddComment={OpenAddComment} centerName = {center && center.name}/>
       </ThirdBlock>
 
       <div>
@@ -189,7 +224,7 @@ export const CenterPage = () => {
       </>
     ) }
     </PageContainer>
-  ) 
+  )
 
 }
 
@@ -219,7 +254,7 @@ const CenterInformation = styled.div`
     margin: 1% 0;
     font-size: 1.5em;
   }
-  
+
   img {
     width:100%;
     height:400px;
@@ -253,7 +288,7 @@ h2{
 }
 border-radius: 15px;
 border: solid 2px;
-box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;  
+box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 background-color:#ffffff;
 
 p.note {
@@ -296,10 +331,10 @@ const Favorite = styled.button`
   position: relative;
   top:50px;
   z-index: 2;
-  
-  
+
+
   & > svg :active {
     fill:white;
   }
-  
+
 `
