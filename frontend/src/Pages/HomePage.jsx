@@ -1,5 +1,6 @@
 //Home Page component rendering the Home Page 
 import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 import { Typeahead } from "../components/Typeahead"
 import {styled} from "styled-components"
 
@@ -8,7 +9,20 @@ export const HomePage = () => {
 
 const navigate = useNavigate();
 
-const regions = ["Laurentides", "Estrie", "Mauricie"]
+const [regions, setRegions] = useState(null);
+
+useEffect(() => {
+  fetch(`/api/allRegions`)
+  .then((response) => response.json())
+  .then((data) => {
+    if (data.message = "Request sucessfull: ") {
+      setRegions(data.data)
+    }
+  })
+  .catch((error) => {
+    console.error(`Error fetching center details for all region:`, error);
+});
+},[])
 
 const handleChange = (domElement => {
 const regionSelected = domElement.target.value; 
@@ -23,7 +37,7 @@ return (
   <Typeahead/>
   <select onChange={(domElement) => {handleChange(domElement)}}>
   <option>Filter by region</option>
-    {regions.map(region => 
+    {regions && regions.map(region => 
     <option key={region}>{region}</option>)}
   </select>
   </FinderElementContainer>
