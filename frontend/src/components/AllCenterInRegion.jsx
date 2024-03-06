@@ -30,7 +30,7 @@ export const AllCenterInRegion = () => {
     {
       loading ? <p> is loading ....</p> : (
         allCentersOfRegion.map(center => 
-          <CenterCard center={center}/> 
+          <CenterCard key={center._id} center={center}/> 
         )
       )
     }
