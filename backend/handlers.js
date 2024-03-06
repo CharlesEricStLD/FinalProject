@@ -9,6 +9,7 @@ const allCommentsAdmin = require("./handlers/allCommentsAdmin")
 const approvedComment = require("./handlers/approvedComment")
 const removeFavorite = require("./handlers/removeFavorite")
 const allCentersInformation = require("./handlers/allCenterInformations")
+const centerConditionsByName = require("./handlers/centerConditionsByName")
 
 module.exports = {
   centerById, 
@@ -21,5 +22,6 @@ module.exports = {
   allCommentsAdmin, 
   approvedComment,
   removeFavorite, 
-  allCentersInformation
+  allCentersInformation,
+  centerConditionsByName
 }
