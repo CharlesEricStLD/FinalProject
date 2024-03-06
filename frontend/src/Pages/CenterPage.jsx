@@ -18,6 +18,7 @@ import { Weather } from "../components/Wheather";
 export const CenterPage = () => {
 
   const [center, SetCenter] = useState(null);
+  const [centerConditonUrl, setcenterConditonUrl] = useState(null);
   const [lattitude, setLattitude] = useState(null);
   const [longitude, setLongitude] = useState(null);
   const [isFavorite, setIsFavorite] = useState(false);
@@ -47,24 +48,21 @@ export const CenterPage = () => {
 
   },[]);
 
-   //Fetch the centers condition url information from the database
+  //Fetch the centers condition url information from the database
   useEffect(() => {
-    if (centerId) {
-      fetch(`/api/center/${centerId}`)
+    if (center) {
+      fetch(`/api/centersCondition/${center.name}`)
       .then((response) => response.json())
       .then((data) => {
         if (data.message = "center sucessfully found: ") {
-          SetCenter(data.data)
+          setcenterConditonUrl(data.data.scrapping.conditionUrl)
         }
       })
       .catch((error) => {
-        console.error(`Error fetching center details for ID ${centerId}:`, error);
+        console.error(`Error fetching center details for ID ${center.name}:`, error);
     });
   }
-
-  },[]);
-
-
+  },[center]);
 
 //set location for center
   useEffect(() => {
@@ -191,6 +189,7 @@ export const CenterPage = () => {
       <h3>Conditions</h3>
       {center.condition? 
       <table>
+        <tbody>
         <tr>
         <th>OUVERT/FERME</th>
         <th>Pistes Fermées</th>
@@ -201,11 +200,13 @@ export const CenterPage = () => {
         <tr>
         {
         Object.values(center.condition).map((data) =>
-        <td>{data ?data: "Information non disponible" }</td>
+        <td>{data ?data: "Information non fournie par le centre de ski de fond"}</td>
         )
         };
         </tr>
+        </tbody>
       </table> : <h3>Condition indisponible pour le moment...</h3>}
+      <p>Pour plus détails, vous pouvez visiter le site internet du centre <a target="_blank" href={centerConditonUrl}>ici</a>.</p>
       </FirstBlock>
 
       <ThirdBlock>
