@@ -10,7 +10,7 @@ const approvedComment = require("./handlers/approvedComment")
 const removeFavorite = require("./handlers/removeFavorite")
 const allCentersInformation = require("./handlers/allCenterInformations")
 const centerConditionsByName = require("./handlers/centerConditionsByName")
-
+const allRegions = require("./handlers/alRegions")
 module.exports = {
   centerById, 
   allCentersByRegion, 
@@ -23,5 +23,6 @@ module.exports = {
   approvedComment,
   removeFavorite, 
   allCentersInformation,
-  centerConditionsByName
+  centerConditionsByName,
+  allRegions
 }

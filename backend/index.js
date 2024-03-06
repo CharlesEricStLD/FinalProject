@@ -1,5 +1,5 @@
 
-const {centerById, allCentersByRegion, signin, logIn, addFavorite, showFavorites, addComment, allCommentsAdmin, approvedComment, removeFavorite, allCentersInformation, centerConditionsByName} = require("./handlers") 
+const {centerById, allCentersByRegion, signin, logIn, addFavorite, showFavorites, addComment, allCommentsAdmin, approvedComment, removeFavorite, allCentersInformation, centerConditionsByName, allRegions} = require("./handlers") 
 
 const express = require("express");
 const morgan = require("morgan");
@@ -16,6 +16,8 @@ express()
 })
 
 .get("/api/allcentersinformation", allCentersInformation)
+
+.get("/api/allRegions", allRegions)
 
 .get("/api/center/:centerId", centerById)
 
