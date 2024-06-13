@@ -16,9 +16,6 @@ Outdoor utility platform
 - OpenAi API
 - Puppeteer
 
-## Github
-[GitHub](https://github.com)
-
 ![Screenshot of the Home page of the app](path-to-screenshot.png)
 
 ## Project Purpose and Goal
