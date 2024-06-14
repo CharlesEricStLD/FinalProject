@@ -18,7 +18,7 @@ import {App} from '../App.jsx'
 export const NewCommentContext = createContext();
 
 export const UserContext = createContext();
-export const DataContext = createContext();
+export const DataCentersContext = createContext();
 
 export const RoutesIndex = () => {
 
@@ -45,7 +45,7 @@ const [user, setUser] = useState(emptyUser)
 const [centersData, setCentersData] = useState(emptyData)
 
   return (
-    <DataContext.Provider value = {[centersData, setCentersData]}>
+    <DataCentersContext.Provider value = {[centersData, setCentersData]}>
     <UserContext.Provider value = {[user, setUser]}>
       
             <App/>
@@ -62,7 +62,7 @@ const [centersData, setCentersData] = useState(emptyData)
                 <Route path="/user/:username" element={<UserPage/>}/>
             </Routes>
   </UserContext.Provider>
-  </DataContext.Provider>
+  </DataCentersContext.Provider>
   )
 
 }

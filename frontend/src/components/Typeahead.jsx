@@ -3,7 +3,7 @@ import { Combobox } from '@headlessui/react'
 import {useState, useEffect, useContext} from "react"
 import {styled} from "styled-components"
 import { Link } from "react-router-dom";
-import {DataCentersContext} from "./DataContext"
+import {DataCentersContext} from "../routes/RoutesIndex"
 
 export const Typeahead = ( ) => {
 
@@ -20,7 +20,6 @@ useEffect(() => {
   .then(response => response.json())
   .then(data => {
     if (data.message === "Request sucessfull: ") {
-      setOptions(data.data)
       setCentersData(data.data)
     } else {
       console.err(data.message);
@@ -30,9 +29,8 @@ useEffect(() => {
 },[])
 
 
-//
 const filteredOptions =
-  options.filter((option) => {
+  centersData.filter((option) => {
         return option.name.toLowerCase().includes(query.toLowerCase())
       })
 
