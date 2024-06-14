@@ -5,7 +5,7 @@
 import {Routes, Route } from "react-router-dom";
 import { useState, createContext } from "react";
 
-
+import {MapOfAllCenters} from "../Pages/MapOfAllCenters.jsx"
 import { HomePage } from "../Pages/HomePage.jsx";
 import { CenterPage } from "../Pages/CenterPage.jsx";
 import { AllCenterInRegion } from "../components/AllCenterInRegion";
@@ -44,9 +44,11 @@ const [user, setUser] = useState(emptyUser)
             <App/>
             <Routes>
                 <Route path="/" element={<HomePage/>} />
+                <Route path="/map" element={<MapOfAllCenters/>} />
                 <Route path="/center/:centerId" element={<CenterPage/>} />
                 <Route path="/admin" element={<AdminPage/>}/>
-                
+
+
                 <Route path="/region/:region" element={<AllCenterInRegion/>} />
                 <Route path="/login" element={<LoginPage/>}/> 
                 <Route path="/signin" element={<SignInPage/>}/> 
