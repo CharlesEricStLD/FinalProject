@@ -3,9 +3,11 @@
 import { MapContainer, TileLayer,Marker,Popup} from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
 import styled from 'styled-components';
+import { useContext } from 'react';
+import { DataCentersContext } from '../routes/RoutesIndex';
 
 //just for testing.
-const positions = [
+const positions2 = [
     [-40.99497, 174.50808],
     [-41.30269, 173.63696],
     [-41.49413, 173.5421],
@@ -18,22 +20,40 @@ const positions = [
 ];
 
 export const MapOfAllCenters = () => {
+  
+  const [centersData, setCentersData] = useContext(DataCentersContext);
+  
+  const filterCentersData = centersData.filter(center => center.location)
+
+  console.log (centersData);
+  console.log(filterCentersData);
+
+  let positionOfAllCenters = [];
+  filterCentersData.map((center) => {
+    let centerObject = {};
+    centerObject = Object.assign({name : center.name, position : [center.location.lat, center.location.lng]})
+    positionOfAllCenters.push(centerObject); 
+  })
+
+  console.log(positionOfAllCenters);
+
+
   return (
     <PageContainer>
-    <MapContainer  style={{ height: '100%', width: '100%', borderRadius:"15px" }} center={positions[1]} zoom={16} scrollWheelZoom={false}>
+    <MapContainer  style={{ height: '100%', width: '100%', borderRadius:"15px" }} center={[47.4187161,-72.79134189999999]} zoom={6} scrollWheelZoom={false}>
     <TileLayer
       attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
       url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
     />
   
-    {positions.map((positionCenter) => (
-    <Marker position={positionCenter}>
+    {positionOfAllCenters.map(center => (
+    <Marker key={center.name} position={center.position}>
       <Popup>
-      name : This is a name
-      position :  {positionCenter}
+    {center.name}
       </Popup>
     </Marker>
-    ))}
+    ))
+    }
     </MapContainer>
     </PageContainer> 
 )}
