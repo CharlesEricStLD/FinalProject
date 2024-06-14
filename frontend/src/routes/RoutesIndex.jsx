@@ -18,6 +18,7 @@ import {App} from '../App.jsx'
 export const NewCommentContext = createContext();
 
 export const UserContext = createContext();
+export const DataContext = createContext();
 
 export const RoutesIndex = () => {
 
@@ -25,6 +26,8 @@ export const RoutesIndex = () => {
     username : "", 
     password : "",
   }
+
+  const emptyData = [];
 
 
 const emptyComment = {
@@ -39,8 +42,12 @@ const [newComments, setNewComments] = useState(emptyComment)
 
 const [user, setUser] = useState(emptyUser)
 
+const [centersData, setCentersData] = useState(emptyData)
+
   return (
+    <DataContext.Provider value = {[centersData, setCentersData]}>
     <UserContext.Provider value = {[user, setUser]}>
+      
             <App/>
             <Routes>
                 <Route path="/" element={<HomePage/>} />
@@ -55,6 +62,7 @@ const [user, setUser] = useState(emptyUser)
                 <Route path="/user/:username" element={<UserPage/>}/>
             </Routes>
   </UserContext.Provider>
+  </DataContext.Provider>
   )
 
 }

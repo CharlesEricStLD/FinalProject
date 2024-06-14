@@ -1,13 +1,14 @@
 //component of the Typeahead
 import { Combobox } from '@headlessui/react'
-import {useState, useEffect} from "react"
+import {useState, useEffect, useContext} from "react"
 import {styled} from "styled-components"
 import { Link } from "react-router-dom";
-
+import {DataCentersContext} from "./DataContext"
 
 export const Typeahead = ( ) => {
 
 const [options, setOptions] = useState([]);
+const [centersData, setCentersData] = useContext(DataCentersContext);
 const [selectedoption, setSelectedoption] = useState("")
 const [query, setQuery] = useState('')
 
@@ -20,6 +21,7 @@ useEffect(() => {
   .then(data => {
     if (data.message === "Request sucessfull: ") {
       setOptions(data.data)
+      setCentersData(data.data)
     } else {
       console.err(data.message);
     }
