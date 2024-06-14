@@ -38,9 +38,16 @@ return (
                 <>
                 <NavItem as={"button"} onClick={handleLogout}>Log out </NavItem>
                 <NavItem to={`/user/${user.username}`}>My profile</NavItem>
+                <NavItem to={`/map`}>Map</NavItem>
                 </>
                 : (
-                <NavItem to="/login"> <LuUserCircle2/> </NavItem>)}
+                <>
+                <NavItem to="/login"> <LuUserCircle2/> </NavItem>
+                <NavItem to={`/map`}>Map</NavItem>
+                </>
+                )
+                
+                }
                 
             </NavBar>
 )
