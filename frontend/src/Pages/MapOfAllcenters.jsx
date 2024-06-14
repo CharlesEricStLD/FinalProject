@@ -2,8 +2,9 @@
 
 import { MapContainer, TileLayer,Marker,Popup} from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
+import styled from 'styled-components';
 
-
+//just for testing.
 const positions = [
     [-40.99497, 174.50808],
     [-41.30269, 173.63696],
@@ -16,9 +17,10 @@ const positions = [
     [-41.51285, 173.53274]
 ];
 
-export const LeafletMap = () => {
+export const MapOfAllCenters = () => {
   return (
-    <MapContainer  style={{ height: '400px', width: '400px', borderRadius:"15px" }} center={positions[1]} zoom={16} scrollWheelZoom={false}>
+    <PageContainer>
+    <MapContainer  style={{ height: '100%', width: '100%', borderRadius:"15px" }} center={positions[1]} zoom={16} scrollWheelZoom={false}>
     <TileLayer
       attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
       url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -27,9 +29,18 @@ export const LeafletMap = () => {
     {positions.map((positionCenter) => (
     <Marker position={positionCenter}>
       <Popup>
+      name : This is a name
       position :  {positionCenter}
       </Popup>
     </Marker>
     ))}
-    </MapContainer> 
+    </MapContainer>
+    </PageContainer> 
 )}
+
+const PageContainer = styled.div`
+  border: none;
+  height:75vh;
+  width:auto;
+  margin:1em;
+`
