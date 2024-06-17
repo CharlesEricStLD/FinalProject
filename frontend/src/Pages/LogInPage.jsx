@@ -21,10 +21,12 @@ export const LoginPage = () => {
     if (name === "username") {
       const valueStore = value.toLowerCase();
       setUser({...user,[name] : valueStore})
-    }   
+    }
+    else{
       setUser({...user, [name] : value})
       setErrorMessage("");
       setValidationMessage("");
+    }   
   }
 
   const logInVerification = () => {
@@ -38,7 +40,7 @@ export const LoginPage = () => {
         "Accept": "application/json",
         "Content-Type": "application/json",
     },
-    body: JSON.stringify({user : {username : user.username, password : user.password}})
+    body: JSON.stringify({user : {username : user.username.toLowerCase(), password : user.password}})
     })
     .then(response => response.json())
     .then((data) => {
@@ -77,7 +79,7 @@ export const LoginPage = () => {
       </label>
       <button onClick = {handleLogIn} disabled={verificationInProgress}>Log in</button>
       {/* <button onClick = {handleLogInAsGuest} disabled={verificationInProgress}>log in as Guest</button> */}
-      {!validationMessage && <p>Doesn't have an account ? You can  <a href="/signin" disabled={verificationInProgress}> sign in here </a>.</p>}
+      {!validationMessage && <p>Doesn't have an account ? You can  <a href="/signup" disabled={verificationInProgress}> sign up here </a>.</p>}
       {errorMessage? <p>{errorMessage}</p> : <p>{validationMessage}</p>}
     </LoginInputs>
     </form>
