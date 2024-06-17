@@ -11,7 +11,7 @@ import { CenterPage } from "../Pages/CenterPage.jsx";
 import { AllCenterInRegion } from "../components/AllCenterInRegion";
 import { LoginPage } from "../Pages/LogInPage.jsx";
 import { UserPage } from "../Pages/UserPage.jsx";
-import { SignInPage } from '../Pages/SignInPage.jsx';
+import { SignUpPage } from '../Pages/SignUpPage.jsx';
 import { AdminPage } from '../Pages/AdminPage.jsx';
 import {App} from '../App.jsx'
 
@@ -58,7 +58,7 @@ const [centersData, setCentersData] = useState(emptyData)
 
                 <Route path="/region/:region" element={<AllCenterInRegion/>} />
                 <Route path="/login" element={<LoginPage/>}/> 
-                <Route path="/signin" element={<SignInPage/>}/> 
+                <Route path="/signup" element={<SignUpPage/>}/> 
                 <Route path="/user/:username" element={<UserPage/>}/>
             </Routes>
   </UserContext.Provider>

@@ -6,6 +6,8 @@ const { MongoClient } = require("mongodb");
 
 require("dotenv").config();
 
+const bcrypt = require("bcrypt")
+
 const {compareHashPassword} = require("../helpers/bcrypt")
 
 const { MONGO_URI } = process.env;
@@ -41,7 +43,13 @@ const logIn = async (request, response) => {
       .json({ status: 401, message : `Please provide a valid email address and password` });
     }
 
-    const validPassword = await compareHashPassword(user.password,validUser.password)
+    const validPassword = await bcrypt.compare(user.password, validUser.password);
+    
+    console.log(password);
+    
+    console.log(validUser);
+
+    console.log(validPassword)
 
     if(!validPassword) {
       return response

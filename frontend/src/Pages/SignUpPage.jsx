@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components"
 import { UserContext } from "../routes/RoutesIndex";
 
-export const SignInPage = () => {
+export const SignUpPage = () => {
 
   const navigate = useNavigate();
   
@@ -62,7 +62,7 @@ export const SignInPage = () => {
     <img className="image1" src="LoginBackground (3).jpg" alt="Lady doing some cross country" />
     <form>
       <SignInInput>
-      <h1>Sign In</h1>
+      <h1>Sign Up</h1>
       <label> UserName :
       <input type="text" name="username" onChange={(event) =>handleChange(event)}></input> 
       </label>
