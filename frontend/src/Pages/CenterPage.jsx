@@ -185,10 +185,11 @@ export const CenterPage = () => {
       {lattitude && longitude && <LeafletMap lattitude={lattitude} longitude={longitude}></LeafletMap>}
       </SecondBlock>
 
+      <>
       <FirstBlock>
       <h3>Conditions</h3>
       {center.condition? 
-      <table>
+      <ConditionTable>
         <tbody>
         <tr>
         <th>OUVERT/FERME</th>
@@ -205,9 +206,10 @@ export const CenterPage = () => {
         };
         </tr>
         </tbody>
-      </table> : <h3>Condition indisponible pour le moment...</h3>}
+      </ConditionTable> : <h3>Condition indisponible pour le moment...</h3>}
       <p>Pour plus détails, vous pouvez visiter le site internet du centre <a target="_blank" href={centerConditonUrl}>ici</a>.</p>
       </FirstBlock>
+      </>
 
       <ThirdBlock>
       <h2>Review</h2>
@@ -277,8 +279,29 @@ const CenterDetails = styled.div`
 
 `
 
+const ConditionTable = styled.table`
+  width:100%;
+  table-layout: fixed;
+  border-spacing : 1em;
+
+  th, tr,td {
+  word-wrap: break-word;
+  font-size: 0.9em;
+  width:100%;
+  text-align: center;
+  }
+`
+
+
 const FirstBlock = styled.div`
-padding:2%;
+padding:4%;
+border-radius: 15px;
+border: solid 2px;
+box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+background-color:#ffffff;
+
+
+
 
 a{
   font-size: 0.7em;
@@ -287,15 +310,19 @@ a{
 h2{
   margin-top: 5%;
 }
-border-radius: 15px;
-border: solid 2px;
-box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
-background-color:#ffffff;
+
 
 p.note {
   font-size: 0.7em;
 }
 
+`
+
+const TableOfConditions = styled.div`
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  
 `
 
 const SecondBlock = styled.div`
