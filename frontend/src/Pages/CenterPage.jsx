@@ -279,6 +279,8 @@ const CenterDetails = styled.div`
 
 `
 
+//todo need to make the page  agrid and make the condition two grid space
+
 const ConditionTable = styled.table`
   width:100%;
   table-layout: fixed;
