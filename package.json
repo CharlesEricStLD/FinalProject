@@ -1,0 +1,16 @@
+{
+  "name": "finalproject",
+  "version": "1.0.1",
+  "description": "CrossCountryFinder web App",
+  "main": "index.js",
+  "scripts": {
+  "start": "concurrently \"npm run start:frontend\" \"npm run start:backend\"",
+  "start:frontend": "cd frontend && npm run dev",
+  "start:backend": "cd backend && npm start"
+  },
+  "author": "CharlesEric St-Louis-Dupuis",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
