@@ -150,7 +150,7 @@ export const CenterPage = () => {
     <PageContainer>
     {!center? <Loader/> : (
       <>
-      <CenterInformation>
+      <ImageAndName>
       <h1>{center.name}</h1>
       <Favorite><GoBookmarkFill onClick={(event) => favoriteCLick(event)}></GoBookmarkFill></Favorite>
       <LoginModal
@@ -163,11 +163,9 @@ export const CenterPage = () => {
       {<p>{validationMessage || errorMessage}</p> }
       <p>Region : {center.region} </p>
       <img src={center.image}></img>
-      </CenterInformation>
+      </ImageAndName>
 
       <CenterDetails>
-
-      <FirstBlock>
       <p><a href={center.url} target="blank">{center.url}</a></p>
       <p> adresss :<a href={`https://www.google.com/maps/place/${center.address}`} target="blank"> {center.address}</a></p>
 
@@ -179,14 +177,14 @@ export const CenterPage = () => {
       {lattitude && longitude && (<p> <a href={`https://www.trailforks.com/map/?ping=${lattitude},${longitude}`} target="blank"> Interactive Map on TrailFork App </a> </p>) }
       </Tooltip>
       <p className="note">You need to have a trailFork account to access this link</p>
-      </FirstBlock>
+      </CenterDetails>
 
-      <SecondBlock>
+      <Map>
       {lattitude && longitude && <LeafletMap lattitude={lattitude} longitude={longitude}></LeafletMap>}
-      </SecondBlock>
+      </Map>
 
       <>
-      <FirstBlock>
+      <Conditions>
       <h3>Conditions</h3>
       {center.condition? 
       <ConditionTable>
@@ -208,22 +206,21 @@ export const CenterPage = () => {
         </tbody>
       </ConditionTable> : <h3>Condition indisponible pour le moment...</h3>}
       <p>Pour plus détails, vous pouvez visiter le site internet du centre <a target="_blank" href={centerConditonUrl}>ici</a>.</p>
-      </FirstBlock>
+      </Conditions>
       </>
 
-      <ThirdBlock>
+      <Comments>
       <h2>Review</h2>
       <button onClick={() => setOpenAddComment(true)}>Add Review</button>
       {commentsToShow && commentsToShow.map(comment => <Comment comment={comment} key={comment._id}/>) }
       <AddComments onCreateAddComment={onCreateAddComment} onCancelAddComment={() => {
           setOpenAddComment(false)}} centerId = {centerId} OpenAddComment={OpenAddComment} centerName = {center && center.name}/>
-      </ThirdBlock>
+      </Comments>
 
-      <div>
+
+      <Meteo>
         {lattitude && longitude && <Weather address = {center.address} lattitude={lattitude} longitude={longitude} />}
-      </div>
-
-      </CenterDetails>
+      </Meteo>
       </>
     ) }
     </PageContainer>
@@ -232,16 +229,23 @@ export const CenterPage = () => {
 }
 
 const PageContainer = styled.div`
-  margin: 1% 8%;
-  padding:1%;
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+  grid-gap:1em;
+  justify-content: center;
+  margin: 4vw 4vh;
+  padding:1em;
   padding-top:0;
-  padding-bottom: 2%;
+  padding-bottom: 1em;
   font-size: 1.2em;
   border-radius: 15px;
   border: 2px solid;
   box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;  background-color:#ffffff;
 `
-const CenterInformation = styled.div`
+const ImageAndName = styled.div`
+grid-column: span 2;
+grid-row : 1;
 
   h1, p{
     display: block;
@@ -255,7 +259,7 @@ const CenterInformation = styled.div`
 
   p{
     margin: 1% 0;
-    font-size: 1.5em;
+    font-size: 1em;
   }
 
   img {
@@ -269,40 +273,15 @@ const CenterInformation = styled.div`
     z-index : 1;
   }
 `
+
 const CenterDetails = styled.div`
-  display:grid;
-  padding:2%;
-  font-size: 1.2em;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr;
-  grid-gap: 3%;
-
-`
-
-//todo need to make the page  agrid and make the condition two grid space
-
-const ConditionTable = styled.table`
-  width:100%;
-  table-layout: fixed;
-  border-spacing : 1em;
-
-  th, tr,td {
-  word-wrap: break-word;
-  font-size: 0.9em;
-  width:100%;
-  text-align: center;
-  }
-`
-
-
-const FirstBlock = styled.div`
+grid-column: 1;
+grid-row:2;
 padding:4%;
 border-radius: 15px;
 border: solid 2px;
 box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 background-color:#ffffff;
-
-
 
 
 a{
@@ -317,21 +296,37 @@ h2{
 p.note {
   font-size: 0.7em;
 }
-
 `
 
-const TableOfConditions = styled.div`
-  display: grid;
-  grid-template-rows: 1fr 1fr;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-  
+const Map = styled.div`
+grid-column: 2;
+grid-row:2;
 `
 
-const SecondBlock = styled.div`
-padding-left:10%;
+//todo need to make the page  agrid and make the condition two grid space
+
+const Conditions = styled.div`
+  grid-column: span 2;
+  grid-row:3;
+  border-radius: 15px;
+border: solid 2px;
+box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+background-color:#ffffff;
 `
 
-const ThirdBlock = styled.div`
+const ConditionTable = styled.table`
+  width:100%;
+  table-layout: fixed;
+  border-spacing : 1em;
+
+  th, tr,td {
+  word-wrap: break-word;
+  font-size: 0.9em;
+  width:100%;
+  text-align: center;
+  }
+`
+const Comments = styled.div`
   border-radius: 15px;
   border: solid 2px;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;  background-color:#ffffff;
@@ -351,6 +346,11 @@ const ThirdBlock = styled.div`
     color:white;
   }
 `
+
+const Meteo = styled.div`
+  grid-column: 1;
+  grid-row:4;
+`
 const Favorite = styled.button`
   border:1px;
   display: inline-block;
@@ -361,7 +361,6 @@ const Favorite = styled.button`
   position: relative;
   top:50px;
   z-index: 2;
-
 
   & > svg :active {
     fill:white;
