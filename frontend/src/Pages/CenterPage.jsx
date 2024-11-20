@@ -192,27 +192,22 @@ export const CenterPage = () => {
       <h3>Conditions</h3>
       {center.condition? 
       <ConditionTable>
-        <table>
           <thead>
           <tr>
-          <th>Open/Close</th>
-          <th>Track Close</th>
-          <th>Snow conditions</th>
-          <th>Warnings</th>
-          <th>Last Update</th>
+          <th className="col0">Open/Close</th>
+          <th className="col1">Track Close</th>
+          <th className="col2">Snow conditions</th>
+          <th className="col3">Warnings</th>
+          <th className="col4">Last Update</th>
           </tr>
           </thead>
         <tbody>
-        <tr>
-        {
-        Object.values(center.condition).map((data, index) => {
-        key = index;
+        <tr>{
+        Object.values(center.condition).map((data,index) => (
         <td>{data ?data: "Not data available from the ski center"}</td>
-        })
-        };
-        </tr>
+        ))
+        }</tr>
         </tbody>
-        </table>
       </ConditionTable> : <h3>Conditions unavailable for the moment...</h3>}
       <p>For more details, you can visit the website directly <a target="_blank" href={centerConditonUrl}>here</a>.</p>
 
@@ -243,7 +238,7 @@ export const CenterPage = () => {
 const PageContainer = styled.div`
   display:grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 0.6fr 1fr 0.5fr;
   grid-gap:1em;
   justify-content: center;
   margin: 4vw 4vh;
@@ -297,6 +292,7 @@ box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30p
 background-color:#ffffff;
 
 
+
 a{
   font-size: 0.7em;
 }
@@ -316,43 +312,51 @@ grid-column: 2;
 grid-row:2;
 `
 
-//todo need to make the page  agrid and make the condition two grid space
-
 const Conditions = styled.div`
 grid-column: span 2;
 grid-row:3;
 display:grid;
 grid-template-columns: 1fr;
-grid-template-rows: 1fr 4fr 1fr;
+grid-template-rows: 0.75fr 4fr 0.75fr;
 padding:1em;
 border-radius: 15px;
 border: solid 2px;
 box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 background-color:#ffffff;
+
+h3 {
+  font-size:2em;
+}
+
 `
 
 const ConditionTable = styled.table`
-  min-width: 100vw;
-  width: auto;
-  flex: 1;
-  border-collapse: collapse;
   display: grid;
   border-collapse: collapse;
   min-width: 100%;
   grid-template-columns: 
-    minmax(150px, 1fr)
-    minmax(150px, 1.67fr)
-    minmax(150px, 1.67fr)
-    minmax(150px, 1.67fr)
-    minmax(150px, 3.33fr)
-    minmax(150px, 1.67fr)
-    minmax(150px, 3.33fr)
-    minmax(150px, 1.67fr);
+  auto repeat(4, 1fr);
+  grid-template-rows: 0.25fr 0.75fr;
+  margin-bottom:0.5em;
+  border:solid 2px;
+  border-radius: 15px;
+
+  thead,tbody{
+    display: contents;
+  }
+
+  tr{
+    display:contents;
+  }
+
   
   th, tr,td {
   word-wrap: break-word;
-  font-size: 0.9em;
+  font-size: 1em;
+  padding:0.5em;
   text-align: center;
+  border:solid 1px;
+  /* border-radius: 5px; */
   }
 `
 const Comments = styled.div`
