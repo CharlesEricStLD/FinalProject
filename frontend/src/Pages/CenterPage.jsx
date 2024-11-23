@@ -154,18 +154,21 @@ export const CenterPage = () => {
     {!center? <Loader/> : (
       <>
       <ImageAndName>
-      <h1>{center.name}</h1>
+      <FavoriteAndTitleContainer>
       <Favorite><GoBookmarkFill onClick={(event) => favoriteCLick(event)}></GoBookmarkFill></Favorite>
+        <h1>{center.name}</h1>
+      </FavoriteAndTitleContainer> 
       <LoginModal
         open={open}
         onCreate={onCreate}
         onCancel={() => {
           setOpen(false);
-        }}></LoginModal>
-
+        }}>
       {<p>{validationMessage || errorMessage}</p> }
+      </LoginModal>
+      
       <p>Region : {center.region} </p>
-      <img src={center.image}></img>
+      {/* <img src={center.image}></img> */}
       </ImageAndName>
 
       <CenterDetails>
@@ -238,11 +241,11 @@ export const CenterPage = () => {
 const PageContainer = styled.div`
   display:grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 0.6fr 1fr 0.5fr;
-  grid-gap:1em;
+  grid-template-rows: 0.5fr 0.6fr 1fr 0.5fr;
+  grid-gap:2em;
   justify-content: center;
   /* margin: 4vw 4vh; */
-  padding:1em;
+  padding:4em;
   padding-top:0;
   padding-bottom: 1em;
   font-size: 1.2em;
@@ -253,35 +256,37 @@ const PageContainer = styled.div`
 `
 const ImageAndName = styled.div`
 grid-column: span 2;
-grid-row : 1;
 margin-top: 1em;
-background-color: var(--box-bg-color);
+/* object-fit: contain; */
+border:solid black;
+display: flex;
+flex-direction: column;
+padding:2%;
 
-  h1, p{
-    display: block;
-    position: relative;
-    font-weight: bold;
+h1, p{
     z-index: 2;
-    padding-left: 5%;
     color:black;
-    top: 150px;
+  }
+`
+const FavoriteAndTitleContainer = styled.div `
+  display: flex;
+  flex-direction: row;
+  margin-right:2em;
+  margin-bottom: 1em;
+`
+const Favorite = styled.button`
+  border:1px;
+  background-color: rgb(0,0,0,0);
+  width:min-content;
+  font-size: 2em;
+  fill:none;
+  z-index: 2;
+  margin-right: 1em;
+
+  & > svg :active {
+    fill:white;
   }
 
-  p{
-    margin: 1% 0;
-    font-size: 1em;
-  }
-
-  img {
-    width:100%;
-    height:400px;
-    object-fit: cover;
-    object-position: 0 64%;
-    border-radius: 15px;
-    position: relative;
-    top:-150px;
-    z-index : 1;
-  }
 `
 
 const CenterDetails = styled.div`
@@ -418,19 +423,4 @@ const Meteo = styled.div`
   grid-column: 1;
   grid-row:4;
 `
-const Favorite = styled.button`
-  border:1px;
-  display: inline-block;
-  margin-left:2%;
-  background-color: rgb(0,0,0,0);
-  font-size: 2em;
-  fill:none;
-  position: relative;
-  top:50px;
-  z-index: 2;
 
-  & > svg :active {
-    fill:white;
-  }
-
-`
