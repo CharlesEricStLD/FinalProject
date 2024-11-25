@@ -244,21 +244,18 @@ const PageContainer = styled.div`
   grid-template-rows: 0.5fr 0.6fr 1fr 0.5fr;
   grid-gap:2em;
   justify-content: center;
-  /* margin: 4vw 4vh; */
   padding:4em;
   padding-top:0;
-  padding-bottom: 1em;
+  padding-bottom: 3em;
   font-size: 1.2em;
-  /* border-radius: 15px; */
-  /* border: 2px solid; */
   box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;  
   background-color:#ffffff;
 `
 const ImageAndName = styled.div`
 grid-column: span 2;
 margin-top: 1em;
-/* object-fit: contain; */
-border:solid black;
+border-radius: 15px;
+background-color: var(--box-bg-color);
 display: flex;
 flex-direction: column;
 padding:2%;
@@ -294,8 +291,6 @@ grid-column: 1;
 grid-row:2;
 padding:4%;
 border-radius: 15px;
-/* border: solid 1px #bcbcbc; */
-/* box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px; */
 box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 background-color: var(--box-bg-color);
 
@@ -328,8 +323,6 @@ grid-template-columns: 1fr;
 grid-template-rows: 0.75fr 4fr 0.75fr;
 padding:1em;
 border-radius: 15px;
-/* border: solid 2px; */
-/* box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px; */
 background-color:var(--box-bg-color);
 box-shadow: var(--box-box-shadow);
 h3 {
@@ -340,14 +333,12 @@ h3 {
 
 const ConditionTable = styled.table`
   display: grid;
-  /* border-collapse: collapse; */
   min-width: 100%;
   grid-template-columns: 
   auto repeat(4, 1fr);
   grid-template-rows: 0.20fr 0.75fr;
   grid-gap: 0.5em;
   margin-bottom:0.5em;
-  /* border:solid 2px; */
   border-radius: 15px;
   background-color: var(--box-bg-color);
   font-weight:bold;
@@ -361,7 +352,6 @@ const ConditionTable = styled.table`
     flex-direction: column;
     justify-content: center;
     background-color: white;
-    /* color:white; */
     border:none;
     border-width: 0 0.3em 0.5em 0.3em;
     border-radius: 15px;
@@ -369,7 +359,6 @@ const ConditionTable = styled.table`
   }
 
   td {
-    /* box-shadow: rgba(0, 0, 0, 0.859) 0px 25px 20px -20px; */
     border-radius: 15px;
     background-color: white;
   }
@@ -377,7 +366,6 @@ const ConditionTable = styled.table`
   tr{
     display:contents;
     border-radius: 15px;
-    /* background-color: rgb(184, 181, 181); */
   }
 
   
@@ -386,23 +374,13 @@ const ConditionTable = styled.table`
   font-size: 1em;
   padding:0.5em;
   text-align: center;
-  /* border:solid #fcfcfc; */
-  /* border-radius: 15px; */
-  /* boxshadow88 */
-  /* box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px; */
   overflow: hidden;
-  
-  
-  /* BoxShadow59 */
-  /* box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px; */
-
   }
 `
 const Comments = styled.div`
   border-radius: 15px;
-  /* border: solid 2px; */
-  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;  background-color:#ffffff;
   background-color: var(--box-bg-color);
+  padding:1em;
 
   h2{
   padding:2%;
