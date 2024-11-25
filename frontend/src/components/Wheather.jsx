@@ -29,5 +29,5 @@ export const Weather = ({lattitude, longitude, address}) => {
 
 const WeatherStyling = styled.div`
   width:100%;
-  height:175%;
+  height:auto;
 `

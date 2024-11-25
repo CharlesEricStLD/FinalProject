@@ -13,6 +13,7 @@ import { Loader } from "../components/Loader";
 import { Tooltip } from 'antd';
 import { GoBookmarkFill } from "react-icons/go";
 import { Weather } from "../components/Wheather";
+import { SnowConditionsTable } from "../components/ConditionsTable";
 
 
 export const CenterPage = () => {
@@ -48,6 +49,8 @@ export const CenterPage = () => {
 
   },[]);
 
+
+  //Todo Remove this when my condition center work from import
   //Fetch the centers condition url information from the database
   useEffect(() => {
     if (center) {
@@ -150,24 +153,25 @@ export const CenterPage = () => {
     <PageContainer>
     {!center? <Loader/> : (
       <>
-      <CenterInformation>
-      <h1>{center.name}</h1>
+      <ImageAndName>
+      <FavoriteAndTitleContainer>
       <Favorite><GoBookmarkFill onClick={(event) => favoriteCLick(event)}></GoBookmarkFill></Favorite>
+        <h1>{center.name}</h1>
+      </FavoriteAndTitleContainer> 
       <LoginModal
         open={open}
         onCreate={onCreate}
         onCancel={() => {
           setOpen(false);
-        }}></LoginModal>
-
+        }}>
       {<p>{validationMessage || errorMessage}</p> }
+      </LoginModal>
+      
       <p>Region : {center.region} </p>
-      <img src={center.image}></img>
-      </CenterInformation>
+      {/* <img src={center.image}></img> */}
+      </ImageAndName>
 
       <CenterDetails>
-
-      <FirstBlock>
       <p><a href={center.url} target="blank">{center.url}</a></p>
       <p> adresss :<a href={`https://www.google.com/maps/place/${center.address}`} target="blank"> {center.address}</a></p>
 
@@ -179,49 +183,54 @@ export const CenterPage = () => {
       {lattitude && longitude && (<p> <a href={`https://www.trailforks.com/map/?ping=${lattitude},${longitude}`} target="blank"> Interactive Map on TrailFork App </a> </p>) }
       </Tooltip>
       <p className="note">You need to have a trailFork account to access this link</p>
-      </FirstBlock>
+      </CenterDetails>
 
-      <SecondBlock>
+      <Map>
       {lattitude && longitude && <LeafletMap lattitude={lattitude} longitude={longitude}></LeafletMap>}
-      </SecondBlock>
+      </Map>
 
-      <FirstBlock>
+      <>
+      <Conditions>
+        {/* <SnowConditionsTable center={center}/> */}
       <h3>Conditions</h3>
       {center.condition? 
-      <table>
+      <ConditionTable>
+          <thead>
+          <tr>
+          <th className="col0">Open/Close</th>
+          <th className="col1">Track Close</th>
+          <th className="col2">Snow conditions</th>
+          <th className="col3">Warnings</th>
+          <th className="col4">Last Update</th>
+          </tr>
+          </thead>
         <tbody>
-        <tr>
-        <th>OUVERT/FERME</th>
-        <th>Pistes Fermées</th>
-        <th>Conditions de neige</th>
-        <th>Avertissements importants</th>
-        <th>Dernière mise à jour</th>
-        </tr>
-        <tr>
-        {
-        Object.values(center.condition).map((data) =>
-        <td>{data ?data: "Information non fournie par le centre de ski de fond"}</td>
-        )
-        };
-        </tr>
+        <tr>{
+        Object.values(center.condition).map((data,index) => (
+        <td>{data ?data: "No data available from the ski center"}</td>
+        ))
+        }</tr>
         </tbody>
-      </table> : <h3>Condition indisponible pour le moment...</h3>}
-      <p>Pour plus détails, vous pouvez visiter le site internet du centre <a target="_blank" href={centerConditonUrl}>ici</a>.</p>
-      </FirstBlock>
+      </ConditionTable> : <h3>Conditions unavailable for the moment...</h3>}
+      <p>For more details, you can visit the website directly <a target="_blank" href={centerConditonUrl}>here</a>.</p>
 
-      <ThirdBlock>
+      {/* Pour plus détails, vous pouvez visiter le site internet du centre, ici */}
+
+      </Conditions>
+      </>
+
+      <Comments>
       <h2>Review</h2>
       <button onClick={() => setOpenAddComment(true)}>Add Review</button>
       {commentsToShow && commentsToShow.map(comment => <Comment comment={comment} key={comment._id}/>) }
       <AddComments onCreateAddComment={onCreateAddComment} onCancelAddComment={() => {
           setOpenAddComment(false)}} centerId = {centerId} OpenAddComment={OpenAddComment} centerName = {center && center.name}/>
-      </ThirdBlock>
+      </Comments>
 
-      <div>
+
+      <Meteo>
         {lattitude && longitude && <Weather address = {center.address} lattitude={lattitude} longitude={longitude} />}
-      </div>
-
-      </CenterDetails>
+      </Meteo>
       </>
     ) }
     </PageContainer>
@@ -230,55 +239,62 @@ export const CenterPage = () => {
 }
 
 const PageContainer = styled.div`
-  margin: 1% 8%;
-  padding:1%;
-  padding-top:0;
-  padding-bottom: 2%;
-  font-size: 1.2em;
-  border-radius: 15px;
-  border: 2px solid;
-  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;  background-color:#ffffff;
-`
-const CenterInformation = styled.div`
-
-  h1, p{
-    display: block;
-    position: relative;
-    font-weight: bold;
-    z-index: 2;
-    padding-left: 5%;
-    color:black;
-    top: 150px;
-  }
-
-  p{
-    margin: 1% 0;
-    font-size: 1.5em;
-  }
-
-  img {
-    width:100%;
-    height:400px;
-    object-fit: cover;
-    object-position: 0 64%;
-    border-radius: 15px;
-    position: relative;
-    top:-150px;
-    z-index : 1;
-  }
-`
-const CenterDetails = styled.div`
   display:grid;
-  padding:2%;
-  font-size: 1.2em;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr;
-  grid-gap: 3%;
+  grid-template-rows: 0.5fr 0.6fr 1fr 0.5fr;
+  grid-gap:2em;
+  justify-content: center;
+  padding:4em;
+  padding-top:0;
+  padding-bottom: 3em;
+  font-size: 1.2em;
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;  
+  background-color:#ffffff;
+`
+const ImageAndName = styled.div`
+grid-column: span 2;
+margin-top: 1em;
+border-radius: 15px;
+background-color: var(--box-bg-color);
+display: flex;
+flex-direction: column;
+padding:2%;
+
+h1, p{
+    z-index: 2;
+    color:black;
+  }
+`
+const FavoriteAndTitleContainer = styled.div `
+  display: flex;
+  flex-direction: row;
+  margin-right:2em;
+  margin-bottom: 1em;
+`
+const Favorite = styled.button`
+  border:1px;
+  background-color: rgb(0,0,0,0);
+  width:min-content;
+  font-size: 2em;
+  fill:none;
+  z-index: 2;
+  margin-right: 1em;
+
+  & > svg :active {
+    fill:white;
+  }
 
 `
 
-const FirstBlock = styled.div`
-padding:2%;
+const CenterDetails = styled.div`
+grid-column: 1;
+grid-row:2;
+padding:4%;
+border-radius: 15px;
+box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+background-color: var(--box-bg-color);
+
+
 
 a{
   font-size: 0.7em;
@@ -287,25 +303,84 @@ a{
 h2{
   margin-top: 5%;
 }
-border-radius: 15px;
-border: solid 2px;
-box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
-background-color:#ffffff;
+
 
 p.note {
   font-size: 0.7em;
 }
+`
+
+const Map = styled.div`
+grid-column: 2;
+grid-row:2;
+`
+
+const Conditions = styled.div`
+grid-column: span 2;
+grid-row:3;
+display:grid;
+grid-template-columns: 1fr;
+grid-template-rows: 0.75fr 4fr 0.75fr;
+padding:1em;
+border-radius: 15px;
+background-color:var(--box-bg-color);
+box-shadow: var(--box-box-shadow);
+h3 {
+  font-size:2em;
+}
 
 `
 
-const SecondBlock = styled.div`
-padding-left:10%;
-`
-
-const ThirdBlock = styled.div`
+const ConditionTable = styled.table`
+  display: grid;
+  min-width: 100%;
+  grid-template-columns: 
+  auto repeat(4, 1fr);
+  grid-template-rows: 0.20fr 0.75fr;
+  grid-gap: 0.5em;
+  margin-bottom:0.5em;
   border-radius: 15px;
-  border: solid 2px;
-  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;  background-color:#ffffff;
+  background-color: var(--box-bg-color);
+  font-weight:bold;
+
+  thead,tbody{
+    display: contents;
+  }
+
+  th {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: white;
+    border:none;
+    border-width: 0 0.3em 0.5em 0.3em;
+    border-radius: 15px;
+    box-shadow: rgba(0, 0, 0, 0.08) 0px 0px 0px
+  }
+
+  td {
+    border-radius: 15px;
+    background-color: white;
+  }
+
+  tr{
+    display:contents;
+    border-radius: 15px;
+  }
+
+  
+  th, tr,td {
+  word-wrap: break-word;
+  font-size: 1em;
+  padding:0.5em;
+  text-align: center;
+  overflow: hidden;
+  }
+`
+const Comments = styled.div`
+  border-radius: 15px;
+  background-color: var(--box-bg-color);
+  padding:1em;
 
   h2{
   padding:2%;
@@ -313,7 +388,6 @@ const ThirdBlock = styled.div`
   }
 
   button {
-    background-color: #0181C2;
     font-size: 1em;
     text-align: center;
     width:25%;
@@ -322,20 +396,9 @@ const ThirdBlock = styled.div`
     color:white;
   }
 `
-const Favorite = styled.button`
-  border:1px;
-  display: inline-block;
-  margin-left:2%;
-  background-color: rgb(0,0,0,0);
-  font-size: 2em;
-  fill:none;
-  position: relative;
-  top:50px;
-  z-index: 2;
 
-
-  & > svg :active {
-    fill:white;
-  }
-
+const Meteo = styled.div`
+  grid-column: 1;
+  grid-row:4;
 `
+
