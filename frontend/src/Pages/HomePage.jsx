@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Typeahead } from "../components/Typeahead"
 import {styled} from "styled-components"
+import { NavLink } from "react-router-dom";
 
 
 export const HomePage = () => {
@@ -31,7 +32,26 @@ navigate(`region/${regionSelected}`)
 
 return (
   <HomePageStyled>
-  <img src="./homePageBanner.jpg"></img>
+  <InputAndImageBlock>
+  <div className="flex1">
+  <p>Quebec CrossCountry Finder!</p>
+  {/* //todo Add the toggle when sign in/Sin out between log IN and My account */}
+  <button>
+  <NavLink role="button" to="/login"></NavLink>Log In
+  </button>
+  </div>
+  <div className="flex2">
+
+  </div>
+
+  </InputAndImageBlock>
+  <FeaturesBlock></FeaturesBlock>
+  <HowItWorkBlock></HowItWorkBlock>
+
+
+
+
+  {/* <img src="./homePageBanner.jpg"></img>
   <h1>Quebec CrossCountry Finder!</h1>
   <FinderElementContainer>
   <Typeahead/>
@@ -40,16 +60,19 @@ return (
     {regions && regions.map(region => 
     <option key={region}>{region}</option>)}
   </select>
-  </FinderElementContainer>
+  </FinderElementContainer> */}
   </HomePageStyled>
 )
 
 }
 
 const HomePageStyled = styled.div`
-height:100vh;
+height:200vh;
 font-size: 1.2em;
+border: solid pink;
 overflow: hidden;
+display: grid;
+grid-template-rows: 1.5fr 1.25fr 2fr;
 
 h1{
   text-align: center;
@@ -68,6 +91,39 @@ img{
   opacity: 80%;
 }
 `
+const InputAndImageBlock = styled.div`
+  border:solid 2px;
+  display: flex;
+  flex-direction: column;
+
+  div.flex1{
+    padding: 1em 1em;
+    
+    p{
+      display: inline;
+    }
+
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  button{
+    color:white;
+    width:10%;
+    padding:0.5em;
+  }
+
+`
+const FeaturesBlock = styled.div`
+  border:solid 2px;
+`
+
+const HowItWorkBlock = styled.div`
+  border:solid 2px;
+`
+
+
 
 const FinderElementContainer = styled.div`
 margin-top:2%;
