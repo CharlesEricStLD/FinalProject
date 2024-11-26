@@ -56,14 +56,15 @@ return (
 
 const NavBar = styled.div`
     z-index: 1;
-    width: 50%;
-    margin-left:20% ;
+    width: 90vw;
+    /* margin-left:20% ; */
     margin-top:1%;
     display: flex;
+    align-content: flex-start;
     justify-content: space-between;
-    font-size: 2.5em;
+    font-size: 2em;
     border-bottom: 4px solid;
-    padding: 1%;
+    padding: 0% 4%;
 
     button {
         font: inherit;
