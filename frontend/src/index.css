@@ -25,4 +25,7 @@ button {
   border-radius: 15px;
   outline: none;
   background-color: var(--high-bg-color);
+  color:white;
+  width:10%;
+  padding:0.5em;
 }
