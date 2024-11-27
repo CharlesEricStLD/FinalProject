@@ -41,9 +41,16 @@ return (
   </button>
   </div>
   <div className="flex2">
-
+  <h1>Every day snow updates for your favorite cross-country resorts!</h1>
+    {/* <div className="flex-centers-selection"> */}
+    <Typeahead/>
+      {/* <select onChange={(domElement) => {handleChange(domElement)}}>
+        <option value="" disabled selected>Filter by region</option>
+        {regions && regions.map(region => 
+        <option key={region}>{region}</option>)}
+      </select> */}
+    {/* </div> */}
   </div>
-
   </InputAndImageBlock>
   <FeaturesBlock></FeaturesBlock>
   <HowItWorkBlock></HowItWorkBlock>
@@ -74,14 +81,6 @@ overflow: hidden;
 display: grid;
 grid-template-rows: 1.5fr 1.25fr 2fr;
 
-h1{
-  text-align: center;
-  width:85%;
-  margin: auto;
-  padding-top: 10%;
-  font-size: 3.2em;
-}
-
 img{
   width: 99%;
   height: 100%;
@@ -95,22 +94,38 @@ const InputAndImageBlock = styled.div`
   border:solid 2px;
   display: flex;
   flex-direction: column;
+  padding: 1em 1em;
 
   div.flex1{
-    padding: 1em 1em;
-    
-    p{
-      display: inline;
-    }
-
     display:flex;
     flex-direction: row;
     justify-content: space-between;
+
+    p{
+      display: inline;
+    }
   }
 
-  button{
-    color:white;
-    width:10%;
+  div.flex2{
+    display:flex;
+    flex-direction: column;
+
+    h1{
+    text-align: center;
+    width:85%;
+    margin: 1em auto 0.5em auto; 
+    font-size: 3.2em;
+    }
+  }
+
+  div.flex-centers-selection {
+    border:solid black;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding: none;
+    margin:none;
     padding:0.5em;
   }
 
@@ -125,32 +140,32 @@ const HowItWorkBlock = styled.div`
 
 
 
-const FinderElementContainer = styled.div`
-margin-top:2%;
-margin-right:2%;
-margin-left: 2%;
-display:grid;
-grid-template-columns: 0.75fr 0.25fr;
-height: max-content;
-border-radius:15px;
-border: solid black;
-font-size: 1.5em;
-position: relative;
+// const FinderElementContainer = styled.div`
+// margin-top:2%;
+// margin-right:2%;
+// margin-left: 2%;
+// display:grid;
+// grid-template-columns: 0.75fr 0.25fr;
+// height: max-content;
+// border-radius:15px;
+// border: solid black;
+// font-size: 1.5em;
+// position: relative;
 
-select {
-  background-color: rgba(0, 0, 0, 0);
-  border: none;
-  outline: none;
-  margin:0;
-  font-size: 1.2em;
-  position:absolute;
-  right:9%;
-  top:20%
-}
+// select {
+//   background-color: rgba(0, 0, 0, 0);
+//   border: none;
+//   outline: none;
+//   margin:0;
+//   font-size: 1.2em;
+//   position:absolute;
+//   right:9%;
+//   top:20%
+// }
 
-option{
-  background-color: rgba(0, 0, 0, 0);
-  text-decoration: none;
-}
+// option{
+//   background-color: rgba(0, 0, 0, 0);
+//   text-decoration: none;
+// }
 
-`
+// `
