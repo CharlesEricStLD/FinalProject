@@ -28,6 +28,27 @@ useEffect(() => {
 
 },[])
 
+const [regions, setRegions] = useState(null);
+
+useEffect(() => {
+  fetch(`/api/allRegions`)
+  .then((response) => response.json())
+  .then((data) => {
+    if (data.message = "Request sucessfull: ") {
+      setRegions(data.data)
+    }
+  })
+  .catch((error) => {
+    console.error(`Error fetching center details for all region:`, error);
+});
+},[])
+
+const handleChange = (domElement => {
+const regionSelected = domElement.target.value; 
+navigate(`region/${regionSelected}`)
+})
+
+
 
 const filteredOptions =
   centersData.filter((option) => {
@@ -37,6 +58,7 @@ const filteredOptions =
 return (
   options ? (
   <TypeaheadStyle>
+  <div className='combobox-container'>
   <Combobox value={selectedoption} onChange={setSelectedoption} nullable>
     <Combobox.Input onChange={(event) => setQuery(event.target.value)} />
     <Combobox.Options>
@@ -47,6 +69,12 @@ return (
       )) : "" }
     </Combobox.Options>
   </Combobox>
+  </div>
+  <select onChange={(domElement) => {handleChange(domElement)}}>
+    <option value="" disabled selected>Filter by region</option>
+    {regions && regions.map(region => 
+    <option key={region}>{region}</option>)}
+  </select>
   </TypeaheadStyle>
   ) : <Loader/>
 )
@@ -54,7 +82,20 @@ return (
 }
 
 const TypeaheadStyle = styled.div`
+    border:solid black;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding: none;
+    margin:none;
+    padding:0.5em;
 
+    div.combobox-container{
+      display: flex;
+      flex-direction: column;
+      width:75%;
+    }
 
 input {
     background: rgba(0, 0, 0, 0);
@@ -62,10 +103,15 @@ input {
     outline: none;
     align-items: left;
     padding:0.5%;
-    width:100%;
     height: 2em;
     object-fit: fill;
     font-size: 1.2em;
+    width:75%;
+}
+
+input:focus-visible {
+  border:none;
+  outline:none;
 }
 
 Link{
@@ -85,8 +131,19 @@ a {
 
 ul > li:hover {
 font-weight: bold;
+border:none;
 background-color: #0062ff46;
 text-decoration: none;
+}
+
+select{
+  width:max-content;
+  margin-left:0.5em;
+  height: 2em;
+  font-size: 1.2em;
+  border: none;
+  outline: none;
+  align-items: left;
 }
 
 `
