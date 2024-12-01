@@ -49,8 +49,7 @@ navigate(`region/${regionSelected}`)
 })
 
 
-// todo check the code base on the Headless UI and check code for better sttylimg
-//todo LAter : Skip to ShadCn
+// todo Check aria-Label and delete Headless UI : https://react-spectrum.adobe.com/react-aria/ComboBox.html#state
 
 const filteredOptions =
   centersData.filter((option) => {
