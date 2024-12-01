@@ -4,13 +4,18 @@
   "description": "CrossCountryFinder web App",
   "main": "index.js",
   "scripts": {
-  "start": "concurrently \"npm run start:frontend\" \"npm run start:backend\"",
-  "start:frontend": "cd frontend && npm run dev",
-  "start:backend": "cd backend && npm start"
+    "start": "concurrently \"npm run start:frontend\" \"npm run start:backend\"",
+    "start:frontend": "cd frontend && npm run dev",
+    "start:backend": "cd backend && npm start"
   },
   "author": "CharlesEric St-Louis-Dupuis",
   "license": "ISC",
   "devDependencies": {
     "concurrently": "^8.2.2"
+  },
+  "dependencies": {
+    "@headlessui/react": "1.7.2",
+    "install": "^0.13.0",
+    "npm": "^10.9.1"
   }
 }
