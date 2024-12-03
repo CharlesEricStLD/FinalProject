@@ -1,17 +1,16 @@
 //component of the Typeahead
-import { Combobox } from '@headlessui/react'
+import {ComboBox, Item, Section} from '@adobe/react-spectrum'
 import {useState, useEffect, useContext} from "react"
 import {styled} from "styled-components"
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {DataCentersContext} from "../routes/RoutesIndex"
 
 export const Typeahead = ( ) => {
 
+const navigate = useNavigate();
 const [options, setOptions] = useState([]);
 const [centersData, setCentersData] = useContext(DataCentersContext);
-const [selectedoption, setSelectedoption] = useState("")
-const [query, setQuery] = useState('')
-
+const [center, setCenter] = useState(null);
 
 //Fetch from server to get all center
 useEffect(() => {
@@ -49,37 +48,34 @@ navigate(`region/${regionSelected}`)
 })
 
 
+
 // todo Check aria-Label and delete Headless UI : https://react-spectrum.adobe.com/react-aria/ComboBox.html#state
 
-const filteredOptions =
-  centersData.filter((option) => {
-        return option.name.toLowerCase().includes(query.toLowerCase())
+const filteredCentersArray =
+  centersData.filter((center) => {
+        return center.name.toLowerCase();
       })
 
 return (
-  options ? (
+  centersData ? (
+  
   <TypeaheadStyle>
-  <div className='combobox-container'>
-  <Combobox value={selectedoption} onChange={setSelectedoption} nullable>
-    <Combobox.Input onChange={(event) => setQuery(event.target.value)} />
-    <Combobox.Options>
-      {query? filteredOptions.map((option) => (
-        <Combobox.Option key={option.name} value={option.name}>
-          <Link to={`/center/${option._id}`}>{option.name}, {option.region}</Link>
-        </Combobox.Option>
-      )) : "" }
-    </Combobox.Options>
-  </Combobox>
-  </div>
+  {console.log(filteredCentersArray)}
+  {/* <div className='combobox-container'> */}
+  <ComboBox
+        defaultItems={filteredCentersArray}
+        onSelectionChange={setCenter}>
+        {center => <Item key={center._id}>{center.name}</Item>}
+  </ComboBox>  
+  {/* <Link to={`/center/${option._id}`}>{option.name}, {option.region}</Link> */}  
   <select onChange={(domElement) => {handleChange(domElement)}}>
-    <option value="" disabled selected>Filter by region</option>
+    <option value="" disabled>Filter by region</option>
     {regions && regions.map(region => 
     <option key={region}>{region}</option>)}
   </select>
   </TypeaheadStyle>
   ) : <Loader/>
 )
-
 }
 
 const TypeaheadStyle = styled.div`

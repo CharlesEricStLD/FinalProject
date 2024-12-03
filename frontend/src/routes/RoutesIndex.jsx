@@ -4,6 +4,8 @@
 
 import {Routes, Route } from "react-router-dom";
 import { useState, createContext } from "react";
+import {Provider, defaultTheme} from '@adobe/react-spectrum';
+import { useNavigate } from "react-router-dom";
 
 import {MapOfAllCenters} from "../Pages/MapOfAllCenters.jsx"
 import { HomePage } from "../Pages/HomePage.jsx";
@@ -44,10 +46,13 @@ const [user, setUser] = useState(emptyUser)
 
 const [centersData, setCentersData] = useState(emptyData)
 
+const navigate = useNavigate();
+
   return (
     <DataCentersContext.Provider value = {[centersData, setCentersData]}>
     <UserContext.Provider value = {[user, setUser]}>
-      
+    <Provider theme={defaultTheme} colorScheme="light" router={{navigate}}>
+
             <App/>
             <Routes>
                 <Route path="/" element={<HomePage/>} />
@@ -61,6 +66,7 @@ const [centersData, setCentersData] = useState(emptyData)
                 <Route path="/signup" element={<SignUpPage/>}/> 
                 <Route path="/user/:username" element={<UserPage/>}/>
             </Routes>
+            </Provider>
   </UserContext.Provider>
   </DataCentersContext.Provider>
   )
