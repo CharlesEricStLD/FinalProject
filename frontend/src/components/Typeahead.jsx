@@ -47,13 +47,24 @@ const regionSelected = domElement.target.value;
 navigate(`region/${regionSelected}`)
 })
 
-// todo Check aria-Label and delete Headless UI : https://react-spectrum.adobe.com/react-aria/ComboBox.html#state
+// todo Style the Combox input: https://react-spectrum.adobe.com/react-aria/ComboBox.html#state
 
 const filteredCentersArray =
   centersData.filter((center) => {
         return center.name.toLowerCase();
       })
 
+const ComboboxStyling = {
+    background: "rgba(0, 0, 0, 0)",
+    backgroundColor:"blue",
+    border: "none",
+    outline: "none",
+    alignItems: "left",
+    padding:"0.25em",
+    height: "2em",
+    fontSize: "1.2em",
+    width:"400%",
+  }
 
 
 return (
@@ -62,7 +73,7 @@ return (
   <TypeaheadStyle>
   {console.log(filteredCentersArray)}
   {/* <div className='combobox-container'> */}
-  <ComboBox aria-labelledby="Search for center"
+  <ComboBox style={ComboboxStyling} aria-labelledby="Search for center"
         defaultItems={filteredCentersArray}
         onSelectionChange={(key) => {
           const selectedCenter = filteredCentersArray.find(center => center._id === key);
@@ -72,7 +83,8 @@ return (
       }}
   >
         {center => <Item key={center._id}>{center.name}</Item>}
-  </ComboBox>  
+  </ComboBox> 
+  {/* </div>  */}
   {/* <Link to={`/center/${option._id}`}>{option.name}, {option.region}</Link> */}  
   <select onChange={(domElement) => {handleChange(domElement)}}>
     <option value="" disabled>Filter by region</option>
@@ -89,7 +101,6 @@ const TypeaheadStyle = styled.div`
     border-radius: 15px;
     display: flex;
     flex-direction: row;
-    justify-content: center;
     padding: none;
     margin:none;
     padding:0.5em;
@@ -141,7 +152,8 @@ text-decoration: none;
 
 select{
   width:max-content;
-  margin-left:0.5em;
+  align-self: flex-end;
+  margin-left:50%;
   height: 2em;
   font-size: 1.2em;
   border: none;
