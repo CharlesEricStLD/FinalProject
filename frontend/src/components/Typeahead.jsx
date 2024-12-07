@@ -47,8 +47,6 @@ const regionSelected = domElement.target.value;
 navigate(`region/${regionSelected}`)
 })
 
-
-
 // todo Check aria-Label and delete Headless UI : https://react-spectrum.adobe.com/react-aria/ComboBox.html#state
 
 const filteredCentersArray =
@@ -56,15 +54,23 @@ const filteredCentersArray =
         return center.name.toLowerCase();
       })
 
+
+
 return (
   centersData ? (
   
   <TypeaheadStyle>
   {console.log(filteredCentersArray)}
   {/* <div className='combobox-container'> */}
-  <ComboBox
+  <ComboBox aria-labelledby="Search for center"
         defaultItems={filteredCentersArray}
-        onSelectionChange={setCenter}>
+        onSelectionChange={(key) => {
+          const selectedCenter = filteredCentersArray.find(center => center._id === key);
+          if (selectedCenter) {
+              navigate(`/center/${selectedCenter._id}`);
+          }
+      }}
+  >
         {center => <Item key={center._id}>{center.name}</Item>}
   </ComboBox>  
   {/* <Link to={`/center/${option._id}`}>{option.name}, {option.region}</Link> */}  
