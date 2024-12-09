@@ -1,5 +1,5 @@
 //component of the Typeahead
-import {ComboBox, Item, Section} from '@adobe/react-spectrum'
+import {ComboBox, Item, Section, View} from '@adobe/react-spectrum'
 import {useState, useEffect, useContext} from "react"
 import {styled} from "styled-components"
 import { Link, useNavigate } from "react-router-dom";
@@ -48,6 +48,8 @@ navigate(`region/${regionSelected}`)
 })
 
 // todo Style the Combox input: https://react-spectrum.adobe.com/react-aria/ComboBox.html#state
+//todo : see that : https://argos-ci.com/blog/react-aria-migration
+
 
 const filteredCentersArray =
   centersData.filter((center) => {
@@ -71,17 +73,17 @@ return (
   centersData ? (
   
   <TypeaheadStyle>
-  {console.log(filteredCentersArray)}
+  {/* {console.log(filteredCentersArray)} */}
   {/* <div className='combobox-container'> */}
-  <ComboBox style={ComboboxStyling} aria-labelledby="Search for center"
+  
+  <ComboBox width='size-6000' flex="5" padding="size-6000" backgroundColor="" aria-labelledby="Search for center"
         defaultItems={filteredCentersArray}
         onSelectionChange={(key) => {
           const selectedCenter = filteredCentersArray.find(center => center._id === key);
           if (selectedCenter) {
               navigate(`/center/${selectedCenter._id}`);
           }
-      }}
-  >
+      }} >
         {center => <Item key={center._id}>{center.name}</Item>}
   </ComboBox> 
   {/* </div>  */}
@@ -101,26 +103,16 @@ const TypeaheadStyle = styled.div`
     border-radius: 15px;
     display: flex;
     flex-direction: row;
-    padding: none;
+    justify-content:start;
     margin:none;
     padding:0.5em;
-
-    div.combobox-container{
-      display: flex;
-      flex-direction: column;
-      width:75%;
-    }
+    width:50%;
+    margin:auto;
 
 input {
-    background: rgba(0, 0, 0, 0);
     border: none;
     outline: none;
-    align-items: left;
-    padding:0.5%;
-    height: 2em;
-    object-fit: fill;
     font-size: 1.2em;
-    width:75%;
 }
 
 input:focus-visible {
@@ -128,7 +120,7 @@ input:focus-visible {
   outline:none;
 }
 
-Link{
+/* Link{
   text-decoration: none;
 }
 
@@ -141,19 +133,18 @@ ul, a, li {
 a {
   text-decoration: none;
   color:black;
-}
+} */
 
-ul > li:hover {
+/* ul > li:hover {
 font-weight: bold;
 border:none;
 background-color: #0062ff46;
 text-decoration: none;
-}
+} */
 
 select{
   width:max-content;
-  align-self: flex-end;
-  margin-left:50%;
+  margin-left:2%;
   height: 2em;
   font-size: 1.2em;
   border: none;
