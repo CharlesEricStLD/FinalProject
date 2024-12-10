@@ -149,7 +149,7 @@ const HomePageStyled = styled.div`
   font-size: 1.2em;
   overflow: hidden;
   display: grid;
-  grid-template-rows: 3fr 1fr 3fr;
+  grid-template-rows: 3fr 0.8fr 3fr;
 
   /* img {
     width: 99%;
@@ -165,7 +165,7 @@ const InputAndImageBlock = styled.div`
   flex-direction: column;
   padding: 1em 1em;
   background-image: url("https://media.canva.com/v2/image-resize/format:JPG/height:900/quality:92/uri:s3%3A%2F%2Fmedia-private.canva.com%2Ff_FJQ%2FMAGY3Of_FJQ%2F1%2Fp.jpg/watermark:F/width:1600?csig=AAAAAAAAAAAAAAAAAAAAAN81sTaF1hP8P3oIvHRdoaOUmrtGUzrW5C4klKhgs8cQ&exp=1733822765&osig=AAAAAAAAAAAAAAAAAAAAAGA7Dfsp8461aK7PcpF0N7d1ashjG6ckaSJRItPufWLQ&signer=media-rpc&x-canva-quality=screen_2x");
-  background-position: right 100% bottom 40%;
+  background-position: right 100% bottom 45%;
   background-repeat: no-repeat;
 
   div.flex1 {
@@ -190,9 +190,9 @@ const InputAndImageBlock = styled.div`
     h1 {
       color: white;
       text-align: center;
-      width: 85%;
+      width: 80%;
       margin: 1em auto 0.5em auto;
-      margin-right: 10%;
+      margin-right: 30%;
       font-size: 2.5em;
     }
   }
@@ -213,6 +213,7 @@ const FeaturesBlock = styled.div`
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-rows: 1fr;
   width:95%;
+  padding:0;
   margin:auto;
   border-radius: 15px;
 `;
@@ -225,7 +226,7 @@ const FeatureBlock = styled.div`
   text-align: center;
   padding:4em 2em;
   width:50%;
-  height:25%;
+  height:2%;
   font-size: 1.2em;
 
   div{

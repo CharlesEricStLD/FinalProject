@@ -93,8 +93,9 @@ const TypeaheadStyle = styled.div`
     padding:none;
     padding:0.5em;
     width:65%;
-    margin:auto;
-    margin-right:28%;
+    margin-top: 15%;
+    right:30%;
+    position: absolute;
 
     div.combobox-container{
       display: flex;
