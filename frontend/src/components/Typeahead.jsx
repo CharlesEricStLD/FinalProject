@@ -2,7 +2,7 @@
 import { Combobox } from '@headlessui/react'
 import {useState, useEffect, useContext} from "react"
 import {styled} from "styled-components"
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {DataCentersContext} from "../routes/RoutesIndex"
 
 export const Typeahead = ( ) => {
@@ -12,6 +12,7 @@ const [centersData, setCentersData] = useContext(DataCentersContext);
 const [selectedoption, setSelectedoption] = useState("")
 const [query, setQuery] = useState('')
 
+const navigate = useNavigate();
 
 //Fetch from server to get all center
 useEffect(() => {
@@ -72,7 +73,7 @@ return (
   </Combobox>
   </div>
   <select onChange={(domElement) => {handleChange(domElement)}}>
-    <option value="" disabled selected>Filter by region</option>
+    <option value={{regions}} disabled>Filter by region</option>
     {regions && regions.map(region => 
     <option key={region}>{region}</option>)}
   </select>
