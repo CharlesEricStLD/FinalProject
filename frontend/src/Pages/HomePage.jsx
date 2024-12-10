@@ -5,6 +5,10 @@ import { Typeahead } from "../components/Typeahead";
 import { styled } from "styled-components";
 import { NavLink } from "react-router-dom";
 import homePageBackground from "../images/homePageBackground.jpg";
+import { FaSnowflake } from "react-icons/fa";
+import { FaSkiingNordic } from "react-icons/fa";
+import { FaSearchLocation } from "react-icons/fa";
+import { MdOutlineUpdate } from "react-icons/md";
 
 export const HomePage = () => {
   const navigate = useNavigate();
@@ -31,22 +35,22 @@ export const HomePage = () => {
 
   const Features = [
     {
-      icon: "https://iconmonstr.com/wp-content/g/gd/makefg.php?i=../releases/preview/2016/png/iconmonstr-weather-50.png&r=0&g=0&b=0",
+      icon: <FaSnowflake size={"70%"}></FaSnowflake>,
       title: "50+ centers",
       hook: "check conditions",
     },
     {
-      icon: "skier icon",
+      icon: <FaSkiingNordic size={"70%"}></FaSkiingNordic>,
       title: "Fresh track paradise",
       hook: "Experience the last track",
     },
     {
-      icon: "loop Icon",
+      icon: <FaSearchLocation size={"70%"}></FaSearchLocation>,
       title: "Easy Search",
       hook: "Find easily by region !",
     },
     {
-      icon: "Rotatting clock/update",
+      icon: <MdOutlineUpdate size={"70%"}></MdOutlineUpdate>,
       title: "Update Each day",
       hook: "Follow daily change",
     },
@@ -78,7 +82,7 @@ export const HomePage = () => {
       </InputAndImageBlock>
       <FeaturesBlock>
         {Features.map((feature)=> <FeatureBlock>
-          {/* <img src={feature.icon}/> */}
+          <div>{feature.icon}</div>
           <h4>{feature.title}</h4>
           <p>{feature.hook}</p>
         </FeatureBlock>)}
@@ -105,7 +109,7 @@ const HomePageStyled = styled.div`
   border: solid pink;
   overflow: hidden;
   display: grid;
-  grid-template-rows: 1.5fr 1.25fr 2fr;
+  grid-template-rows: 2fr 1.25fr 2fr;
 
   img {
     width: 99%;
@@ -172,7 +176,6 @@ const FeaturesBlock = styled.div`
   grid-template-rows: 1fr;
 `;
 const FeatureBlock = styled.div`
-  border:solid black;
   display:flex;
   flex-direction: column;
   align-content: center;
@@ -182,10 +185,20 @@ const FeatureBlock = styled.div`
   padding:4em 2em;
   width:50%;
   height:25%;
+  font-size: 1.2em;
+
+  div{
+    width:100%;
+    padding:none;
+    margin:none;
+  }
 
   h4{
     margin: 0.5em;
+    margin-top:0;
+    padding-top:0;
   }
+  
 `;
 
 const HowItWorkBlock = styled.div`
