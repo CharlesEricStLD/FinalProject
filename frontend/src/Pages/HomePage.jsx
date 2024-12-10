@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { Typeahead } from "../components/Typeahead";
 import { styled } from "styled-components";
 import { NavLink } from "react-router-dom";
-import homePageBackground from "../images/homePageBackground.jpg";
 import { FaSnowflake } from "react-icons/fa";
 import { FaSkiingNordic } from "react-icons/fa";
 import { FaSearchLocation } from "react-icons/fa";
@@ -56,6 +55,32 @@ export const HomePage = () => {
     },
   ];
 
+  const howItWorksSteps = [
+    
+      {
+        image: "https://assets.api.uizard.io/api/cdn/stream/28727295-5ea8-4a46-a6cb-8b59b13afb9c.png&quot",
+        title: "Find your perfect spot",
+        hook: "Discover the best sow spot near of you",
+      },
+      {
+        image: "https://images.unsplash.com/photo-1542744173-05336fcc7ad4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wyMDUzMDJ8MHwxfHNlYXJjaHwyMnx8cmVwb3J0fGVufDF8fHx8MTcxOTk2OTkyMHww&ixlib=rb-4.0.3&q=80&w=1080&quot",
+        title: "Check their new conditions",
+        hook: "Ezasily view conditions and meteo",
+      },
+      {
+        image: "https://images.unsplash.com/photo-1577138565420-9780b78b0ee1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wyMDUzMDJ8MHwxfHNlYXJjaHw3fHxjYWJpbiUyMHNub3d8ZW58MXx8fHwxNzE5OTcwMzk5fDA&ixlib=rb-4.0.3&q=80&w=1080&quot",
+        title: "Track your favorite center",
+        hook: "Favorite your center",
+      },
+      {
+        image: "https://images.unsplash.com/photo-1486078695445-0497c2f58cfe?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wyMDUzMDJ8MHwxfHNlYXJjaHwxMnx8c25vd3xlbnwxfHx8fDE3MTk5Njk4MDZ8MA&ixlib=rb-4.0.3&q=80&w=1080&quot",
+        title: "Enjor the snow !",
+        hook: "Share with the community",
+      },
+
+    
+  ]
+
   return (
     <HomePageStyled>
       <InputAndImageBlock>
@@ -87,7 +112,23 @@ export const HomePage = () => {
           <p>{feature.hook}</p>
         </FeatureBlock>)}
       </FeaturesBlock>
-      <HowItWorkBlock></HowItWorkBlock>
+      
+      <HowItWorkBlock>
+      {/* <h3>How it works?</h3> */}
+        {howItWorksSteps.map((step, index) => 
+        <Step>
+        <ImgStep bgimage={step.image}>
+        </ImgStep>
+        <div className="textDiv">
+        <h3>{index}</h3>
+        <h4>{step.title}</h4>
+        <p>{step.hook}</p>
+        </div>        
+        
+        </Step>
+        )}
+        
+      </HowItWorkBlock>
 
       {/* <img src="./homePageBanner.jpg"></img>
   <h1>Quebec CrossCountry Finder!</h1>
@@ -106,22 +147,20 @@ export const HomePage = () => {
 const HomePageStyled = styled.div`
   height: 200vh;
   font-size: 1.2em;
-  border: solid pink;
   overflow: hidden;
   display: grid;
-  grid-template-rows: 2fr 1.25fr 2fr;
+  grid-template-rows: 3fr 1fr 3fr;
 
-  img {
+  /* img {
     width: 99%;
     height: 100%;
     position: absolute;
     top: -0.2%;
     z-index: -1;
     opacity: 80%;
-  }
+  } */
 `;
 const InputAndImageBlock = styled.div`
-  border: solid 2px;
   display: flex;
   flex-direction: column;
   padding: 1em 1em;
@@ -157,7 +196,6 @@ const InputAndImageBlock = styled.div`
       font-size: 2.5em;
     }
   }
-
   div.flex-centers-selection {
     border: solid black;
     border-radius: 15px;
@@ -170,10 +208,13 @@ const InputAndImageBlock = styled.div`
   }
 `;
 const FeaturesBlock = styled.div`
-  border: solid 2px;
+  background-color: var(--box-bg-color);
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-rows: 1fr;
+  width:95%;
+  margin:auto;
+  border-radius: 15px;
 `;
 const FeatureBlock = styled.div`
   display:flex;
@@ -202,8 +243,45 @@ const FeatureBlock = styled.div`
 `;
 
 const HowItWorkBlock = styled.div`
-  border: solid 2px;
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  grid-template-rows: 1fr;
 `;
+
+const Step = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  text-align: center;
+
+  .textDiv{
+    width:85%;
+    margin: 0 auto;
+  }
+
+  h3{
+    margin: 0.25em;
+  }
+
+  p{
+    margin: 0.25em;
+  }
+`
+
+const ImgStep = styled.div`
+  margin:auto;
+  border-radius: 15px;
+  text-align: center;
+  padding:4em 2em;
+  width:65%;
+  height:20%;
+  font-size: 1.2em;
+  margin:1em;
+  background-image: url(${(props) => props.bgimage});
+  background-size: cover;
+  display: block;
+  margin:1em;
+`
 
 // const FinderElementContainer = styled.div`
 // margin-top:2%;
