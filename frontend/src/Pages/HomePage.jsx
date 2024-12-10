@@ -1,66 +1,91 @@
-//Home Page component rendering the Home Page 
+//Home Page component rendering the Home Page
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { Typeahead } from "../components/Typeahead"
-import {styled} from "styled-components"
+import { Typeahead } from "../components/Typeahead";
+import { styled } from "styled-components";
 import { NavLink } from "react-router-dom";
-import homePageBackground from "../images/homePageBackground.jpg"
-
+import homePageBackground from "../images/homePageBackground.jpg";
 
 export const HomePage = () => {
+  const navigate = useNavigate();
 
-const navigate = useNavigate();
+  const [regions, setRegions] = useState(null);
 
-const [regions, setRegions] = useState(null);
+  useEffect(() => {
+    fetch(`/api/allRegions`)
+      .then((response) => response.json())
+      .then((data) => {
+        if ((data.message = "Request sucessfull: ")) {
+          setRegions(data.data);
+        }
+      })
+      .catch((error) => {
+        console.error(`Error fetching center details for all region:`, error);
+      });
+  }, []);
 
-useEffect(() => {
-  fetch(`/api/allRegions`)
-  .then((response) => response.json())
-  .then((data) => {
-    if (data.message = "Request sucessfull: ") {
-      setRegions(data.data)
-    }
-  })
-  .catch((error) => {
-    console.error(`Error fetching center details for all region:`, error);
-});
-},[])
+  const handleChange = (domElement) => {
+    const regionSelected = domElement.target.value;
+    navigate(`region/${regionSelected}`);
+  };
 
-const handleChange = (domElement => {
-const regionSelected = domElement.target.value; 
-navigate(`region/${regionSelected}`)
-})
+  const Features = [
+    {
+      icon: "https://iconmonstr.com/wp-content/g/gd/makefg.php?i=../releases/preview/2016/png/iconmonstr-weather-50.png&r=0&g=0&b=0",
+      title: "50+ centers",
+      hook: "check conditions",
+    },
+    {
+      icon: "skier icon",
+      title: "Fresh track paradise",
+      hook: "Experience the last track",
+    },
+    {
+      icon: "loop Icon",
+      title: "Easy Search",
+      hook: "Find easily by region !",
+    },
+    {
+      icon: "Rotatting clock/update",
+      title: "Update Each day",
+      hook: "Follow daily change",
+    },
+  ];
 
-return (
-  <HomePageStyled>
-  <InputAndImageBlock>
-  <div className="flex1">
-  <p className="brandName">Quebec CrossCountry Finder!</p>
-  {/* //todo Add the toggle when sign in/Sin out between log IN and My account */}
-  <button>
-  <NavLink role="button" to="/login"></NavLink>Log In
-  </button>
-  </div>
-  <div className="flex2">
-  <h1>Every day snow updates for your favorite cross-country resorts!</h1>
-    {/* <div className="flex-centers-selection"> */}
-    <Typeahead/>
-      {/* <select onChange={(domElement) => {handleChange(domElement)}}>
+  return (
+    <HomePageStyled>
+      <InputAndImageBlock>
+        <div className="flex1">
+          <p className="brandName">Quebec CrossCountry Finder!</p>
+          {/* //todo Add the toggle when sign in/Sin out between log IN and My account */}
+          <button>
+            <NavLink role="button" to="/login"></NavLink>Log In
+          </button>
+        </div>
+        <div className="flex2">
+          <h1>
+            Every day snow updates for your favorite cross-country resorts!
+          </h1>
+          {/* <div className="flex-centers-selection"> */}
+          <Typeahead />
+          {/* <select onChange={(domElement) => {handleChange(domElement)}}>
         <option value="" disabled selected>Filter by region</option>
         {regions && regions.map(region => 
         <option key={region}>{region}</option>)}
       </select> */}
-    {/* </div> */}
-  </div>
-  
-  </InputAndImageBlock>
-  <FeaturesBlock></FeaturesBlock>
-  <HowItWorkBlock></HowItWorkBlock>
+          {/* </div> */}
+        </div>
+      </InputAndImageBlock>
+      <FeaturesBlock>
+        {Features.map((feature)=> <FeatureBlock>
+          {/* <img src={feature.icon}/> */}
+          <h4>{feature.title}</h4>
+          <p>{feature.hook}</p>
+        </FeatureBlock>)}
+      </FeaturesBlock>
+      <HowItWorkBlock></HowItWorkBlock>
 
-
-
-
-  {/* <img src="./homePageBanner.jpg"></img>
+      {/* <img src="./homePageBanner.jpg"></img>
   <h1>Quebec CrossCountry Finder!</h1>
   <FinderElementContainer>
   <Typeahead/>
@@ -70,30 +95,29 @@ return (
     <option key={region}>{region}</option>)}
   </select>
   </FinderElementContainer> */}
-  </HomePageStyled>
-)
-
-}
+    </HomePageStyled>
+  );
+};
 
 const HomePageStyled = styled.div`
-height:200vh;
-font-size: 1.2em;
-border: solid pink;
-overflow: hidden;
-display: grid;
-grid-template-rows: 1.5fr 1.25fr 2fr;
+  height: 200vh;
+  font-size: 1.2em;
+  border: solid pink;
+  overflow: hidden;
+  display: grid;
+  grid-template-rows: 1.5fr 1.25fr 2fr;
 
-img{
-  width: 99%;
-  height: 100%;
-  position:absolute;
-  top:-0.2%;
-  z-index: -1;
-  opacity: 80%;
-}
-`
+  img {
+    width: 99%;
+    height: 100%;
+    position: absolute;
+    top: -0.2%;
+    z-index: -1;
+    opacity: 80%;
+  }
+`;
 const InputAndImageBlock = styled.div`
-  border:solid 2px;
+  border: solid 2px;
   display: flex;
   flex-direction: column;
   padding: 1em 1em;
@@ -101,15 +125,14 @@ const InputAndImageBlock = styled.div`
   background-position: right 100% bottom 40%;
   background-repeat: no-repeat;
 
-
-  div.flex1{
-    display:flex;
+  div.flex1 {
+    display: flex;
     flex-direction: row;
     justify-content: space-between;
 
-    p.brandName{
+    p.brandName {
       display: inline;
-      color:white;
+      color: white;
       /* margin-left:1em;
       margin-top: 1.5em; */
       font-weight: bold;
@@ -117,41 +140,57 @@ const InputAndImageBlock = styled.div`
     }
   }
 
-  div.flex2{
-    display:flex;
+  div.flex2 {
+    display: flex;
     flex-direction: column;
-    
-    h1{
-    color:white;
-    text-align: center;
-    width:85%;
-    margin: 1em auto 0.5em auto; 
-    margin-right:10%;
-    font-size: 2.5em;
+
+    h1 {
+      color: white;
+      text-align: center;
+      width: 85%;
+      margin: 1em auto 0.5em auto;
+      margin-right: 10%;
+      font-size: 2.5em;
     }
   }
 
   div.flex-centers-selection {
-    border:solid black;
+    border: solid black;
     border-radius: 15px;
     display: flex;
     flex-direction: row;
     justify-content: center;
     padding: none;
-    margin:none;
-    padding:0.5em;
+    margin: none;
+    padding: 0.5em;
   }
-
-`
+`;
 const FeaturesBlock = styled.div`
-  border:solid 2px;
-`
+  border: solid 2px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr;
+`;
+const FeatureBlock = styled.div`
+  border:solid black;
+  display:flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  margin:auto;
+  text-align: center;
+  padding:4em 2em;
+  width:50%;
+  height:25%;
+
+  h4{
+    margin: 0.5em;
+  }
+`;
 
 const HowItWorkBlock = styled.div`
-  border:solid 2px;
-`
-
-
+  border: solid 2px;
+`;
 
 // const FinderElementContainer = styled.div`
 // margin-top:2%;
