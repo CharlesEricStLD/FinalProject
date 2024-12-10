@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { Typeahead } from "../components/Typeahead"
 import {styled} from "styled-components"
 import { NavLink } from "react-router-dom";
+import homePageBackground from "../images/homePageBackground.jpg"
 
 
 export const HomePage = () => {
@@ -34,7 +35,7 @@ return (
   <HomePageStyled>
   <InputAndImageBlock>
   <div className="flex1">
-  <p>Quebec CrossCountry Finder!</p>
+  <p className="brandName">Quebec CrossCountry Finder!</p>
   {/* //todo Add the toggle when sign in/Sin out between log IN and My account */}
   <button>
   <NavLink role="button" to="/login"></NavLink>Log In
@@ -51,6 +52,7 @@ return (
       </select> */}
     {/* </div> */}
   </div>
+  
   </InputAndImageBlock>
   <FeaturesBlock></FeaturesBlock>
   <HowItWorkBlock></HowItWorkBlock>
@@ -95,26 +97,37 @@ const InputAndImageBlock = styled.div`
   display: flex;
   flex-direction: column;
   padding: 1em 1em;
+  background-image: url("https://media.canva.com/v2/image-resize/format:JPG/height:900/quality:92/uri:s3%3A%2F%2Fmedia-private.canva.com%2Ff_FJQ%2FMAGY3Of_FJQ%2F1%2Fp.jpg/watermark:F/width:1600?csig=AAAAAAAAAAAAAAAAAAAAAN81sTaF1hP8P3oIvHRdoaOUmrtGUzrW5C4klKhgs8cQ&exp=1733822765&osig=AAAAAAAAAAAAAAAAAAAAAGA7Dfsp8461aK7PcpF0N7d1ashjG6ckaSJRItPufWLQ&signer=media-rpc&x-canva-quality=screen_2x");
+  background-position: right 100% bottom 40%;
+  background-repeat: no-repeat;
+
 
   div.flex1{
     display:flex;
     flex-direction: row;
     justify-content: space-between;
 
-    p{
+    p.brandName{
       display: inline;
+      color:white;
+      /* margin-left:1em;
+      margin-top: 1.5em; */
+      font-weight: bold;
+      font-style: underline;
     }
   }
 
   div.flex2{
     display:flex;
     flex-direction: column;
-
+    
     h1{
+    color:white;
     text-align: center;
     width:85%;
     margin: 1em auto 0.5em auto; 
-    font-size: 3.2em;
+    margin-right:10%;
+    font-size: 2.5em;
     }
   }
 

@@ -3,7 +3,7 @@ import { Combobox } from '@headlessui/react'
 import {useState, useEffect, useContext} from "react"
 import {styled} from "styled-components"
 import { Link, useNavigate } from "react-router-dom";
-import {DataCentersContext} from "../routes/RoutesIndex"
+import {DataCentersContext} from "../routes/RoutesIndex";
 
 export const Typeahead = ( ) => {
 
@@ -84,14 +84,17 @@ return (
 }
 
 const TypeaheadStyle = styled.div`
+    background-color: white;
     border:solid black;
     border-radius: 15px;
     display: flex;
     flex-direction: row;
     justify-content: center;
-    padding: none;
-    margin:none;
+    padding:none;
     padding:0.5em;
+    width:65%;
+    margin:auto;
+    margin-right:20%;
 
     div.combobox-container{
       display: flex;
@@ -146,6 +149,7 @@ select{
   border: none;
   outline: none;
   align-items: left;
+  background-color: rgba(0, 0, 0, 0)
 }
 
 `
