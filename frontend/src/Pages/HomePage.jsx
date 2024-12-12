@@ -107,14 +107,15 @@ export const HomePage = () => {
       </InputAndImageBlock>
       <FeaturesBlock>
         {Features.map((feature)=> <FeatureBlock>
-          <div>{feature.icon}</div>
+          <div className="icon">{feature.icon}</div>
           <h4>{feature.title}</h4>
           <p>{feature.hook}</p>
         </FeatureBlock>)}
       </FeaturesBlock>
       
+      
       <HowItWorkBlock>
-      {/* <h3>How it works?</h3> */}
+      <h3>How it works?</h3>
         {howItWorksSteps.map((step, index) => 
         <Step>
         <ImgStep bgimage={step.image}>
@@ -145,11 +146,12 @@ export const HomePage = () => {
 };
 
 const HomePageStyled = styled.div`
-  height: 200vh;
-  font-size: 1.2em;
+  font-size: 1em;
   overflow: hidden;
   display: grid;
-  grid-template-rows: 3fr 0.8fr 3fr;
+  grid-template-rows: 3fr 1fr 3fr;
+  border:solid green 4px;
+  grid-gap: 1em;
 
   /* img {
     width: 99%;
@@ -161,11 +163,13 @@ const HomePageStyled = styled.div`
   } */
 `;
 const InputAndImageBlock = styled.div`
+  /* border:solid pink 4px; */
   display: flex;
   flex-direction: column;
   padding: 1em 1em;
   background-image: url("https://media.canva.com/v2/image-resize/format:JPG/height:900/quality:92/uri:s3%3A%2F%2Fmedia-private.canva.com%2Ff_FJQ%2FMAGY3Of_FJQ%2F1%2Fp.jpg/watermark:F/width:1600?csig=AAAAAAAAAAAAAAAAAAAAAN81sTaF1hP8P3oIvHRdoaOUmrtGUzrW5C4klKhgs8cQ&exp=1733822765&osig=AAAAAAAAAAAAAAAAAAAAAGA7Dfsp8461aK7PcpF0N7d1ashjG6ckaSJRItPufWLQ&signer=media-rpc&x-canva-quality=screen_2x");
   background-position: right 100% bottom 45%;
+  /* width:125%; */
   background-repeat: no-repeat;
 
   div.flex1 {
@@ -186,6 +190,9 @@ const InputAndImageBlock = styled.div`
   div.flex2 {
     display: flex;
     flex-direction: column;
+    flex-wrap: wrap;
+    width:max-content;
+    text-align: center;
 
     h1 {
       color: white;
@@ -208,12 +215,13 @@ const InputAndImageBlock = styled.div`
   }
 `;
 const FeaturesBlock = styled.div`
+  /* border:Solid yellow 8px; */
   background-color: var(--box-bg-color);
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-rows: 1fr;
   width:95%;
-  padding:0;
+  padding:0.5em;
   margin:auto;
   border-radius: 15px;
 `;
@@ -224,15 +232,20 @@ const FeatureBlock = styled.div`
   justify-content: center;
   margin:auto;
   text-align: center;
-  padding:4em 2em;
-  width:50%;
-  height:2%;
-  font-size: 1.2em;
+  padding:1em 2em;
+  width:75%;
+  height:0.5%;
+  /* font-size: 1em; */
 
   div{
     width:100%;
     padding:none;
     margin:none;
+  }
+
+  .icon {
+    width:25%;
+    margin:auto;
   }
 
   h4{
@@ -247,6 +260,14 @@ const HowItWorkBlock = styled.div`
   display: grid;
   grid-template-columns: repeat(4,1fr);
   grid-template-rows: 1fr;
+  /* border:solid 4px blue; */
+  position:relative;
+
+  h3 {
+    position:absolute;
+    text-align: left;
+    margin-left:1em;
+  }
 `;
 
 const Step = styled.div`
@@ -254,6 +275,7 @@ const Step = styled.div`
   flex-direction: column;
   align-content: center;
   text-align: center;
+  margin-top:2em;
 
   .textDiv{
     width:85%;
@@ -261,7 +283,7 @@ const Step = styled.div`
   }
 
   h3{
-    margin: 0.25em;
+    margin: 0;
   }
 
   p{

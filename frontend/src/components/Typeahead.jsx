@@ -92,9 +92,9 @@ const TypeaheadStyle = styled.div`
     justify-content: center;
     padding:none;
     padding:0.5em;
-    width:65%;
-    margin-top: 15%;
-    right:30%;
+    width:60%;
+    margin-top: 12%;
+    right:35%;
     position: absolute;
 
     div.combobox-container{
