@@ -18,7 +18,8 @@ import { SnowConditionsTable } from "../components/ConditionsTable";
 
 export const CenterPage = () => {
 
-  const [center, SetCenter] = useState(null);
+  const [center, setCenter] = useState(null);
+  const [conditionsTable, setConditionsTable] = useState(null)
   const [centerConditonUrl, setcenterConditonUrl] = useState(null);
   const [lattitude, setLattitude] = useState(null);
   const [longitude, setLongitude] = useState(null);
@@ -39,7 +40,8 @@ export const CenterPage = () => {
       .then((response) => response.json())
       .then((data) => {
         if (data.message = "center sucessfully found: ") {
-          SetCenter(data.data)
+          setCenter(data.data)
+          setConditionsTable((JSON.parse(data.data.condition)[0]));
         }
       })
       .catch((error) => {
@@ -148,6 +150,8 @@ export const CenterPage = () => {
     (commentsToShow = (center.comments).filter((comment) => comment.accepted === true))
   }
 
+  const noDataMessage = "No data available from the ski center";
+
   return (
 
     <PageContainer>
@@ -193,7 +197,7 @@ export const CenterPage = () => {
       <Conditions>
         {/* <SnowConditionsTable center={center}/> */}
       <h3>Conditions</h3>
-      {center.condition? 
+      {conditionsTable? 
       <ConditionTable>
           <thead>
           <tr>
@@ -205,11 +209,25 @@ export const CenterPage = () => {
           </tr>
           </thead>
         <tbody>
-        <tr>{
-        Object.values(center.condition).map((data,index) => (
-        <td>{data ?data: "No data available from the ski center"}</td>
-        ))
-        }</tr>
+        <tr>
+        <>
+          <td>
+            {conditionsTable.open ? conditionsTable.open : noDataMessage }
+          </td>
+          <td>
+            {conditionsTable.closedTracks ? conditionsTable.closedTracks : noDataMessage }
+          </td>
+          <td>
+            {conditionsTable.Conditions ?conditionsTable.Conditions : noDataMessage }
+          </td>
+          <td>
+            {conditionsTable.Warnings ?conditionsTable.Warnings : noDataMessage }
+          </td>
+          <td>
+            {conditionsTable.LastUpdatedDate ?conditionsTable.LastUpdatedDate : noDataMessage }
+          </td>
+      </>
+      </tr>
         </tbody>
       </ConditionTable> : <h3>Conditions unavailable for the moment...</h3>}
       <p>For more details, you can visit the website directly <a target="_blank" href={centerConditonUrl}>here</a>.</p>
