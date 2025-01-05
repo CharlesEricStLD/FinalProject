@@ -315,14 +315,13 @@ const Favorite = styled.button`
 
 const CenterDetails = styled.div`
 grid-column: 1;
-grid-row:3;
+grid-row:4;
 margin:0.1em;
 padding:0 1em;
 border-radius: 15px;
 box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 background-color: var(--box-bg-color);
 width:100%;
-text-wrap: wrap;
 
 a{
   font-size: 0.8em;
@@ -430,6 +429,6 @@ const Comments = styled.div`
 
 const Meteo = styled.div`
   grid-column: 1;
-  grid-row:4;
+  grid-row:3;
 `
 
