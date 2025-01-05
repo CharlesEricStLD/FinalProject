@@ -174,7 +174,7 @@ export const CenterPage = () => {
       <p>Region : {center.region} </p>
       {/* <img src={center.image}></img> */}
       </ImageAndName>
-
+      
       <CenterDetails>
       <p><a href={center.url} target="blank">{center.url}</a></p>
       <p> adresss :<a href={`https://www.google.com/maps/place/${center.address}`} target="blank"> {center.address}</a></p>
@@ -212,7 +212,7 @@ export const CenterPage = () => {
         <tr>
         <>
           <td>
-            {conditionsTable.open ? conditionsTable.open : noDataMessage }
+            {conditionsTable.Open ? "Open" : "Closed"}
           </td>
           <td>
             {conditionsTable.closedTracks ? conditionsTable.closedTracks : noDataMessage }
@@ -259,7 +259,7 @@ export const CenterPage = () => {
 const PageContainer = styled.div`
   display:grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 0.5fr 0.6fr 1fr 0.5fr;
+  grid-template-rows: 0.5fr 0.5fr 0.6fr 0.5fr;
   grid-gap:2em;
   justify-content: center;
   padding:4em;
@@ -274,6 +274,9 @@ grid-column: span 2;
 margin-top: 1em;
 border-radius: 15px;
 background-color: var(--box-bg-color);
+background-image: url("../public/centerPageBanner.jpg");
+background-position: top 15% right;
+background-size: cover;
 display: flex;
 flex-direction: column;
 padding:2%;
@@ -335,10 +338,9 @@ grid-row:2;
 
 const Conditions = styled.div`
 grid-column: span 2;
-grid-row:3;
 display:grid;
+grid-template-rows: 0.4fr 1fr 0.5fr;
 grid-template-columns: 1fr;
-grid-template-rows: 0.75fr 4fr 0.75fr;
 padding:1em;
 border-radius: 15px;
 background-color:var(--box-bg-color);
@@ -347,19 +349,23 @@ h3 {
   font-size:2em;
 }
 
+p{
+  padding:1em 0;
+}
+max-height: fit-content;
 `
 
 const ConditionTable = styled.table`
   display: grid;
   min-width: 100%;
-  grid-template-columns: 
-  auto repeat(4, 1fr);
-  grid-template-rows: 0.20fr 0.75fr;
+  grid-template-columns:auto repeat(4, 1fr);
+  grid-template-rows: 0.3fr 1fr;
   grid-gap: 0.5em;
-  margin-bottom:0.5em;
   border-radius: 15px;
   background-color: var(--box-bg-color);
   font-weight:bold;
+  background-color: rgb(129, 15, 209);
+  padding:0.5em;
 
   thead,tbody{
     display: contents;
