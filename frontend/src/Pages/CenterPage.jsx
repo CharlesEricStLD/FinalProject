@@ -198,46 +198,7 @@ export const CenterPage = () => {
 
       <>
       <Conditions>
-        {/* <SnowConditionsTable center={center}/> */}
-      <h3>Conditions</h3>
-      {conditionsTable? 
-      <ConditionTable>
-          <thead>
-          <tr>
-          <th className="col0">Open/Close</th>
-          <th className="col1">Track Close</th>
-          <th className="col2">Snow conditions</th>
-          <th className="col3">Warnings</th>
-          <th className="col4">Last Update</th>
-          </tr>
-          </thead>
-        <tbody>
-        <tr>
-        <>
-          <td>
-            {conditionsTable.Open ? "Open" : "Closed"}
-          </td>
-          <td>
-            {conditionsTable.closedTracks ? conditionsTable.closedTracks : noDataMessage }
-          </td>
-          <td>
-            {console.log(conditionsTable)}
-            {conditionsTable.Conditions ?conditionsTable.Conditions : noDataMessage }
-          </td>
-          <td>
-            {conditionsTable.Warnings != 'null' || conditionsTable.Warnings != '' ?conditionsTable.Warnings : noDataMessage }
-          </td>
-          <td>
-            {conditionsTable.LastUpdatedDate  ?conditionsTable.LastUpdatedDate : noDataMessage }
-          </td>
-      </>
-      </tr>
-        </tbody>
-      </ConditionTable> : <h3>Conditions unavailable for the moment...</h3>}
-      <p>For more details, you can visit the website directly <a target="_blank" href={centerConditonUrl}>here</a>.</p>
-
-      {/* Pour plus détails, vous pouvez visiter le site internet du centre, ici */}
-
+        <SnowConditionsTable></SnowConditionsTable>
       </Conditions>
       </>
 
