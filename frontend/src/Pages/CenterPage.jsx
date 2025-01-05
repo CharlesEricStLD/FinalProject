@@ -18,7 +18,8 @@ import { SnowConditionsTable } from "../components/ConditionsTable";
 
 export const CenterPage = () => {
 
-  const [center, SetCenter] = useState(null);
+  const [center, setCenter] = useState(null);
+  const [conditionsTable, setConditionsTable] = useState(null)
   const [centerConditonUrl, setcenterConditonUrl] = useState(null);
   const [lattitude, setLattitude] = useState(null);
   const [longitude, setLongitude] = useState(null);
@@ -39,7 +40,8 @@ export const CenterPage = () => {
       .then((response) => response.json())
       .then((data) => {
         if (data.message = "center sucessfully found: ") {
-          SetCenter(data.data)
+          setCenter(data.data)
+          setConditionsTable((JSON.parse(data.data.condition)[0]));
         }
       })
       .catch((error) => {
@@ -148,6 +150,8 @@ export const CenterPage = () => {
     (commentsToShow = (center.comments).filter((comment) => comment.accepted === true))
   }
 
+  const noDataMessage = "No data available from the ski center";
+
   return (
 
     <PageContainer>
@@ -170,10 +174,11 @@ export const CenterPage = () => {
       <p>Region : {center.region} </p>
       {/* <img src={center.image}></img> */}
       </ImageAndName>
-
+      
       <CenterDetails>
-      <p><a href={center.url} target="blank">{center.url}</a></p>
-      <p> adresss :<a href={`https://www.google.com/maps/place/${center.address}`} target="blank"> {center.address}</a></p>
+      <h2>Center Informations</h2>
+      <p>Website: <a href={center.url} target="blank">{center.url}</a></p>
+      <p> adresss: <a href={`https://www.google.com/maps/place/${center.address}`} target="blank"> {center.address}</a></p>
 
       <h2>Contact</h2>
       <p>{center.contact.email}</p>
@@ -186,14 +191,16 @@ export const CenterPage = () => {
       </CenterDetails>
 
       <Map>
-      {lattitude && longitude && <LeafletMap lattitude={lattitude} longitude={longitude}></LeafletMap>}
+      {lattitude && longitude ? 
+      lattitude && longitude && <LeafletMap lattitude={lattitude} longitude={longitude}></LeafletMap>: noDataMessage 
+      }
       </Map>
 
       <>
       <Conditions>
         {/* <SnowConditionsTable center={center}/> */}
       <h3>Conditions</h3>
-      {center.condition? 
+      {conditionsTable? 
       <ConditionTable>
           <thead>
           <tr>
@@ -205,11 +212,26 @@ export const CenterPage = () => {
           </tr>
           </thead>
         <tbody>
-        <tr>{
-        Object.values(center.condition).map((data,index) => (
-        <td>{data ?data: "No data available from the ski center"}</td>
-        ))
-        }</tr>
+        <tr>
+        <>
+          <td>
+            {conditionsTable.Open ? "Open" : "Closed"}
+          </td>
+          <td>
+            {conditionsTable.closedTracks ? conditionsTable.closedTracks : noDataMessage }
+          </td>
+          <td>
+            {console.log(conditionsTable)}
+            {conditionsTable.Conditions ?conditionsTable.Conditions : noDataMessage }
+          </td>
+          <td>
+            {conditionsTable.Warnings != 'null' || conditionsTable.Warnings != '' ?conditionsTable.Warnings : noDataMessage }
+          </td>
+          <td>
+            {conditionsTable.LastUpdatedDate  ?conditionsTable.LastUpdatedDate : noDataMessage }
+          </td>
+      </>
+      </tr>
         </tbody>
       </ConditionTable> : <h3>Conditions unavailable for the moment...</h3>}
       <p>For more details, you can visit the website directly <a target="_blank" href={centerConditonUrl}>here</a>.</p>
@@ -229,7 +251,8 @@ export const CenterPage = () => {
 
 
       <Meteo>
-        {lattitude && longitude && <Weather address = {center.address} lattitude={lattitude} longitude={longitude} />}
+      {lattitude && longitude ? 
+        lattitude && longitude && <Weather address = {center.address} lattitude={lattitude} longitude={longitude} /> : noDataMessage}
       </Meteo>
       </>
     ) }
@@ -241,8 +264,8 @@ export const CenterPage = () => {
 const PageContainer = styled.div`
   display:grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 0.5fr 0.6fr 1fr 0.5fr;
-  grid-gap:2em;
+  grid-template-rows: 0.6fr 1fr 0.8fr 0.6fr;
+  grid-gap:1em;
   justify-content: center;
   padding:4em;
   padding-top:0;
@@ -253,9 +276,13 @@ const PageContainer = styled.div`
 `
 const ImageAndName = styled.div`
 grid-column: span 2;
+grid-row: 1;
 margin-top: 1em;
 border-radius: 15px;
 background-color: var(--box-bg-color);
+background-image: url("../public/centerPageBanner.jpg");
+background-position: top 15% right;
+background-size: cover;
 display: flex;
 flex-direction: column;
 padding:2%;
@@ -288,39 +315,38 @@ const Favorite = styled.button`
 
 const CenterDetails = styled.div`
 grid-column: 1;
-grid-row:2;
-padding:4%;
+grid-row:4;
+margin:0.1em;
+padding:0 1em;
 border-radius: 15px;
 box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 background-color: var(--box-bg-color);
-
-
+width:100%;
 
 a{
-  font-size: 0.7em;
+  font-size: 0.8em;
 }
 
-h2{
-  margin-top: 5%;
+p{
+  font-size: 1em;
 }
-
 
 p.note {
-  font-size: 0.7em;
+  font-size: 0.8em;
 }
 `
 
 const Map = styled.div`
 grid-column: 2;
-grid-row:2;
+grid-row:3;
 `
 
 const Conditions = styled.div`
+grid-row: 2;
 grid-column: span 2;
-grid-row:3;
 display:grid;
+grid-template-rows: 0.4fr 1fr 0.5fr;
 grid-template-columns: 1fr;
-grid-template-rows: 0.75fr 4fr 0.75fr;
 padding:1em;
 border-radius: 15px;
 background-color:var(--box-bg-color);
@@ -329,19 +355,23 @@ h3 {
   font-size:2em;
 }
 
+p{
+  padding:1em 0;
+}
+max-height: fit-content;
 `
 
 const ConditionTable = styled.table`
   display: grid;
   min-width: 100%;
-  grid-template-columns: 
-  auto repeat(4, 1fr);
-  grid-template-rows: 0.20fr 0.75fr;
+  grid-template-columns:auto repeat(4, 1fr);
+  grid-template-rows: 0.3fr 1fr;
   grid-gap: 0.5em;
-  margin-bottom:0.5em;
   border-radius: 15px;
   background-color: var(--box-bg-color);
   font-weight:bold;
+  background-color: rgb(129, 15, 209);
+  padding:0.5em;
 
   thead,tbody{
     display: contents;
@@ -399,6 +429,6 @@ const Comments = styled.div`
 
 const Meteo = styled.div`
   grid-column: 1;
-  grid-row:4;
+  grid-row:3;
 `
 

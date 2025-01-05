@@ -8,6 +8,7 @@ import { FaSnowflake } from "react-icons/fa";
 import { FaSkiingNordic } from "react-icons/fa";
 import { FaSearchLocation } from "react-icons/fa";
 import { MdOutlineUpdate } from "react-icons/md";
+import homePageImageBanner from "../images/homePageBackground2.jpg"
 
 export const HomePage = () => {
   const navigate = useNavigate();
@@ -84,6 +85,7 @@ export const HomePage = () => {
   return (
     <HomePageStyled>
       <InputAndImageBlock>
+      
         <div className="flex1">
           <p className="brandName">Quebec CrossCountry Finder!</p>
           {/* //todo Add the toggle when sign in/Sin out between log IN and My account */}
@@ -166,11 +168,12 @@ const InputAndImageBlock = styled.div`
   /* border:solid pink 4px; */
   display: flex;
   flex-direction: column;
-  padding: 1em 1em;
-  background-image: url("https://media.canva.com/v2/image-resize/format:JPG/height:900/quality:92/uri:s3%3A%2F%2Fmedia-private.canva.com%2Ff_FJQ%2FMAGY3Of_FJQ%2F1%2Fp.jpg/watermark:F/width:1600?csig=AAAAAAAAAAAAAAAAAAAAAN81sTaF1hP8P3oIvHRdoaOUmrtGUzrW5C4klKhgs8cQ&exp=1733822765&osig=AAAAAAAAAAAAAAAAAAAAAGA7Dfsp8461aK7PcpF0N7d1ashjG6ckaSJRItPufWLQ&signer=media-rpc&x-canva-quality=screen_2x");
-  background-position: right 100% bottom 45%;
-  /* width:125%; */
+  padding: 2em 2em;
+  background-image: url("../public/homePageBackground2b.jpg");
+  background-size: cover;
+  background-position: top 72% right 100%;  
   background-repeat: no-repeat;
+  filter : saturate(120%);
 
   div.flex1 {
     display: flex;
@@ -179,11 +182,10 @@ const InputAndImageBlock = styled.div`
 
     p.brandName {
       display: inline;
-      color: white;
-      /* margin-left:1em;
-      margin-top: 1.5em; */
+      color: #ffffff;
       font-weight: bold;
       font-style: underline;
+      /* padding-top: 1em; */
     }
   }
 
@@ -191,17 +193,23 @@ const InputAndImageBlock = styled.div`
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    width:max-content;
+    width:75%;
     text-align: center;
 
     h1 {
       color: white;
       text-align: center;
       width: 80%;
-      margin: 1em auto 0.5em auto;
-      margin-right: 30%;
+      margin: 1em auto 0 auto;
+      /* margin-right: 30%; */
       font-size: 2.5em;
     }
+
+    img {
+  object-fit: contain;
+  width:100%;
+  }
+
   }
   div.flex-centers-selection {
     border: solid black;

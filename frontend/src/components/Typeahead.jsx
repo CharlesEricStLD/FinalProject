@@ -90,9 +90,8 @@ const TypeaheadStyle = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: center;
-    padding:none;
     padding:0.5em;
-    width:60%;
+    width:50%;
     margin-top: 12%;
     right:35%;
     position: absolute;
@@ -128,6 +127,7 @@ ul, a, li {
   list-style: none;
   font-size: 1em;
   padding:0.5%;
+  text-align: left;
 }
 
 a {
