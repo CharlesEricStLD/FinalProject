@@ -176,8 +176,9 @@ export const CenterPage = () => {
       </ImageAndName>
       
       <CenterDetails>
-      <p><a href={center.url} target="blank">{center.url}</a></p>
-      <p> adresss :<a href={`https://www.google.com/maps/place/${center.address}`} target="blank"> {center.address}</a></p>
+      <h2>Center Informations</h2>
+      <p>Website: <a href={center.url} target="blank">{center.url}</a></p>
+      <p> adresss: <a href={`https://www.google.com/maps/place/${center.address}`} target="blank"> {center.address}</a></p>
 
       <h2>Contact</h2>
       <p>{center.contact.email}</p>
@@ -190,7 +191,9 @@ export const CenterPage = () => {
       </CenterDetails>
 
       <Map>
-      {lattitude && longitude && <LeafletMap lattitude={lattitude} longitude={longitude}></LeafletMap>}
+      {lattitude && longitude ? 
+      lattitude && longitude && <LeafletMap lattitude={lattitude} longitude={longitude}></LeafletMap>: noDataMessage 
+      }
       </Map>
 
       <>
@@ -218,13 +221,14 @@ export const CenterPage = () => {
             {conditionsTable.closedTracks ? conditionsTable.closedTracks : noDataMessage }
           </td>
           <td>
+            {console.log(conditionsTable)}
             {conditionsTable.Conditions ?conditionsTable.Conditions : noDataMessage }
           </td>
           <td>
-            {conditionsTable.Warnings ?conditionsTable.Warnings : noDataMessage }
+            {conditionsTable.Warnings != 'null' || conditionsTable.Warnings != '' ?conditionsTable.Warnings : noDataMessage }
           </td>
           <td>
-            {conditionsTable.LastUpdatedDate ?conditionsTable.LastUpdatedDate : noDataMessage }
+            {conditionsTable.LastUpdatedDate  ?conditionsTable.LastUpdatedDate : noDataMessage }
           </td>
       </>
       </tr>
@@ -247,7 +251,8 @@ export const CenterPage = () => {
 
 
       <Meteo>
-        {lattitude && longitude && <Weather address = {center.address} lattitude={lattitude} longitude={longitude} />}
+      {lattitude && longitude ? 
+        lattitude && longitude && <Weather address = {center.address} lattitude={lattitude} longitude={longitude} /> : noDataMessage}
       </Meteo>
       </>
     ) }
@@ -259,8 +264,8 @@ export const CenterPage = () => {
 const PageContainer = styled.div`
   display:grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 0.5fr 0.5fr 0.6fr 0.5fr;
-  grid-gap:2em;
+  grid-template-rows: 0.6fr 1fr 0.8fr 0.6fr;
+  grid-gap:1em;
   justify-content: center;
   padding:4em;
   padding-top:0;
@@ -271,6 +276,7 @@ const PageContainer = styled.div`
 `
 const ImageAndName = styled.div`
 grid-column: span 2;
+grid-row: 1;
 margin-top: 1em;
 border-radius: 15px;
 background-color: var(--box-bg-color);
@@ -309,34 +315,35 @@ const Favorite = styled.button`
 
 const CenterDetails = styled.div`
 grid-column: 1;
-grid-row:2;
-padding:4%;
+grid-row:3;
+margin:0.1em;
+padding:0 1em;
 border-radius: 15px;
 box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 background-color: var(--box-bg-color);
-
-
+width:100%;
+text-wrap: wrap;
 
 a{
-  font-size: 0.7em;
+  font-size: 0.8em;
 }
 
-h2{
-  margin-top: 5%;
+p{
+  font-size: 1em;
 }
-
 
 p.note {
-  font-size: 0.7em;
+  font-size: 0.8em;
 }
 `
 
 const Map = styled.div`
 grid-column: 2;
-grid-row:2;
+grid-row:3;
 `
 
 const Conditions = styled.div`
+grid-row: 2;
 grid-column: span 2;
 display:grid;
 grid-template-rows: 0.4fr 1fr 0.5fr;
